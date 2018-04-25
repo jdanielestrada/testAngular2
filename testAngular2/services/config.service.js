@@ -31,15 +31,16 @@
 
             var configService = {
                 ApiUrls: {
-                    //UrlGestionProduccion  : "http://localhost:1600/produccion/gestion_produccion/",
-                    UrlGestionProduccion   : pathApiNode + "/produccion/gestion_produccion/",
-                    UrlCheckVersionsApp    : pathApiNode + "/app_versions/check_versions_app/",
-                    UrlNuevaOrden          : pathApiNode + "/pos/nuevaorden/",
-                    UrlForgotPassword      : pathApiMVC + "/api/ForgotPassword/",
-                    UrlGestionProduccionMVC: pathApiMVC + "/api/AtencionTicket/",
-                    UrlPeticiones          : pathApiMVC + "/api/Peticiones/",
-                    UrlTercerosUnoeNodejs  : pathApiNode + "/terceros/unoe/",
-                    UrlApiUNOEE            : urlbase + "/WebApiUNOEE/api/request/",
+                    UrlGestionProduccion: "http://192.168.1.43/webapinode_pos/produccion/gestion_produccion/",
+                    UrlGestionCotizaciones: pathApiNode + "/cotizaciones/gestion_cotizaciones/",
+
+                    //UrlCheckVersionsApp: pathApiNode + "/app_versions/check_versions_app/",
+                    //UrlNuevaOrden          : pathApiNode + "/pos/nuevaorden/",
+                    //UrlForgotPassword      : pathApiMVC + "/api/ForgotPassword/",
+                    //UrlGestionProduccionMVC: pathApiMVC + "/api/AtencionTicket/",
+                    //UrlPeticiones          : pathApiMVC + "/api/Peticiones/",
+                    //UrlTercerosUnoeNodejs  : pathApiNode + "/terceros/unoe/",
+                    //UrlApiUNOEE            : urlbase + "/WebApiUNOEE/api/request/",
                    
                 },
                 variables: {

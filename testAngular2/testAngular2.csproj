@@ -1655,7 +1655,7 @@
     <Content Include="modules\Home\home.controller.js" />
     <Content Include="modules\Home\Home.html" />
     <Content Include="modules\modals\modalFrmConfirmacion.js" />
-    <Content Include="modules\modals\modalFrmMotivosSuspensionEtapa.js" />
+    <Content Include="modules\modals\modal.addNuevoProyecto.controller.js" />
     <Content Include="modules\modals\scriptModal.html" />
     <Content Include="modules\UserLogin\userLogin.controller.js" />
     <Content Include="modules\UserLogin\UserLogin.html" />

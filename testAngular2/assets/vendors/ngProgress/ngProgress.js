@@ -13,7 +13,7 @@ angular.module('ngProgress.provider', ['ngProgress.directive'])
             this.count = 0;
             this.height = '8px';
             this.$scope = $rootScope.$new();
-            this.color = 'rgb(255, 132, 0)';
+            this.color = '#c3e81f';
             this.parent = $document.find('body')[0];
             this.count = 0;
 

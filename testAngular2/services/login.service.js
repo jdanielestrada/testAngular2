@@ -54,6 +54,10 @@
                     loginService = angular.copy(loginServicetmp);
                     loginService.hasSession = true;
                     
+                    $rootScope.mostrarMenu = true;
+                    $location.path('/Home');
+
+                    return
                     RTAService.getSucursales(loginService.UserData.cs_IdUsuario, 1) //$rootScope.idCompania)
                         .then(function (resultSucursales) {
                             if (resultSucursales.data === undefined || !_.isArray(resultSucursales.data)) {
