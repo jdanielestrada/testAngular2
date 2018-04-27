@@ -43,8 +43,8 @@ body {
     background: rgb(255, 255, 255);
 }
 
-.modal-tipo-falla-maquina {
-    width: 902px;
+.modal-seleccion-producto {
+    width: 1335px;
 }
 
 .secciones {
@@ -5330,4 +5330,12 @@ input[type="checkbox"] {
 
 #ngProgress {
     border: 0px solid #c3e81f;
+}
+
+.img-previa {
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
 }

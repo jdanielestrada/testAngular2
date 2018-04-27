@@ -126,6 +126,8 @@
     <Content Include="assets\vendors\Angular-bootstrap\ui-bootstrap-tpls-0.13.4.js" />
     <Content Include="assets\vendors\Angular-bootstrap\ui-bootstrap-tpls-0.13.4.min.js" />
     <Content Include="assets\vendors\Angular-bootstrap\ui-bootstrap-tpls-2.0.1.min.js" />
+    <Content Include="assets\vendors\angular-input-masks\angular-input-masks-standalone.js" />
+    <Content Include="assets\vendors\angular-input-masks\angular-input-masks-standalone.min.js" />
     <Content Include="assets\vendors\async\async.js" />
     <Content Include="assets\vendors\bootstrap-3.3.7\bootstrap-3.3.7\dist\css\bootstrap.css" />
     <Content Include="assets\vendors\bootstrap-3.3.7\bootstrap-3.3.7\dist\fonts\glyphicons-halflings-regular.svg" />

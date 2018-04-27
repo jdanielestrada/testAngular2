@@ -4,17 +4,65 @@
         <h4 class="modal-title font-madecentro" style="font-weight: 600;">Selección de proyectos</h4>
     </div>
     <div class="modal-body" style="background-color: #f9f9f9;">
-        <div class="row">
+        <!--<div class="row">
             <pre>{{obj_producto_seleccionado | json}}</pre>
-        </div>
+        </div>-->
         <div class="row">
             <div class="col-md-12">
-                <select class="form-control font-madecentro font_size_15px"
-                        id="seleccion_proyecto"></select>
+                <div class="form-group">
+                    <label>Filtrar Producto:</label>
+
+                    <select class="form-control font-madecentro font_size_15px"
+                            id="seleccion_proyecto"></select>
+                </div>
             </div>
         </div>
         <div class="row">
             <pre>{{obj_data_producto | json}}</pre>
+            
+            <div class="col-md-12">
+                <table class="table table-hover table-condensed table-striped" ng-if="obj_producto_seleccionado.ID_ITEM != null">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Código</th>
+                            <th>Referencia</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>% Margen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img alt="zoom1"
+                                     class="img-previa"
+                                     onerror="this.src = 'Assets/img/placeholder.png';">
+                                <!--ng-src="http://192.168.1.42/SGD/PRO/G4/AGNRNGW215.jpg"-->
+                            </td>
+                            <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
+                            <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
+                            <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
+                            <td>
+                                <input aria-describedby="basic-addon1"
+                                       class="form-control"
+                                       ng-model="obj_producto_seleccionado.cantidad"
+                                       placeholder="..."
+                                       required
+                                       ui-number-mask="0">
+                            </td>
+                            <td>
+                                <input aria-describedby="basic-addon1"
+                                       class="form-control"
+                                       ng-model="obj_producto_seleccionado.margen"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>            
         </div>
     </div>
     <div class="modal-footer text-center">
@@ -22,3 +70,4 @@
         <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Cancelar</button>
     </div>
 </script>
+

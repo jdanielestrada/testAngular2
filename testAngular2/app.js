@@ -15,7 +15,8 @@
             "ngAnimate",
             "smart-table",
             "ui.sortable",
-            "ngClickSelect"
+            "ngClickSelect",
+            'ui.utils.masks'
         ])
         .config(config)
         .controller("app", app)

@@ -39,7 +39,7 @@
                 backdrop: "static",
                 keyboard: false,
                 controller: "modalFrmAddNuevoProyecto",
-                size: "lg",
+                size: "seleccion-producto",
                 //resolve: {
                 //    solicitud: function() {
                 //        return solicitud;

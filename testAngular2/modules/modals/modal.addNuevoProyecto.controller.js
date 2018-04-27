@@ -27,6 +27,9 @@
                         vm.list_productos_desarrollados = data.data[0];
                         vm.list_productos_desarrollados.forEach(function (item, index) {
                             item.D_REFERENCIA = item.ID_REFERENCIA.trim() + " - " + item.DESCRIPCION.trim();
+
+                            item.ID_REFERENCIA = item.ID_REFERENCIA.trim();
+                            item.DESCRIPCION = item.DESCRIPCION.trim();
                         });
 
                         vm.list_productos_desarrollados.push({
