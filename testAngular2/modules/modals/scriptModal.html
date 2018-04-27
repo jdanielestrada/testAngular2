@@ -18,8 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <pre>{{obj_data_producto | json}}</pre>
-            
+            <!--<pre>{{data_materiales_producto | json}}</pre>-->            
             <div class="col-md-12">
                 <table class="table table-hover table-condensed table-striped" ng-if="obj_producto_seleccionado.ID_ITEM != null">
                     <thead>
@@ -36,8 +35,11 @@
                         <tr>
                             <td>
                                 <img alt="zoom1"
+                                     class="img-previa" src="./assets/img/image001.png" />
+
+                                <!--<img alt="zoom1"
                                      class="img-previa"
-                                     onerror="this.src = 'Assets/img/placeholder.png';">
+                                     onerror="this.src = 'Assets/img/placeholder.png';">-->
                                 <!--ng-src="http://192.168.1.42/SGD/PRO/G4/AGNRNGW215.jpg"-->
                             </td>
                             <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
@@ -64,9 +66,32 @@
                 </table>
             </div>            
         </div>
+        <div class="row">
+            <legend class="font-rta encabezado_legend"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales</legend>
+            <div class="col-md-12">
+                <table class="table table-hover table-condensed table-striped" ng-if="obj_producto_seleccionado.ID_ITEM != null">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Referencia</th>
+                            <th>Descripción</th>
+                            <th>Cantidad Requerida</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in data_materiales_producto">
+                            <td>{{item.ID_COD_ITEM_C}}</td>
+                            <td>{{item.ID_REFER_C}}</td>
+                            <td>{{item.DESCRIPCION_C}}</td>
+                            <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <div class="modal-footer text-center">
-        <button class="btn btn-default font_size_16px" ng-click="" type="submit">Guardar</button>
+        <button class="btn btn-default font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>
         <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Cancelar</button>
     </div>
 </script>

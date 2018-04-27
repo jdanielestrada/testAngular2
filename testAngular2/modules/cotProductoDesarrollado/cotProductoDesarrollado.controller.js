@@ -83,10 +83,10 @@
         //#region Control User Session
         
         vm.cookieUser = {};
-        vm.cookieUser = $cookieStore.get('servlogGProd');
+        vm.cookieUser = $cookieStore.get('servlog');
 
         if (!_.isNull(vm.cookieUser)) {
-            if (vm.cookieUser.hasSession && parseInt(vm.cookieUser.UserData.cs_IdUsuario) === parseInt(loginService.UserData.cs_IdUsuario)) {
+            if (vm.cookieUser.hasSession && parseInt(vm.cookieUser.UserData.ID_USUARIO) === parseInt(loginService.UserData.ID_USUARIO)) {
                 if ($location.$$path == "/cotProductoDesarrollado" && angular.verficar_perfil_usuario("cotProductoDesarrollado")) {
 
                     angular.VerificarVersionApp();

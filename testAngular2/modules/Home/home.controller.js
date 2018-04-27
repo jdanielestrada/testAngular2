@@ -18,7 +18,7 @@
             
             //#region Atributos
             $rootScope.img_perfil = configService.variables.Dominio + loginService.UserData.Ruta_FotoPerfil + loginService.UserData.Nombre_FotoPerfil + loginService.UserData.Ext_FotoPerfil;
-            $rootScope.usuario_log = loginService.UserData.Usuario;
+            $rootScope.usuario_log = (loginService.UserData.NOMBRES_USUARIO + " " + loginService.UserData.APELLIDOS_USUARIO).toLowerCase();
             vm.dominio = configService.variables.Dominio;
 
             vm.obj_gestion_ordenes_produccion = {
@@ -271,10 +271,10 @@
         //#region Control User Session
 
         vm.cookieUser = {};
-        vm.cookieUser = $cookieStore.get('servlogGProd');
+        vm.cookieUser = $cookieStore.get('servlog');
 
         if (!_.isNull(vm.cookieUser)) {
-            if (vm.cookieUser.hasSession && parseInt(vm.cookieUser.UserData.cs_IdUsuario) === parseInt(loginService.UserData.cs_IdUsuario)) {
+            if (vm.cookieUser.hasSession && parseInt(vm.cookieUser.UserData.ID_USUARIO) === parseInt(loginService.UserData.ID_USUARIO)) {
                 if ($location.$$path == "/Home") {
 
                     angular.VerificarVersionApp();

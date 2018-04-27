@@ -45,7 +45,7 @@
 
                 vm.leerCookie = function () {
 
-                    vm.loginServicetmp = $cookieStore.get('servlogGProd');
+                    vm.loginServicetmp = $cookieStore.get('servlog');
 
                     if (!angular.isUndefined(vm.loginServicetmp)) {
 
@@ -217,9 +217,9 @@
                     var hora = 1000 * 60 * 60; //1hora
                     var timeoutExpireSession = hora;
 
-                    $cookieStore.put('servlogGProd', loginService);
+                    $cookieStore.put('servlog', loginService);
 
-                    //$cookieStore.put('servlogGProd', loginService,
+                    //$cookieStore.put('servlog', loginService,
                     //{
                     //    expires: new Date(moment().add(timeoutExpireSession, "ms"))
                     //});

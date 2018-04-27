@@ -20,23 +20,23 @@
 
 
             getProductosDesarrollados: getProductosDesarrollados,
-            getProductosDesarrolladosByFiltro: getProductosDesarrolladosByFiltro,
+            getMaterialesProductosDesarrollados: getMaterialesProductosDesarrollados,
         };
 
-        function getProductosDesarrolladosByFiltro(idItemReferencia) {
+        function getMaterialesProductosDesarrollados(idItemReferencia) {
             //$rootScope.progressbar.start();
-            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_productos_desarrollados_by_filtro/" + idItemReferencia)
-                .then(getProductosDesarrolladosByFiltroComplete)
-                .catch(getProductosDesarrolladosByFiltroFailed);
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_materiales_productos_desarrollados/" + idItemReferencia)
+                .then(getMaterialesProductosDesarrolladosComplete)
+                .catch(getMaterialesProductosDesarrolladosFailed);
 
-            function getProductosDesarrolladosByFiltroComplete(response) {
+            function getMaterialesProductosDesarrolladosComplete(response) {
                 //$rootScope.progressbar.complete();
                 return response.data;
             }
 
-            function getProductosDesarrolladosByFiltroFailed(error) {
+            function getMaterialesProductosDesarrolladosFailed(error) {
                 //$rootScope.progressbar.reset();
-                toastr.error('XHR falló en getProductosDesarrolladosByFiltro', error);
+                toastr.error('XHR falló en getMaterialesProductosDesarrollados', error);
                 return error;
             }
         }

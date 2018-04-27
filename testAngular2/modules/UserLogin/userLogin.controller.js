@@ -21,19 +21,19 @@
 
         vm.loginServicetmp = {};
         vm.credentials = {
-            username: "",
+            usuario: "",
             password: ""
         };
 
         vm.login = function(credentials) {
             vm.Error.value = false;
-            if (vm.credentials.username != "" && vm.credentials.password != "") {
+            if (vm.credentials.usuario != "" && vm.credentials.password != "") {
                 vm.logearUsuario(credentials);
                 vm.credentials.password = "";
             } else {
                 vm.Error.value = true;
 
-                if (vm.credentials.username == "") {
+                if (vm.credentials.usuario == "") {
                     vm.credentials.password = '';
                     toastr.error("Ingrese un correo.");
                     return;
@@ -48,8 +48,7 @@
 
         vm.logearUsuario = function(credenciales) {
             vm.showSpinner = true;
-            credenciales.idAplicacion = $constants.id_aplicacion;
-
+            
             loginService.login(credenciales)
                 .then(function(result) {
 

@@ -9,12 +9,15 @@
     function modalFrmAddNuevoProyecto(modalService, parametrosService, configService, RTAService, $scope, $uibModalInstance, $timeout) {
         var vm = $scope;
 
+        vm.cancel = cancel;
+        vm.guardar_item = guardar_item;
+
         vm.obj_producto_seleccionado = {};
         vm.list_productos_desarrollados = [];
+        vm.data_materiales_producto = [];
 
         get_productos_desarrollados();
-
-      
+        
         function get_productos_desarrollados() {
 
             vm.objectDialog.LoadingDialog("...");
@@ -57,7 +60,7 @@
                             $eventSelect.on("select2:select", function (e) {
 
                                 vm.obj_producto_seleccionado = e.params.data;
-                                get_productos_desarrollados_by_filtro();
+                                get_materiales_productos_desarrollados();
 
                                 $timeout(function () {
                                     vm.$apply();
@@ -70,17 +73,16 @@
                     }
                 });
         }
-
-        vm.obj_data_producto = {};
-        function get_productos_desarrollados_by_filtro() {
+        
+        function get_materiales_productos_desarrollados() {
 
             vm.objectDialog.LoadingDialog("...");
-            RTAService.getProductosDesarrolladosByFiltro(vm.obj_producto_seleccionado.ID_ITEM)
+            RTAService.getMaterialesProductosDesarrollados(vm.obj_producto_seleccionado.ID_ITEM)
                 .then(function(data) {
                     vm.objectDialog.HideDialog();
-
+                    angular.activarFancybox();
                     if (data.data.length > 0 && data.data[0].length > 0) {
-                        vm.obj_data_producto = data.data[0][0];
+                        vm.data_materiales_producto = data.data[0];
                     } else {
                         toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
                     }
@@ -88,7 +90,11 @@
                 });
         }
 
-        vm.cancel = function () {
+        function guardar_item() {
+            $uibModalInstance.close();
+        }
+
+        function cancel() {
             $uibModalInstance.dismiss('cancel');
         };
 
