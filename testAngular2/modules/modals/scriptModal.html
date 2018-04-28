@@ -69,7 +69,7 @@
         <div class="row">
             <legend class="font-rta encabezado_legend"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales</legend>
             <div class="col-md-12">
-                <table class="table table-hover table-condensed table-striped" ng-if="obj_producto_seleccionado.ID_ITEM != null">
+                <table class="table table-hover table-condensed table-striped" ng-if="obj_producto_seleccionado.data_materiales_producto.length > 0">
                     <thead>
                         <tr>
                             <th>Código</th>
@@ -79,7 +79,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in data_materiales_producto">
+                        <tr ng-repeat="item in obj_producto_seleccionado.data_materiales_producto">
                             <td>{{item.ID_COD_ITEM_C}}</td>
                             <td>{{item.ID_REFER_C}}</td>
                             <td>{{item.DESCRIPCION_C}}</td>

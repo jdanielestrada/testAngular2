@@ -32,19 +32,19 @@
 
             return modalInstance.result;
         }
-
-        function modalFormAddNuevoProyecto(solicitud) {
+        
+        function modalFormAddNuevoProyecto(list_productos_seleccionados) {
             var modalInstance = $uibModal.open({
                 templateUrl: "frmAddNuevoProyecto.html",
                 backdrop: "static",
                 keyboard: false,
                 controller: "modalFrmAddNuevoProyecto",
                 size: "seleccion-producto",
-                //resolve: {
-                //    solicitud: function() {
-                //        return solicitud;
-                //    }
-                //}
+                resolve: {
+                    listProductosSeleccionados: function () {
+                        return list_productos_seleccionados;
+                    }
+                }
             });
 
             return modalInstance.result;

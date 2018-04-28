@@ -4,9 +4,9 @@
         .module('appRTA')
         .controller('modalFrmAddNuevoProyecto', modalFrmAddNuevoProyecto);
 
-    modalFrmAddNuevoProyecto.$inject = ['modalService', 'parametrosService', 'configService', 'RTAService', '$scope', '$uibModalInstance', '$timeout'];
+    modalFrmAddNuevoProyecto.$inject = ['modalService', 'parametrosService', 'configService', 'RTAService', '$scope', '$uibModalInstance', '$timeout', 'listProductosSeleccionados'];
 
-    function modalFrmAddNuevoProyecto(modalService, parametrosService, configService, RTAService, $scope, $uibModalInstance, $timeout) {
+    function modalFrmAddNuevoProyecto(modalService, parametrosService, configService, RTAService, $scope, $uibModalInstance, $timeout, listProductosSeleccionados) {
         var vm = $scope;
 
         vm.cancel = cancel;
@@ -59,6 +59,7 @@
                             var $eventSelect = $("#seleccion_proyecto");
                             $eventSelect.on("select2:select", function (e) {
 
+                                vm.obj_producto_seleccionado = {};
                                 vm.obj_producto_seleccionado = e.params.data;
                                 get_materiales_productos_desarrollados();
 
@@ -83,6 +84,8 @@
                     angular.activarFancybox();
                     if (data.data.length > 0 && data.data[0].length > 0) {
                         vm.data_materiales_producto = data.data[0];
+
+                        vm.obj_producto_seleccionado.data_materiales_producto = data.data[0];
                     } else {
                         toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
                     }
@@ -91,7 +94,46 @@
         }
 
         function guardar_item() {
-            $uibModalInstance.close();
+
+            if (vm.obj_producto_seleccionado.ID_ITEM === null ||
+             vm.obj_producto_seleccionado.ID_ITEM === undefined ||
+             vm.obj_producto_seleccionado.ID_ITEM === "") {
+                toastr.warning("Debe seleccionar un producto.");
+                return;
+            }
+
+            /*verificar si la referencia fué previamente seleccionada*/
+            let data_producto_seleccion_previa = _.where(listProductosSeleccionados, { ID_ITEM: vm.obj_producto_seleccionado.ID_ITEM });
+            if (data_producto_seleccion_previa.length > 0) {
+                toastr.warning("El producto ya se encuentra seleccionado.");
+                return;
+            }
+
+            if (vm.obj_producto_seleccionado.cantidad === null ||
+                vm.obj_producto_seleccionado.cantidad === undefined ||
+                vm.obj_producto_seleccionado.cantidad === "" ||
+                parseInt(vm.obj_producto_seleccionado.cantidad) < 1) {
+                toastr.warning("Debe ingresar una cantidad válida del producto.");
+                return;
+            }
+
+            if (vm.obj_producto_seleccionado.margen === null ||
+                vm.obj_producto_seleccionado.margen === undefined ||
+                vm.obj_producto_seleccionado.margen === "" ||
+                parseInt(vm.obj_producto_seleccionado.margen) < 1) {
+                toastr.warning("Debe ingresar un margen válido del producto.");
+                return;
+            }
+
+            if (vm.obj_producto_seleccionado.data_materiales_producto === null ||
+                vm.obj_producto_seleccionado.data_materiales_producto === undefined ||
+                vm.obj_producto_seleccionado.data_materiales_producto === "" ||
+                vm.obj_producto_seleccionado.data_materiales_producto.length < 1) {
+                toastr.warning("No se permite agregar el producto, éste no cuenta con el detalle de material requerido.");
+                return;
+            }
+
+            $uibModalInstance.close(vm.obj_producto_seleccionado);
         }
 
         function cancel() {

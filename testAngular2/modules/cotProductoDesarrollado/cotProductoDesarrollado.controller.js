@@ -17,7 +17,11 @@
         function init() {
 
             vm.show_modal_seleccion_proyecto = show_modal_seleccion_proyecto;
-            
+            vm.remover_producto = remover_producto;
+
+
+            vm.list_productos_seleccionados = [];
+
             $timeout(function() {
                 $("#dpFechaCotizacion").datetimepicker({
                     dayViewHeaderFormat: "MMMM YYYY",
@@ -40,7 +44,21 @@
             }, 300);
 
             function show_modal_seleccion_proyecto() {
-                modalService.modalFormAddNuevoProyecto();
+                modalService.modalFormAddNuevoProyecto(vm.list_productos_seleccionados)
+                    .then((producto) => {
+                        vm.list_productos_seleccionados.push(producto);
+                    });
+            }
+
+            function remover_producto(producto) {
+
+                let indice_producto = 0;
+                vm.list_productos_seleccionados.forEach(function(item, index) {
+                    if (item.ID_ITEM === producto.ID_ITEM)
+                        indice_producto = index;
+                });
+
+                vm.list_productos_seleccionados.splice(indice_producto, 1);
             }
 
             function get_consecutivo_cotizacion() {
