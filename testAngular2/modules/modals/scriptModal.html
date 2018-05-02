@@ -34,7 +34,7 @@
                     <tbody>
                         <tr>
                             <td>
-                                <img alt="zoom1"
+                                <img alt="zoom"
                                      class="img-previa" src="./assets/img/image001.png" />
 
                                 <!--<img alt="zoom1"
@@ -66,32 +66,41 @@
                 </table>
             </div>            
         </div>
-        <div class="row">
-            <legend class="font-rta encabezado_legend"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales</legend>
-            <div class="col-md-12">
-                <table class="table table-hover table-condensed table-striped" ng-if="obj_producto_seleccionado.data_materiales_producto.length > 0">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Referencia</th>
-                            <th>Descripción</th>
-                            <th>Cantidad Requerida</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="item in obj_producto_seleccionado.data_materiales_producto">
-                            <td>{{item.ID_COD_ITEM_C}}</td>
-                            <td>{{item.ID_REFER_C}}</td>
-                            <td>{{item.DESCRIPCION_C}}</td>
-                            <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="row" ng-if="obj_producto_seleccionado.data_materiales_producto.length > 0">
+            <!--<legend class="font-rta encabezado_legend"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales</legend>-->
+            <div class="col-md-10 col-md-offset-1">                
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped" >
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Referencia</th>
+                                    <th>Descripción</th>
+                                    <th>Cantidad Requerida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in obj_producto_seleccionado.data_materiales_producto">
+                                    <td>{{item.ID_COD_ITEM_C}}</td>
+                                    <td>{{item.ID_REFER_C}}</td>
+                                    <td>{{item.DESCRIPCION_C}}</td>
+                                    <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
+                                </tr>
+                            </tbody>
+                        </table>                        
+                    </div>
+                </div>                
             </div>
         </div>
     </div>
     <div class="modal-footer text-center">
-        <button class="btn btn-default font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>
+        <button class="btn btn-rta font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>
         <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Cancelar</button>
     </div>
 </script>

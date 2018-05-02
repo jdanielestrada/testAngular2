@@ -85,7 +85,7 @@
                     if (data.data.length > 0 && data.data[0].length > 0) {
                         vm.data_materiales_producto = data.data[0];
 
-                        vm.obj_producto_seleccionado.data_materiales_producto = data.data[0];
+                        vm.obj_producto_seleccionado.data_materiales_producto = _.sortBy(data.data[0], 'DESCRIPCION_C');
                     } else {
                         toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
                     }

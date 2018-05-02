@@ -271,7 +271,7 @@ sup {
 
 html, body {
     min-height: 100%;
-    display: inline-table;
+    /*display: inline-table;*/
     width: 100%;
     background-color: #EEEEEE !important;
 }
@@ -5338,4 +5338,10 @@ input[type="checkbox"] {
     border-style: solid;
     border-color: black;
     border-width: 1px;
+}
+
+.fixed-guardar-formulario {
+    position: fixed;
+    bottom: 40%;
+    right: 0px;
 }
