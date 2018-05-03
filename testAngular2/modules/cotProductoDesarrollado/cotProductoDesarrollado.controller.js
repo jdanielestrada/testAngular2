@@ -22,6 +22,21 @@
 
             vm.list_productos_seleccionados = [];
 
+            //OBJ
+
+            vm.obj_encabezado_cotizacion = {
+
+                documento_cliente: "",
+                nombres_cliente  : "",
+                apellidos_cliente: "",
+                fecha_cotizacion : "",
+                cs_id_usuario    : "",
+                tipo_cotizacion  : "",
+                cs_cotizacion    : ""
+
+            }
+            vm.swMostrarItems = false;
+
             $timeout(function() {
                 $("#dpFechaCotizacion").datetimepicker({
                     dayViewHeaderFormat: "MMMM YYYY",
@@ -133,6 +148,80 @@
                         }
                     });
             }
+
+            function generarConsecutivoCotizacion() {
+
+                vm.obj_encabezado_cotizacion.tipo_cotizacion = 'I';
+                vm.obj_encabezado_cotizacion.cs_id_usuario = 2;
+                //vm.objectDialog.LoadingDialog("...");
+                RTAService.generarConsecutivoCotizacion(vm.obj_encabezado_cotizacion.tipo_cotizacion, vm.obj_encabezado_cotizacion.cs_id_usuario)
+                    .then(function (data) {
+                        if (result.MSG === "GUARDADO") {
+                            vm.obj_encabezado_cotizacion.cs_cotizacion = result.OUT_CS_COTIZACION;
+                        }
+                        else
+                        {
+                            toastr.error(result.MSG);
+                        }
+
+                    });
+            };
+
+            function insertEncabezadoCotizacion() {
+                
+                //validaciones
+
+                if (vm.obj_encabezado_cotizacion.documento_cliente === null      ||
+                    vm.obj_encabezado_cotizacion.documento_cliente === undefined ||
+                    vm.obj_encabezado_cotizacion.documento_cliente === "")
+                {
+                    toastr.warning("Debe ingresar un documento de cliente");
+                    return;
+                }
+
+                if (vm.obj_encabezado_cotizacion.nombres_cliente === null      ||
+                    vm.obj_encabezado_cotizacion.nombres_cliente === undefined ||
+                    vm.obj_encabezado_cotizacion.nombres_cliente === "")
+                {
+                    toastr.warning("Debe ingresar los NOMBRES del cliente");
+                    return;
+                }
+
+                if (vm.obj_encabezado_cotizacion.apellidos_cliente === null      ||
+                    vm.obj_encabezado_cotizacion.apellidos_cliente === undefined ||
+                    vm.obj_encabezado_cotizacion.apellidos_cliente === "")
+                {
+                    toastr.warning("Debe ingresar APELLIDOS del cliente");
+                    return;
+                }
+
+
+                let fecha_ct = $('#dpFechaCotizacion').data("DateTimePicker").date();
+                vm.obj_encabezado_cotizacion.fecha_cotizacion = fecha_ct == null ? null : moment(fecha_ct).format("YYYY-MM-DD");
+
+                if (vm.obj_encabezado_cotizacion.fecha_cotizacion === "" || vm.obj_encabezado_cotizacion.fecha_cotizacion === null) {
+                    toastr.warning('Debe soleccionar una fecha');
+                    return;
+                };
+
+                RTAService.insert_encabezado_cotizacion(vm.obj_encabezado_cotizacion)
+                  .then(function (result) {
+
+                      if (result.MSG === "GUARDADO") 
+                      {
+                          swal("SE HA INICIADO LA COTIZACIÓN ", "", "success");
+                          vm.swMostrarItems = true;
+                      }
+                      else 
+                      {
+                          console.log(result.MSG);
+                      
+                      }
+
+                  });
+            };
+
+
         };
         
         //#region Control User Session

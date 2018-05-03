@@ -21,6 +21,8 @@
 
             getProductosDesarrollados: getProductosDesarrollados,
             getMaterialesProductosDesarrollados: getMaterialesProductosDesarrollados,
+            generarConsecutivoCotizacion: generarConsecutivoCotizacion,
+            insertEncabezadoCotizacion: insertEncabezadoCotizacion
         };
 
         function getMaterialesProductosDesarrollados(idItemReferencia) {
@@ -58,6 +60,45 @@
                 return error;
             }
         }
+
+
+        function generarConsecutivoCotizacion(tipoCotizacion, idUsuario)
+        {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "generar_consecutivo_cotizacion/" + tipoCotizacion + "/" + idUsuario)
+                .then(generarConsecutivoCotizacionComplete)
+                .catch(generarConsecutivoCotizacionFailed);
+
+            function generarConsecutivoCotizacionComplete(response)
+            {
+                return response.data;
+            }
+
+            function generarConsecutivoCotizacionFailed(error)
+            {
+                logger.error('XHR falló en generarConsecutivoCotizacion', error);
+                return error;
+            }
+        }
+
+        function insertEncabezadoCotizacion(request)
+        {
+            return $http.post(TreidConfigSrv.ApiUrls.UrlCuadreCaja + "insert_h_Cotizacion/", JSON.stringify(request))
+                .then(insertEncabezadoCotizacioncomplete)
+                .catch(insertEncabezadoCotizacionFailed);
+
+            function insertEncabezadoCotizacioncomplete(response)
+            {
+                return response.data;
+            }
+
+            function insertEncabezadoCotizacionFailed(error)
+            {
+                console.log('Error en insertEncabezadoCotizacion', error);
+                return error;
+            }
+        }
+
+
 
         function getOpsForGestionOperarioExtraLaboral(request) {
             $rootScope.progressbar.start();
