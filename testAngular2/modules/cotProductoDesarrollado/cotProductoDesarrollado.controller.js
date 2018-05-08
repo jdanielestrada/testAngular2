@@ -30,12 +30,20 @@
                 nombres_cliente  : "",
                 apellidos_cliente: "",
                 fecha_cotizacion : "",
-                cs_id_usuario    : "",
-                tipo_cotizacion  : "",
+                cs_id_usuario: loginService.UserData.ID_USUARIO,
+                tipo_cotizacion: loginService.UserData.TIPO_DOCUMENTO,
                 cs_cotizacion    : ""
 
             }
             vm.swMostrarItems = false;
+
+
+            //ARRYS
+
+            vm.listaCotizacionesUsuario = [];
+
+
+            console.log(loginService.UserData);
 
             $timeout(function() {
                 $("#dpFechaCotizacion").datetimepicker({
@@ -113,6 +121,32 @@
                 vm.list_productos_seleccionados.splice(indice_producto, 1);
             }
 
+
+
+            
+             vm.getCotizacionesByUsusario= function() {
+
+                 vm.objectDialog.LoadingDialog("...");
+
+                 RTAService.getCotizacionesByUsusario(loginService.UserData.ID_USUARIO)
+                    .then(function (data) {
+                        vm.objectDialog.HideDialog();
+                        angular.activarFancybox();
+                        if (data.data.length > 0 && data.data[0].length > 0) {
+                            vm.listaCotizacionesUsuario = data.data[0];
+
+                        } else {
+                            toastr.warning("No se encontró ninguna cotización realizada por el usuario" + loginService.UserData.NOMBRES_USUARIO + ' ' + loginService.UserData.APELLIDOS_USUARIO);
+                        }
+
+                    });
+            }
+
+            vm.getCotizacionesByUsusario();
+
+
+
+
             function get_consecutivo_cotizacion() {
 
                 //vm.objectDialog.LoadingDialog("...");
@@ -149,48 +183,27 @@
                     });
             }
 
-            function generarConsecutivoCotizacion() {
+            vm.generarConsecutivoCotizacion = function () {
 
-                vm.obj_encabezado_cotizacion.tipo_cotizacion = 'I';
-                vm.obj_encabezado_cotizacion.cs_id_usuario = 2;
-                //vm.objectDialog.LoadingDialog("...");
-                RTAService.generarConsecutivoCotizacion(vm.obj_encabezado_cotizacion.tipo_cotizacion, vm.obj_encabezado_cotizacion.cs_id_usuario)
-                    .then(function (data) {
-                        if (result.MSG === "GUARDADO") {
-                            vm.obj_encabezado_cotizacion.cs_cotizacion = result.OUT_CS_COTIZACION;
-                        }
-                        else
-                        {
-                            toastr.error(result.MSG);
-                        }
-
-                    });
-            };
-
-            function insertEncabezadoCotizacion() {
-                
                 //validaciones
 
-                if (vm.obj_encabezado_cotizacion.documento_cliente === null      ||
+                if (vm.obj_encabezado_cotizacion.documento_cliente === null ||
                     vm.obj_encabezado_cotizacion.documento_cliente === undefined ||
-                    vm.obj_encabezado_cotizacion.documento_cliente === "")
-                {
+                    vm.obj_encabezado_cotizacion.documento_cliente === "") {
                     toastr.warning("Debe ingresar un documento de cliente");
                     return;
                 }
 
-                if (vm.obj_encabezado_cotizacion.nombres_cliente === null      ||
+                if (vm.obj_encabezado_cotizacion.nombres_cliente === null ||
                     vm.obj_encabezado_cotizacion.nombres_cliente === undefined ||
-                    vm.obj_encabezado_cotizacion.nombres_cliente === "")
-                {
+                    vm.obj_encabezado_cotizacion.nombres_cliente === "") {
                     toastr.warning("Debe ingresar los NOMBRES del cliente");
                     return;
                 }
 
-                if (vm.obj_encabezado_cotizacion.apellidos_cliente === null      ||
+                if (vm.obj_encabezado_cotizacion.apellidos_cliente === null ||
                     vm.obj_encabezado_cotizacion.apellidos_cliente === undefined ||
-                    vm.obj_encabezado_cotizacion.apellidos_cliente === "")
-                {
+                    vm.obj_encabezado_cotizacion.apellidos_cliente === "") {
                     toastr.warning("Debe ingresar APELLIDOS del cliente");
                     return;
                 }
@@ -204,12 +217,33 @@
                     return;
                 };
 
-                RTAService.insert_encabezado_cotizacion(vm.obj_encabezado_cotizacion)
+
+                //vm.objectDialog.LoadingDialog("...");
+                console.log(vm.obj_encabezado_cotizacion);
+
+                RTAService.generarConsecutivoCotizacion(vm.obj_encabezado_cotizacion.tipo_cotizacion, vm.obj_encabezado_cotizacion.cs_id_usuario)
+                    .then(function (result) {
+                        if (result.MSG === "OK") {
+                            vm.obj_encabezado_cotizacion.cs_cotizacion = result.OUT_CS_COTIZACION;
+                            vm.insertEncabezadoCotizacion();
+                        }
+                        else
+                        {
+                            toastr.error(result.MSG);
+                        }
+
+                    });
+            };
+
+          vm.insertEncabezadoCotizacion=function() {
+                
+  
+              RTAService.insertEncabezadoCotizacion(vm.obj_encabezado_cotizacion)
                   .then(function (result) {
 
                       if (result.MSG === "GUARDADO") 
                       {
-                          swal("SE HA INICIADO LA COTIZACIÓN ", "", "success");
+                          swal("SE HA INICIADO LA COTIZACIÓN CORRECTAMENTE", "", "success");
                           vm.swMostrarItems = true;
                       }
                       else 

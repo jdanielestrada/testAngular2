@@ -11,7 +11,21 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                    
+                    <div ng-repeat="item in listaCotizacionesUsuario" style="text-align: right">
+                     
+                    </div>
+
+                    <div ng-repeat="item in listaCotizacionesUsuario" id="reportes" class="ng-scope">
+                        <ul style="margin-top: 10px;">
+                            
+                                <a href="javascript:;" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;color:green" class="ng-binding" >
+                                    <span class="fa fa-check-square-o" style="font-size: 12px;"></span>&nbsp;<span>{{item.TIPO_COTIZACION}}-{{item.CS_TIPO_COTIZACION}}</span>
+                                </a>
+                           
+                        </ul>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -30,19 +44,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Documento</label>
-                                        <input type="text" class="form-control" placeholder="Documento de identidad" ng-model="obj_encabezado_cotizacion.documento_cliente">
+                                        <input type="text" class="form-control" placeholder="Documento " ng-model="obj_encabezado_cotizacion.documento_cliente" style="text-transform:uppercase">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nombres cliente</label>
-                                        <input type="text" class="form-control" placeholder="Nombres" ng-model="obj_encabezado_cotizacion.nombres_cliente">
+                                        <input type="text" class="form-control" placeholder="Nombres" ng-model="obj_encabezado_cotizacion.nombres_cliente" style="text-transform:uppercase">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Apellidos cliente</label>
-                                        <input type="text" class="form-control" placeholder="Apellidos" ng-model="obj_encabezado_cotizacion.apellidos_cliente">
+                                        <input type="text" class="form-control" placeholder="Apellidos" ng-model="obj_encabezado_cotizacion.apellidos_cliente" style="text-transform:uppercase">
                                     </div>
                                 </div>
                             </div>
@@ -50,14 +64,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Email Cliente</label>
-                                        <input type="text" class="form-control" placeholder="@...">
+                                        <input type="text" class="form-control" placeholder="@..." style="text-transform:uppercase">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Fecha</label>
                                         <div class="input-group date" id="dpFechaCotizacion">
-                                            <input type="text" class="form-control font_size_15px"/>
+                                            <input disabled="" type="text" class="form-control font_size_15px"/>
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -74,7 +88,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <button class="btn btn-box-tool btn-rta"
-                                            ng-click="insertEncabezadoCotizacion()"
+                                            ng-click="generarConsecutivoCotizacion()"
                                             type="button"
                                             style="height: 40px; width: 40px; padding: 0;">
                                         <i class="fa fa-check-circle"

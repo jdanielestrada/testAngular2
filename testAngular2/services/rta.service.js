@@ -15,14 +15,14 @@
     function RTAService($http, configService, $rootScope) {
         return {
 
-            getParametrosMulti: getParametrosMulti,
+            getParametrosMulti                  : getParametrosMulti,
             getOpsForGestionOperarioExtraLaboral: getOpsForGestionOperarioExtraLaboral,
 
-
-            getProductosDesarrollados: getProductosDesarrollados,
-            getMaterialesProductosDesarrollados: getMaterialesProductosDesarrollados,
-            generarConsecutivoCotizacion: generarConsecutivoCotizacion,
-            insertEncabezadoCotizacion: insertEncabezadoCotizacion
+            getProductosDesarrollados           : getProductosDesarrollados,
+            getMaterialesProductosDesarrollados : getMaterialesProductosDesarrollados,
+            generarConsecutivoCotizacion        : generarConsecutivoCotizacion,
+            insertEncabezadoCotizacion          : insertEncabezadoCotizacion,
+            getCotizacionesByUsusario           : getCotizacionesByUsusario
         };
 
         function getMaterialesProductosDesarrollados(idItemReferencia) {
@@ -62,9 +62,9 @@
         }
 
 
-        function generarConsecutivoCotizacion(tipoCotizacion, idUsuario)
+        function generarConsecutivoCotizacion(tipo_cotizacion, idUsuario)
         {
-            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "generar_consecutivo_cotizacion/" + tipoCotizacion + "/" + idUsuario)
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "generar_consecutivo_cotizacion/" + tipo_cotizacion + "/" + idUsuario)
                 .then(generarConsecutivoCotizacionComplete)
                 .catch(generarConsecutivoCotizacionFailed);
 
@@ -82,7 +82,7 @@
 
         function insertEncabezadoCotizacion(request)
         {
-            return $http.post(TreidConfigSrv.ApiUrls.UrlCuadreCaja + "insert_h_Cotizacion/", JSON.stringify(request))
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insert_h_Cotizacion/", JSON.stringify(request))
                 .then(insertEncabezadoCotizacioncomplete)
                 .catch(insertEncabezadoCotizacionFailed);
 
@@ -118,6 +118,31 @@
                 return error;
             }
         }
+
+
+        function getCotizacionesByUsusario(idUsuario) {
+            //$rootScope.progressbar.start();
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_cotizaciones_by_usuario/" + idUsuario)
+                .then(getCotizacionesByUsusarioComplete)
+                .catch(getCotizacionesByUsusarioFailed);
+
+            function getCotizacionesByUsusarioComplete(response) {
+                //$rootScope.progressbar.complete();
+                return response.data;
+            }
+
+            function getCotizacionesByUsusarioFailed(error) {
+                //$rootScope.progressbar.reset();
+                toastr.error('XHR falló en getCotizacionesByUsusario', error);
+                return error;
+            }
+        }
+
+
+
+
+
+
 
         function getParametrosMulti(request) {
             $rootScope.progressbar.start();

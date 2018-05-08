@@ -32,16 +32,16 @@
                     sref: "cotProductoDesarrollado",
                     d_menu: "Producto Desarrollado"
                 },
-                //{
-                //    icon_class: "pencil-square-o",
-                //    sref: "",
-                //    d_menu: "Producto Modificado"
-                //},
-                //{
-                //    icon_class: "plus-square-o",
-                //    sref: "",
-                //    d_menu: "Producto Nuevo"
-                //}
+                {
+                    icon_class: "pencil-square-o",
+                    sref: "",
+                    d_menu: "Producto Modificado"
+                },
+                {
+                    icon_class: "plus-square-o",
+                    sref: "",
+                    d_menu: "Producto Nuevo"
+                }
             ];
 
             vm.verificarPerfil = function(opcion) {
