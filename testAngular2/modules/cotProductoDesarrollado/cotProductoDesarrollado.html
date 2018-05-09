@@ -18,7 +18,7 @@
                     <div ng-repeat="item in listaCotizacionesUsuario" id="reportes" class="ng-scope">
                         <ul style="margin-top: 10px;">
                             
-                                <a href="javascript:;" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;color:green" class="ng-binding" >
+                                <a href="javascript:;" style="font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif;color:green" class="ng-binding" ng-click="getDetalleCotizacion(item);">
                                     <span class="fa fa-check-square-o" style="font-size: 12px;"></span>&nbsp;<span>{{item.TIPO_COTIZACION}}-{{item.CS_TIPO_COTIZACION}}</span>
                                 </a>
                            

@@ -40,7 +40,9 @@
 
             //ARRYS
 
-            vm.listaCotizacionesUsuario = [];
+            vm.listaCotizacionesUsuario         = [];
+            vm.listaDetalleCotizacion           = [];
+            vm.listaMaterialesByItemCotizacion  = [];
 
 
             console.log(loginService.UserData);
@@ -122,9 +124,7 @@
             }
 
 
-
-            
-             vm.getCotizacionesByUsusario= function() {
+            vm.getCotizacionesByUsusario= function() {
 
                  vm.objectDialog.LoadingDialog("...");
 
@@ -143,45 +143,6 @@
             }
 
             vm.getCotizacionesByUsusario();
-
-
-
-
-            function get_consecutivo_cotizacion() {
-
-                //vm.objectDialog.LoadingDialog("...");
-                RTAService.getTiposProyectos()
-                    .then(function (data) {
-                        //vm.objectDialog.HideDialog();
-
-                        if (data.data.length > 0 && data.data[0].length > 0) {
-
-                            vm.list_tipos_proyectos = data.data[0];
-                            vm.list_tipos_proyectos.push({
-                                C_ESTADO_COTIZACION: 0,
-                                D_ESTADO_COTIZACION: "..."
-                            });
-
-                            vm.list_tipos_proyectos.forEach(function (item, index) {
-                                item.id = item.C_ESTADO_COTIZACION;
-                                item.text = item.D_ESTADO_COTIZACION;
-
-                                if (item.C_ESTADO_COTIZACION === 0)
-                                    item.selected = true;
-                            });
-
-                            $timeout(function () {
-                                $("#seleccion_proyecto").select2({
-                                    data: vm.list_tipos_proyectos,
-                                    language: "es"
-                                });
-                            }, 300);
-
-                        } else {
-                            toastr.error("Ocurrió un error al tratar de obtener los tipos de proyectos.");
-                        }
-                    });
-            }
 
             vm.generarConsecutivoCotizacion = function () {
 
@@ -227,34 +188,52 @@
                             vm.obj_encabezado_cotizacion.cs_cotizacion = result.OUT_CS_COTIZACION;
                             vm.insertEncabezadoCotizacion();
                         }
-                        else
-                        {
+                        else {
                             toastr.error(result.MSG);
                         }
 
                     });
             };
 
-          vm.insertEncabezadoCotizacion=function() {
-                
-  
-              RTAService.insertEncabezadoCotizacion(vm.obj_encabezado_cotizacion)
-                  .then(function (result) {
+            vm.insertEncabezadoCotizacion = function () {
 
-                      if (result.MSG === "GUARDADO") 
-                      {
-                          swal("SE HA INICIADO LA COTIZACIÓN CORRECTAMENTE", "", "success");
-                          vm.swMostrarItems = true;
-                      }
-                      else 
-                      {
-                          console.log(result.MSG);
-                      
-                      }
 
-                  });
+                RTAService.insertEncabezadoCotizacion(vm.obj_encabezado_cotizacion)
+                    .then(function (result) {
+
+                        if (result.MSG === "GUARDADO") {
+                            swal("SE HA INICIADO LA COTIZACIÓN CORRECTAMENTE", "", "success");
+                            vm.swMostrarItems = true;
+                        }
+                        else {
+                            console.log(result.MSG);
+
+                        }
+
+                    });
             };
 
+            vm.getDetalleCotizacion = function (item) {
+
+                let csIdCotizacion = item.CS_ID_COTIZACION;
+
+                vm.objectDialog.LoadingDialog("...");
+
+                RTAService.getDetalleCotizacion(csIdCotizacion)
+                   .then(function (data)
+                   {
+                       vm.objectDialog.HideDialog();
+                       angular.activarFancybox();
+                       if (data.data.length > 0 && data.data[0].length > 0)
+                       {
+                           vm.listaDetalleCotizacion = data.data[0];
+
+                       } else {
+                           toastr.warning("No se encontró items asociados a la cotización");
+                       }
+
+                   });
+            }
 
         };
         

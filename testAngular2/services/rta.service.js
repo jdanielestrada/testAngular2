@@ -22,7 +22,8 @@
             getMaterialesProductosDesarrollados : getMaterialesProductosDesarrollados,
             generarConsecutivoCotizacion        : generarConsecutivoCotizacion,
             insertEncabezadoCotizacion          : insertEncabezadoCotizacion,
-            getCotizacionesByUsusario           : getCotizacionesByUsusario
+            getCotizacionesByUsusario           : getCotizacionesByUsusario,
+            getDetalleCotizacion                : getDetalleCotizacion
         };
 
         function getMaterialesProductosDesarrollados(idItemReferencia) {
@@ -139,7 +140,23 @@
         }
 
 
+        function getDetalleCotizacion(csIdCotizacion) {
+            //$rootScope.progressbar.start();
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_detalle_cotizacion/" + csIdCotizacion)
+                .then(getDetalleCotizacionComplete)
+                .catch(getDetalleCotizacionFailed);
 
+            function getDetalleCotizacionComplete(response) {
+                //$rootScope.progressbar.complete();
+                return response.data;
+            }
+
+            function getDetalleCotizacionFailed(error) {
+                //$rootScope.progressbar.reset();
+                toastr.error('XHR falló en getDetalleCotizacion', error);
+                return error;
+            }
+        }
 
 
 
