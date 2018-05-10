@@ -266,6 +266,7 @@
 
         $urlRouterProvider.otherwise("/");
 
+
     }
 
     function app($scope, $rootScope, $location, loginService, ngProgressFactory, configService, parametrosService, $uibModal, $timeout) {
