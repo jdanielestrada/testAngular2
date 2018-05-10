@@ -17,7 +17,25 @@
         return {
             modalFormConfirmacion: modalFormConfirmacion,
             modalFormAddNuevoProyecto: modalFormAddNuevoProyecto,
+            modalFormBuscarCotizaciones: modalFormBuscarCotizaciones
         };
+
+        function modalFormBuscarCotizaciones() {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmBusquedaCotizaciones.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "busquedaCotizaciones",
+                size: "lg",
+                //resolve: {
+                //    listProductosSeleccionados: function () {
+                //        return list_productos_seleccionados;
+                //    }
+                //}
+            });
+
+            return modalInstance.result;
+        }
 
         function modalFormConfirmacion(message) {
             var modalHtml = '<div class="modal-body">' + message + '</div>';

@@ -105,3 +105,38 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="frmBusquedaCotizaciones.html">
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title font-madecentro" style="font-weight: 600;">Lista de Cotizaciones</h4>
+    </div>
+    <div class="modal-body" style="background-color: #f9f9f9;">
+        <table class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th># Cotización</th>
+                    <th>Documento</th>
+                    <th>Cliente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in listaCotizacionesUsuario" ng-click="getDetalleCotizacion(item);" style="cursor: pointer">
+                    <td>
+                        <span>{{item.TIPO_COTIZACION}}-{{item.CS_TIPO_COTIZACION}}</span>
+                    </td>
+                    <td>
+                        <span>{{item.DOCUMENTO_CLIENTE}}</span>
+                    </td>
+                    <td>
+                        <span style="text-transform: uppercase">{{item.CLIENTE}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+    <div class="modal-footer text-center">
+        <!--<button class="btn btn-rta font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>-->
+        <button class="btn btn-rta font_size_16px" ng-click="cancel()" type="button">Salir</button>
+    </div>
+</script>
+
