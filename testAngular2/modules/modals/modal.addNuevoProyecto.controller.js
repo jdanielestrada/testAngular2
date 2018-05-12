@@ -95,9 +95,7 @@
 
         function guardar_item() {
 
-            if (vm.obj_producto_seleccionado.ID_ITEM === null ||
-             vm.obj_producto_seleccionado.ID_ITEM === undefined ||
-             vm.obj_producto_seleccionado.ID_ITEM === "") {
+            if (!isRegistroValido(vm.obj_producto_seleccionado.ID_ITEM)) {
                 toastr.warning("Debe seleccionar un producto.");
                 return;
             }
@@ -109,32 +107,66 @@
                 return;
             }
 
-            if (vm.obj_producto_seleccionado.cantidad === null ||
-                vm.obj_producto_seleccionado.cantidad === undefined ||
-                vm.obj_producto_seleccionado.cantidad === "" ||
-                parseInt(vm.obj_producto_seleccionado.cantidad) < 1) {
+            if (!isRegistroValido(vm.obj_producto_seleccionado.cantidad) || parseInt(vm.obj_producto_seleccionado.cantidad) < 1) {
                 toastr.warning("Debe ingresar una cantidad válida del producto.");
                 return;
             }
 
-            if (vm.obj_producto_seleccionado.margen === null ||
-                vm.obj_producto_seleccionado.margen === undefined ||
-                vm.obj_producto_seleccionado.margen === "" ||
-                parseInt(vm.obj_producto_seleccionado.margen) < 1) {
+            if (!isRegistroValido(vm.obj_producto_seleccionado.margen) || parseInt(vm.obj_producto_seleccionado.margen) < 1) {
                 toastr.warning("Debe ingresar un margen válido del producto.");
                 return;
             }
 
-            if (vm.obj_producto_seleccionado.data_materiales_producto === null ||
-                vm.obj_producto_seleccionado.data_materiales_producto === undefined ||
-                vm.obj_producto_seleccionado.data_materiales_producto === "" ||
-                vm.obj_producto_seleccionado.data_materiales_producto.length < 1) {
+            if (!isRegistroValido(vm.obj_producto_seleccionado.EMPAQUE_H)) {
+                toastr.warning("Debe ingresar un empaque H válido del producto.");
+                return;
+            }
+            if (!isRegistroValido(vm.obj_producto_seleccionado.EMPAQUE_W)) {
+                toastr.warning("Debe ingresar un empaque W válido del producto.");
+                return;
+            }
+            if (!isRegistroValido(vm.obj_producto_seleccionado.EMPAQUE_D)) {
+                toastr.warning("Debe ingresar un empaque D válido del producto.");
+                return;
+            }
+            if (!isRegistroValido(vm.obj_producto_seleccionado.CUBICAGE_C)) {
+                toastr.warning("Debe ingresar un cubicage C válido del producto.");
+                return;
+            }
+            if (!isRegistroValido(vm.obj_producto_seleccionado.CUBICAGE_K)) {
+                toastr.warning("Debe ingresar un cubicage K válido del producto.");
+                return;
+            }
+            
+            if (!isRegistroValido(vm.obj_producto_seleccionado.data_materiales_producto) || vm.obj_producto_seleccionado.data_materiales_producto.length < 1) {
                 toastr.warning("No se permite agregar el producto, éste no cuenta con el detalle de material requerido.");
                 return;
             }
 
             $uibModalInstance.close(vm.obj_producto_seleccionado);
         }
+
+        function isRegistroValido(valor) {
+            
+            if (valor === null ||
+                valor === undefined ||
+                valor === "" ) {
+                return false;
+            }
+
+            return true;
+        }
+
+        //vm.HH = function(valor) {
+        //    if (valor === null ||
+        //        valor === undefined ||
+        //        valor === "" ||
+        //        parseInt(valor) < 1) {
+        //        return false;
+        //    }
+
+        //    return true;
+        //};
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');

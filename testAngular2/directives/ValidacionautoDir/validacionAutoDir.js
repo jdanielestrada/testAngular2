@@ -56,7 +56,7 @@
                         var a = 1;
                         break;
                     case 'decimal':
-                        l_valaux = frm_jsvalcadena(a_valor, ',.-0123456789');
+                        l_valaux = frm_jsvalcadena(a_valor, ',.0123456789');
                         if (l_valaux.substring(0, 1) == '.') l_valaux = '0' + l_valaux;
                         break;
                     case 'date':

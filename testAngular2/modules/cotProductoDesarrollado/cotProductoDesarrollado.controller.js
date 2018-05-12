@@ -49,7 +49,7 @@
                     dayViewHeaderFormat: "MMMM YYYY",
                     locale: "es",
                     //sideBySide: true,
-                    minDate: moment(),
+                    //minDate: moment(),
                     defaultDate: moment(),
                     showClear: true,
                     widgetPositioning: {
@@ -69,8 +69,21 @@
             function ver_modal_cotizaciones() {
 
                 modalService.modalFormBuscarCotizaciones()
-                    .then((dt_cotizacion) => {
-                        console.log("dt_cotizacion", dt_cotizacion);
+                    .then((cotizacion) => {
+                        console.log("dt_cotizacion", cotizacion);
+
+                        vm.obj_encabezado_cotizacion.documento_cliente = cotizacion.DOCUMENTO_CLIENTE;
+                        vm.obj_encabezado_cotizacion.nombres_cliente = cotizacion.NOMBRES_CLIENTE;
+                        vm.obj_encabezado_cotizacion.apellidos_cliente = cotizacion.APELLIDOS_CLIENTE;
+                        vm.obj_encabezado_cotizacion.fecha_cotizacion = cotizacion.FECHA_COTIZACION;
+                        $('#dpFechaCotizacion').data("DateTimePicker").date(moment(cotizacion.FECHA_COTIZACION));
+
+                        vm.obj_encabezado_cotizacion.tipo_cotizacion = cotizacion.TIPO_COTIZACION;
+                        vm.obj_encabezado_cotizacion.cs_cotizacion = cotizacion.CS_TIPO_COTIZACION;
+
+                        $timeout(() => {
+                            vm.$apply();
+                        }, 0);
                     });
             }
 
@@ -130,7 +143,7 @@
             }
             
             function generarConsecutivoCotizacion() {
-
+                
                 //validaciones
 
                 if (vm.obj_encabezado_cotizacion.documento_cliente === null ||
@@ -163,23 +176,31 @@
                 };
 
 
-                vm.objectDialog.LoadingDialog("...");
-                console.log(vm.obj_encabezado_cotizacion);
+                if (vm.obj_encabezado_cotizacion.cs_cotizacion !== undefined &&
+                    vm.obj_encabezado_cotizacion.cs_cotizacion !== null &&
+                    vm.obj_encabezado_cotizacion.cs_cotizacion !== 0) {
+                    
+                    vm.swMostrarItems = true;
 
-                RTAService.generarConsecutivoCotizacion(vm.obj_encabezado_cotizacion.tipo_cotizacion, vm.obj_encabezado_cotizacion.cs_id_usuario)
-                    .then(function (result) {
+                } else {
+                    vm.objectDialog.LoadingDialog("...");
+                    console.log(vm.obj_encabezado_cotizacion);
 
-                        vm.objectDialog.HideDialog();
+                    RTAService.generarConsecutivoCotizacion(vm.obj_encabezado_cotizacion.tipo_cotizacion, vm.obj_encabezado_cotizacion.cs_id_usuario)
+                        .then(function (result) {
 
-                        if (result.MSG === "OK") {
-                            vm.obj_encabezado_cotizacion.cs_cotizacion = result.OUT_CS_COTIZACION;
-                            vm.insertEncabezadoCotizacion();
-                        }
-                        else {
-                            toastr.error(result.MSG);
-                        }
+                            vm.objectDialog.HideDialog();
 
-                    });
+                            if (result.MSG === "OK") {
+                                vm.obj_encabezado_cotizacion.cs_cotizacion = result.OUT_CS_COTIZACION;
+                                vm.insertEncabezadoCotizacion();
+                            }
+                            else {
+                                toastr.error(result.MSG);
+                            }
+
+                        });
+                }
             };
 
             vm.insertEncabezadoCotizacion = function () {

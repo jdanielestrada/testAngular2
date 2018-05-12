@@ -18,7 +18,9 @@
         getCotizacionesByUsusario();
 
         function getDetalleCotizacion(item) {
-            
+
+            item.listaDetalleCotizacion = [];
+
             let csIdCotizacion = item.CS_ID_COTIZACION;
 
             vm.objectDialog.LoadingDialog("...");
@@ -30,12 +32,14 @@
                    if (data.data.length > 0 && data.data[0].length > 0) {
                        vm.listaDetalleCotizacion = data.data[0];
 
-                       $uibModalInstance.close(vm.listaDetalleCotizacion);
+                       item.listaDetalleCotizacion = vm.listaDetalleCotizacion;
+
                    } else {
                        toastr.warning("No se encontró items asociados a la cotización");
                        vm.listaDetalleCotizacion = [];
                    }
 
+                   $uibModalInstance.close(item);
                });
         }
 

@@ -17,18 +17,36 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="overflow-x: scroll;">
             <!--<pre>{{data_materiales_producto | json}}</pre>-->            
             <div class="col-md-12">
-                <table class="table table-hover table-condensed table-striped" ng-if="obj_producto_seleccionado.ID_ITEM != null">
+                <table class="table table-hover table-condensed table-striped table-bordered" 
+                       ng-if="obj_producto_seleccionado.ID_ITEM != null" 
+                       style="font-size: 13px;">
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Código</th>
-                            <th>Referencia</th>
-                            <th>Descripción</th>
-                            <th>Cantidad</th>
-                            <th>% Margen</th>
+                            <th>CIDIS</th>
+                            <th>CÓDIGO</th>
+                            <th>REFERENCIA</th>
+                            <th>DESCRIPCIÓN</th>                            
+                            <th>PROCEDENCIA</th>
+                            <th>UM</th>
+                            <th>EMPAQUE H</th>
+                            <th>EMPAQUE W</th>
+                            <th>EMPAQUE D</th>
+                            <th>CUBICAGE C</th>
+                            <th>CUBICAGE K</th>  
+                            <th>MEDIDAS_PT</th>
+                            <th>COLOR</th>
+                            <th>CANTIDAD</th>
+                            <th>ULTIMO COSTO</th>
+                            <th>CANTIDAD UC</th>
+                            <th>VALOR_CLIENTE</th>
+                            <th>MARGEN</th>                          
+
+                            <th>CANTIDAD</th>
+                            <th>% MARGEN</th>           
                         </tr>
                     </thead>
                     <tbody>
@@ -42,20 +60,72 @@
                                      onerror="this.src = 'Assets/img/placeholder.png';">-->
                                 <!--ng-src="http://192.168.1.42/SGD/PRO/G4/AGNRNGW215.jpg"-->
                             </td>
+                            <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
                             <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
                             <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
                             <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
+                            
+                            <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
+                            <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
+                            
                             <td>
                                 <input aria-describedby="basic-addon1"
                                        class="form-control"
+                                       ng-model="obj_producto_seleccionado.EMPAQUE_H"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td>
+                            <td>
+                                <input aria-describedby="basic-addon1"
+                                       class="form-control"
+                                       ng-model="obj_producto_seleccionado.EMPAQUE_W"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td>
+                            <td>
+                                <input aria-describedby="basic-addon1"
+                                       class="form-control"
+                                       ng-model="obj_producto_seleccionado.EMPAQUE_D"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td>
+                            <td>
+                                <input aria-describedby="basic-addon1"
+                                       class="form-control"
+                                       ng-model="obj_producto_seleccionado.CUBICAGE_C"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td>
+                            <td>
+                                <input aria-describedby="basic-addon1"
+                                       class="form-control"
+                                       ng-model="obj_producto_seleccionado.CUBICAGE_K"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td>
+                            
+                            <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
+                            <td>{{obj_producto_seleccionado.COLOR}}</td>
+                            <td>{{obj_producto_seleccionado.CANTIDAD}}</td>
+                            <td>{{obj_producto_seleccionado.ULTIMO_COSTO}}</td>
+                            <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
+                            <td>{{obj_producto_seleccionado.VALOR_CLIENTE}}</td>
+                            <td>{{obj_producto_seleccionado.MARGEN}}</td>
+
+                            <td>
+                                <input class="form-control"
                                        ng-model="obj_producto_seleccionado.cantidad"
                                        placeholder="..."
                                        required
                                        ui-number-mask="0">
                             </td>
                             <td>
-                                <input aria-describedby="basic-addon1"
-                                       class="form-control"
+                                <input class="form-control"
                                        ng-model="obj_producto_seleccionado.margen"
                                        placeholder="..."
                                        required
@@ -66,6 +136,7 @@
                 </table>
             </div>            
         </div>
+        <br />
         <div class="row" ng-if="obj_producto_seleccionado.data_materiales_producto.length > 0">
             <!--<legend class="font-rta encabezado_legend"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales</legend>-->
             <div class="col-md-10 col-md-offset-1">                
@@ -128,7 +199,8 @@
                         <span>{{item.DOCUMENTO_CLIENTE}}</span>
                     </td>
                     <td>
-                        <span style="text-transform: uppercase">{{item.CLIENTE}}</span>
+                        <span style="text-transform: uppercase">{{item.NOMBRES_CLIENTE}} </span>
+                        <span style="text-transform: uppercase">{{item.APELLIDOS_CLIENTE}}</span>                        
                     </td>
                 </tr>
             </tbody>

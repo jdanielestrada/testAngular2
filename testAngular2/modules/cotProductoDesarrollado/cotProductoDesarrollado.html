@@ -11,32 +11,29 @@
                     </h3>
                 </div>
                 <div class="box-body">
-                  
-
-                        <button class="btn btn-rta col-sm-12"
-                                ng-click="ver_modal_cotizaciones()"
-                                style="margin-bottom: 10px;"
-                                title="Buscar Cotizaciones Generadas"
-                                type="button">
-                            <i class="fa fa-search" style="font-size: 28px;"></i>
-                        </button>
-
                     <button class="btn btn-rta col-sm-12"
-                            ng-click="guardar()"
+                            ng-click="ver_modal_cotizaciones()"
                             style="margin-bottom: 10px;"
-                            title="Guardar Cotización"
+                            title="Buscar Cotizaciones Generadas"
                             type="button">
-                        <i class="fa fa-check-square-o" style="font-size: 28px;"></i>
+                        <i class="fa fa-search" style="font-size: 28px;"></i>
                     </button>
-                    <button class="btn btn-rta col-sm-12"
-                            ng-click="guardar()"
-                            title="Enviar Cotización"
-                            type="button">
-                        <i class="fa fa-paper-plane" style="font-size: 25px;"></i>
-                    </button>
+
                     <div ng-if="list_productos_seleccionados.length > 0">
-                  
-                        </div>
+                        <button class="btn btn-rta col-sm-12"
+                                ng-click="guardar()"
+                                style="margin-bottom: 10px;"
+                                title="Guardar Cotización"
+                                type="button">
+                            <i class="fa fa-check-square-o" style="font-size: 28px;"></i>
+                        </button>
+                        <!--<button class="btn btn-rta col-sm-12"
+                                ng-click="guardar()"
+                                title="Enviar Cotización"
+                                type="button">
+                            <i class="fa fa-paper-plane" style="font-size: 25px;"></i>
+                        </button>-->
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,17 +93,20 @@
                                     </div>
                                 </div>-->
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button class="btn btn-box-tool btn-rta"
-                                            ng-click="generarConsecutivoCotizacion()"
-                                            type="button"
-                                            style="height: 40px; width: 40px; padding: 0;">
-                                        <i class="fa fa-check-circle"
-                                           style="font-size: 31px;"
-                                           tooltip-placement="left"
-                                           uib-tooltip="Comenzar cotizacion"></i>
-                                    </button>
+                            <div class="row text-center">
+                                <div class="col-md-2 col-md-offset-5">
+                                 
+                                        <button class="btn btn-box-tool btn-rta col-md-12"
+                                                ng-click="generarConsecutivoCotizacion()"
+                                                style="margin-bottom: 15px"
+                                                type="button"
+                                                tooltip-placement="left"
+                                               uib-tooltip="Comenzar cotizacion">
+                                            <i class="fa fa-check-circle"
+                                               style="font-size: 31px;"
+                                               ></i>
+                                        </button>
+                             
                                 </div>
                             </div>
 
@@ -128,32 +128,62 @@
                                         </div>
                                     </div>
                                     <div class="box-body">
-                                        <div class="row">
+                                        <div class="row" style="overflow-x: scroll;">
                                             <!--<pre>{{data_materiales_producto | json}}</pre>-->
                                             <div class="col-md-12">
-                                                <table class="table table-hover table-condensed table-striped" ng-if="list_productos_seleccionados.length > 0">
+                                                <table class="table table-hover table-condensed table-striped table-bordered" ng-if="list_productos_seleccionados.length > 0">
                                                     <thead>
                                                         <tr>
                                                             <th></th>
-                                                            <th>Código</th>
-                                                            <th>Referencia</th>
-                                                            <th>Descripción</th>
-                                                            <th>Cantidad</th>
-                                                            <th>% Margen</th>
+                                                            <th>CIDIS</th>
+                                                            <th>CÓDIGO</th>
+                                                            <th>REFERENCIA</th>
+                                                            <th>DESCRIPCIÓN</th>
+                                                            <th>PROCEDENCIA</th>
+                                                            <th>UM</th>
+                                                            <th>EMPAQUE H</th>
+                                                            <th>EMPAQUE W</th>
+                                                            <th>EMPAQUE D</th>
+                                                            <th>CUBICAGE C</th>
+                                                            <th>CUBICAGE K</th>
+                                                            <th>MEDIDAS_PT</th>
+                                                            <th>COLOR</th>
+                                                            <th>CANTIDAD</th>
+                                                            <th>ULTIMO COSTO</th>
+                                                            <th>CANTIDAD UC</th>
+                                                            <th>VALOR_CLIENTE</th>
+                                                            <th>MARGEN</th>
+                                                            <th>CANTIDAD</th>
+                                                            <th>% MARGEN</th> 
                                                             <th></th>
-                                                        </tr>
+                                                    </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="item in list_productos_seleccionados">
-                                                            <td>
-                                                                <img alt="zoom"
-                                                                     class="img-previa" src="./assets/img/image001.png" />
-                                                            </td>
-                                                            <td>{{item.ID_ITEM}}</td>
-                                                            <td>{{item.ID_REFERENCIA}}</td>
-                                                            <td>{{item.DESCRIPCION}}</td>
-                                                            <td>{{item.cantidad}}</td>
-                                                            <td>{{item.margen}}</td>
+                                                    <tr ng-repeat="item in list_productos_seleccionados">
+                                                        <td>
+                                                            <img alt="zoom"
+                                                                 class="img-previa" src="./assets/img/image001.png"/>
+                                                        </td>
+                                                        <td>{{item.C_CIDIS}}</td>
+                                                        <td>{{item.ID_ITEM}}</td>
+                                                        <td>{{item.ID_REFERENCIA}}</td>
+                                                        <td>{{item.DESCRIPCION}}</td>
+                                                        <td>{{item.ID_PROCEDENCIA}}</td>
+                                                        <td>{{item.UNIDAD_MEDIDA}}</td>
+                                                        <td>{{item.EMPAQUE_H}}</td>
+                                                        <td>{{item.EMPAQUE_W}}</td>
+                                                        <td>{{item.EMPAQUE_D}}</td>
+                                                        <td>{{item.CUBICAGE_C}}</td>
+                                                        <td>{{item.CUBICAGE_K}}</td>
+                                                        <td>{{item.MEDIDAS_PT}}</td>
+                                                        <td>{{item.COLOR}}</td>
+                                                        <td>{{item.CANTIDAD}}</td>
+                                                        <td>{{item.ULTIMO_COSTO}}</td>
+                                                        <td>{{item.CANTIDAD_UC}}</td>
+                                                        <td>{{item.VALOR_CLIENTE}}</td>
+                                                        <td>{{item.MARGEN}}</td>
+                                                        <td>{{item.cantidad}}</td>
+                                                        <td>{{item.margen}}</td>
                                                             <td>
                                                                 <button class="btn btn-rta" title="Eliminar el producto de la lista" ng-click="remover_producto(item)">
                                                                     <i class="fa fa-trash-o" style="font-size: 22px;"></i>
@@ -174,23 +204,5 @@
         </div>
     </div>
 </div>
-
-<div class="col-sm-1 fixed-guardar-formulario" style="bottom: 58%;" ng-if="list_productos_seleccionados.length > 0">
-    <button class="btn btn-rta col-sm-12"
-            ng-click="guardar()"
-            style="margin-bottom: 10px;"
-            title="Guardar Cotización" 
-            type="button">
-        <i class="fa fa-check-square-o" style="font-size: 28px;"></i>
-    </button>
-
-    <button class="btn btn-rta col-sm-12"
-            ng-click="guardar()"
-            title="Enviar Cotización" 
-            type="button">
-        <i class="fa fa-paper-plane" style="font-size: 25px;"></i>
-    </button>
-</div>
-
 
 <div ui-view="templateModal"></div>
