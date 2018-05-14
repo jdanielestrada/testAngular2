@@ -107,12 +107,12 @@
                 return;
             }
 
-            if (!isRegistroValido(vm.obj_producto_seleccionado.cantidad) || parseInt(vm.obj_producto_seleccionado.cantidad) < 1) {
+            if (!isRegistroValido(vm.obj_producto_seleccionado.CANTIDAD) || parseInt(vm.obj_producto_seleccionado.CANTIDAD) < 1) {
                 toastr.warning("Debe ingresar una cantidad válida del producto.");
                 return;
             }
 
-            if (!isRegistroValido(vm.obj_producto_seleccionado.margen) || parseInt(vm.obj_producto_seleccionado.margen) < 1) {
+            if (!isRegistroValido(vm.obj_producto_seleccionado.MARGEN) || parseInt(vm.obj_producto_seleccionado.MARGEN) < 1) {
                 toastr.warning("Debe ingresar un margen válido del producto.");
                 return;
             }

@@ -23,8 +23,40 @@
             generarConsecutivoCotizacion        : generarConsecutivoCotizacion,
             insertEncabezadoCotizacion          : insertEncabezadoCotizacion,
             getCotizacionesByUsusario           : getCotizacionesByUsusario,
-            getDetalleCotizacion                : getDetalleCotizacion
+            getDetalleCotizacion: getDetalleCotizacion,
+            insertProductosCotizacion: insertProductosCotizacion,
+            deleteProductoDtCotizacion: deleteProductoDtCotizacion
         };
+        
+        function deleteProductoDtCotizacion(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "delete_producto_dt_cotizacion/", JSON.stringify(request))
+                .then(deleteProductoDtCotizacioncomplete)
+                .catch(deleteProductoDtCotizacionFailed);
+
+            function deleteProductoDtCotizacioncomplete(response) {
+                return response.data;
+            }
+
+            function deleteProductoDtCotizacionFailed(error) {
+                console.log('Error en deleteProductoDtCotizacion', error);
+                return error;
+            }
+        }
+
+        function insertProductosCotizacion(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insert_productos_cotizacion/", JSON.stringify(request))
+                .then(insertProductosCotizacioncomplete)
+                .catch(insertProductosCotizacionFailed);
+
+            function insertProductosCotizacioncomplete(response) {
+                return response.data;
+            }
+
+            function insertProductosCotizacionFailed(error) {
+                console.log('Error en insertProductosCotizacion', error);
+                return error;
+            }
+        }
 
         function getMaterialesProductosDesarrollados(idItemReferencia) {
             //$rootScope.progressbar.start();

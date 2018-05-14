@@ -45,6 +45,16 @@
                         <h3 class="box-title">
                             Cotización Nro. <b style="font-size: larger;">{{obj_encabezado_cotizacion.tipo_cotizacion}} - {{obj_encabezado_cotizacion.cs_cotizacion}}</b>
                         </h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool"
+                                    ng-click="limpiar_formulario()"
+                                    tooltip-placement="top"
+                                    type="button" 
+                                    uib-tooltip="Limpiar Formulario">
+                                <i class="fa fa-refresh"
+                                   style="font-size: 23px;"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="box-body">
                         <form>
@@ -72,7 +82,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Email Cliente</label>
-                                        <input type="text" class="form-control" placeholder="@..." style="text-transform:uppercase">
+                                        <input type="text" class="form-control" placeholder="@..." style="text-transform:uppercase"ng-model="obj_encabezado_cotizacion.email">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -95,7 +105,6 @@
                             </div>
                             <div class="row text-center">
                                 <div class="col-md-2 col-md-offset-5">
-                                 
                                         <button class="btn btn-box-tool btn-rta col-md-12"
                                                 ng-click="generarConsecutivoCotizacion()"
                                                 style="margin-bottom: 15px"
@@ -106,10 +115,8 @@
                                                style="font-size: 31px;"
                                                ></i>
                                         </button>
-                             
                                 </div>
                             </div>
-
                             <div>
                                 <div class="box" style="margin-bottom: 10px; border-top: 3px solid #dadada !important;" ng-show="swMostrarItems">
                                     <div class="box-header with-border"
@@ -128,7 +135,7 @@
                                         </div>
                                     </div>
                                     <div class="box-body">
-                                        <div class="row" style="overflow-x: scroll;">
+                                        <div class="row no-margin" style="overflow-x: scroll;">
                                             <!--<pre>{{data_materiales_producto | json}}</pre>-->
                                             <div class="col-md-12">
                                                 <table class="table table-hover table-condensed table-striped table-bordered" ng-if="list_productos_seleccionados.length > 0">
@@ -182,8 +189,8 @@
                                                         <td>{{item.CANTIDAD_UC}}</td>
                                                         <td>{{item.VALOR_CLIENTE}}</td>
                                                         <td>{{item.MARGEN}}</td>
-                                                        <td>{{item.cantidad}}</td>
-                                                        <td>{{item.margen}}</td>
+                                                        <td>{{item.CANTIDAD}}</td>
+                                                        <td>{{item.MARGEN}}</td>
                                                             <td>
                                                                 <button class="btn btn-rta" title="Eliminar el producto de la lista" ng-click="remover_producto(item)">
                                                                     <i class="fa fa-trash-o" style="font-size: 22px;"></i>

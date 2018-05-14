@@ -17,33 +17,30 @@
         function init() {
 
             vm.show_modal_seleccion_proyecto = show_modal_seleccion_proyecto;
-            vm.remover_producto = remover_producto;
-            vm.guardar = guardar;
-            vm.ver_modal_cotizaciones = ver_modal_cotizaciones;
-            vm.generarConsecutivoCotizacion = generarConsecutivoCotizacion;
+            vm.remover_producto              = remover_producto;
+            vm.guardar                       = guardar;
+            vm.ver_modal_cotizaciones        = ver_modal_cotizaciones;
+            vm.generarConsecutivoCotizacion  = generarConsecutivoCotizacion;
+            vm.limpiar_formulario            = limpiar_formulario;
 
             vm.list_productos_seleccionados = [];
-            
-            vm.obj_encabezado_cotizacion = {
 
+            vm.obj_encabezado_cotizacion = {
                 documento_cliente: "",
-                nombres_cliente  : "",
+                nombres_cliente: "",
                 apellidos_cliente: "",
-                fecha_cotizacion : "",
+                fecha_cotizacion: "",
                 cs_id_usuario: loginService.UserData.ID_USUARIO,
                 tipo_cotizacion: loginService.UserData.TIPO_DOCUMENTO,
-                cs_cotizacion    : ""
+                cs_cotizacion: null
+            };
 
-            }
             vm.swMostrarItems = false;
             
             vm.listaCotizacionesUsuario         = [];
             vm.listaDetalleCotizacion           = [];
             vm.listaMaterialesByItemCotizacion  = [];
-
-
-            console.log(loginService.UserData);
-
+            
             $timeout(function() {
                 $("#dpFechaCotizacion").datetimepicker({
                     dayViewHeaderFormat: "MMMM YYYY",
@@ -64,13 +61,13 @@
                 }, 50);
 
             }, 300);
-
             
             function ver_modal_cotizaciones() {
 
                 modalService.modalFormBuscarCotizaciones()
                     .then((cotizacion) => {
                         console.log("dt_cotizacion", cotizacion);
+                        limpiar_formulario();
 
                         vm.obj_encabezado_cotizacion.documento_cliente = cotizacion.DOCUMENTO_CLIENTE;
                         vm.obj_encabezado_cotizacion.nombres_cliente = cotizacion.NOMBRES_CLIENTE;
@@ -80,6 +77,13 @@
 
                         vm.obj_encabezado_cotizacion.tipo_cotizacion = cotizacion.TIPO_COTIZACION;
                         vm.obj_encabezado_cotizacion.cs_cotizacion = cotizacion.CS_TIPO_COTIZACION;
+                        vm.obj_encabezado_cotizacion.cs_h_cotizacion = cotizacion.CS_ID_COTIZACION;
+
+                        if (cotizacion.listaDetalleCotizacion.length > 0) {
+                            vm.list_productos_seleccionados = cotizacion.listaDetalleCotizacion;
+                            vm.swMostrarItems = true;
+                            angular.activarFancybox();
+                        }
 
                         $timeout(() => {
                             vm.$apply();
@@ -126,26 +130,54 @@
             function show_modal_seleccion_proyecto() {
                 modalService.modalFormAddNuevoProyecto(vm.list_productos_seleccionados)
                     .then((producto) => {
-                        vm.list_productos_seleccionados.push(producto);
-                        angular.activarFancybox();
+                        guardar_producto_seleccionado(producto);
+                    });
+            }
+
+            function guardar_producto_seleccionado(producto) {
+
+                producto.CS_H_COTIZACION = vm.obj_encabezado_cotizacion.cs_h_cotizacion;
+                producto.ID_USUARIO = loginService.UserData.ID_USUARIO;
+
+                RTAService.insertProductosCotizacion(producto)
+                    .then(function(result) {
+
+                        if (result.MSG === "OK") {
+                            toastr.success("Producto Agregado Correctamente.");
+                            producto.CS_ID_DT_COTIZACION = result.OUT_CS_ID_DT_COTIZACION;
+                            vm.list_productos_seleccionados.push(producto);
+                            angular.activarFancybox();
+                        } else {
+                            console.error(result.MSG);
+                            toastr.error("Ocurrió un error al tratar de insertar el producto, intentelo nuevamente.");
+                        }
                     });
             }
 
             function remover_producto(producto) {
 
-                let indice_producto = 0;
-                vm.list_productos_seleccionados.forEach(function(item, index) {
-                    if (item.ID_ITEM === producto.ID_ITEM)
-                        indice_producto = index;
-                });
+                RTAService.deleteProductoDtCotizacion(producto)
+                    .then(function(result) {
 
-                vm.list_productos_seleccionados.splice(indice_producto, 1);
+                        if (result.MSG === "OK") {
+                            toastr.success("Producto Eliminado Correctamente.");
+
+                            let indice_producto = 0;
+                            vm.list_productos_seleccionados.forEach(function(item, index) {
+                                if (item.CS_ID_DT_COTIZACION === producto.CS_ID_DT_COTIZACION)
+                                    indice_producto = index;
+                            });
+
+                            vm.list_productos_seleccionados.splice(indice_producto, 1);
+                        } else {
+                            console.error(result.MSG);
+                            toastr.error("Ocurrió un error al tratar de eliminar el producto, intentelo nuevamente.");
+                        }
+                    });
             }
             
             function generarConsecutivoCotizacion() {
                 
-                //validaciones
-
                 if (vm.obj_encabezado_cotizacion.documento_cliente === null ||
                     vm.obj_encabezado_cotizacion.documento_cliente === undefined ||
                     vm.obj_encabezado_cotizacion.documento_cliente === "") {
@@ -193,6 +225,7 @@
 
                             if (result.MSG === "OK") {
                                 vm.obj_encabezado_cotizacion.cs_cotizacion = result.OUT_CS_COTIZACION;
+                             
                                 vm.insertEncabezadoCotizacion();
                             }
                             else {
@@ -204,19 +237,36 @@
             };
 
             vm.insertEncabezadoCotizacion = function () {
-
                 RTAService.insertEncabezadoCotizacion(vm.obj_encabezado_cotizacion)
                     .then(function (result) {
 
-                        if (result.MSG === "GUARDADO") {
+                        if (result.MSG === "OK") {
                             swal("SE HA INICIADO LA COTIZACIÓN CORRECTAMENTE", "", "success");
                             vm.swMostrarItems = true;
+                            vm.obj_encabezado_cotizacion.cs_h_cotizacion = result.OUT_CS_H_COTIZACION;
                         }
                         else {
                             console.log(result.MSG);
                         }
                     });
             };
+
+            function limpiar_formulario() {
+                vm.obj_encabezado_cotizacion.documento_cliente = "";
+                vm.obj_encabezado_cotizacion.nombres_cliente   = "";
+                vm.obj_encabezado_cotizacion.apellidos_cliente = "";
+                vm.obj_encabezado_cotizacion.email             = "";
+                vm.obj_encabezado_cotizacion.cs_cotizacion     = null;
+                vm.obj_encabezado_cotizacion.cs_h_cotizacion   = null;
+                vm.list_productos_seleccionados                = [];
+                vm.swMostrarItems                              = false;
+
+                $('#dpFechaCotizacion').data("DateTimePicker").date(moment());
+
+                $timeout(() => {
+                    vm.$apply();
+                }, 0);
+            }
         };
         
         //#region Control User Session
