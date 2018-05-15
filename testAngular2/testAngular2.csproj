@@ -1584,6 +1584,19 @@
     <Content Include="assets\vendors\ng-click-select\ng-click-select.js" />
     <Content Include="assets\vendors\ngProgress\ngProgress.css" />
     <Content Include="assets\vendors\ngProgress\ngProgress.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\.eslintrc.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\.gitignore" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\Gruntfile.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\papaparse.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\papaparse.min.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\player\player.css" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\player\player.html" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\player\player.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\tests\.eslintrc.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\tests\node-tests.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\tests\test-cases.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\tests\test.js" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\tests\tests.html" />
     <Content Include="assets\vendors\select2-4.0.1\select2-4.0.1\dist\css\select2.min.css" />
     <Content Include="assets\vendors\select2-4.0.1\select2-4.0.1\dist\js\i18n\ar.js" />
     <Content Include="assets\vendors\select2-4.0.1\select2-4.0.1\dist\js\i18n\az.js" />
@@ -1653,6 +1666,8 @@
     <Content Include="directives\ValidacionautoDir\validacionAutoDir.js" />
     <Content Include="filter\dateFilter.js" />
     <Content Include="index.html" />
+    <Content Include="modules\adminUploadArchivos\adminUploadArchivos.controller.js" />
+    <Content Include="modules\adminUploadArchivos\adminUploadArchivos.html" />
     <Content Include="modules\cotProductoDesarrollado\cotProductoDesarrollado.controller.js" />
     <Content Include="modules\cotProductoDesarrollado\cotProductoDesarrollado.html" />
     <Content Include="modules\Home\home.controller.js" />
@@ -1748,6 +1763,14 @@
     <Content Include="assets\vendors\ionicons-2.0.1\ionicons-2.0.1\scss\_ionicons-icons.scss" />
     <Content Include="assets\vendors\ionicons-2.0.1\ionicons-2.0.1\scss\_ionicons-variables.scss" />
     <Content Include="assets\vendors\underscore\underscore-min.map" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\.npmignore" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\.travis.yml" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\bower.json" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\LICENSE" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\package.json" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\README.md" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\tests\long-sample.csv" />
+    <Content Include="assets\vendors\PapaParse-4.4.0\tests\sample.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

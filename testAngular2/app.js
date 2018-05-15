@@ -262,6 +262,15 @@
                         templateUrl: "modules/modals/scriptModal.html?rand=" + rand
                     }
                 }
+            })
+            .state("adminUploadArchivos", {
+                url: "/adminUploadArchivos",
+                views: {
+                    '': {
+                        templateUrl: "modules/adminUploadArchivos/adminUploadArchivos.html?rand=" + rand,
+                        controller: "adminUploadArchivos"
+                    }
+                }
             });
 
         $urlRouterProvider.otherwise("/");

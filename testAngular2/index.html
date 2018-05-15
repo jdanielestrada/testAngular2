@@ -92,7 +92,8 @@
                             </span>
                         </a>
                     </li>
-                    <!--<li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoModificado' }"
+
+                    <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoModificado' }"
                             ng-if="verificarPerfil('cotProductoModificado')">
                         <a href="javascript:;"
                            ui-sref="cotProductoDesarrollado"
@@ -114,10 +115,35 @@
                                 &nbsp;P. Nuevo
                             </span>
                         </a>
-                    </li>-->
+                    </li>
 
 
-                
+
+                    <li class="dropdown">
+                        <!--&& verificarPerfil('gestion_inventario')-->
+                        <a href="#" class="dropdown-toggle dropdown-madecentro-menu" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fa fa-reorder" style="font-size: 20px;"></i>
+                            <span class="font-madecentro">
+                                Administrac&oacute;n<span class="caret"></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu madecentro-menu">
+                            <li class="hvr-fade" ng-class="{'active' : location.path() == '/adminUploadArchivos' }" ng-if="verificarPerfil('adminUploadArchivos')">
+                              
+                                <a ui-sref="adminUploadArchivos" class="responsive_headline">
+                                   
+                                    <span class="font-madecentro">
+                                        &nbsp; Gestion de archivos
+                                    </span>
+                                   
+                                </a>
+                            </li>
+         
+                        </ul>
+                    </li>
+
+
                 </ul>
                 <!--current user information-->
                 <div class="navbar-custom-menu">
@@ -240,11 +266,13 @@
     <script src="assets/vendors/ng-click-select/ng-click-select.js"></script>
     <script src="assets/vendors/SweetAlert2/sweetalert2.min.js"></script>
     <script src="assets/vendors/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+    <script src="assets/vendors/PapaParse-4.4.0/papaparse.min.js"></script>
     <!--modules-->
     <script type="text/javascript" src="app.js?v=1.0.0"></script>
     <script type="text/javascript" src="modules/Home/home.controller.js?v=1.0.0"></script>
     <script type="text/javascript" src="modules/UserLogin/userLogin.controller.js?v=1.0.0"></script>
     <script src="modules/cotProductoDesarrollado/cotProductoDesarrollado.controller.js?v=1.0.0"></script>
+    <script src="modules/adminUploadArchivos/adminUploadArchivos.controller.js"></script>
 
     <!--modals-->
     <script src="modules/modals/modal.confirmaciones.controller.js?v=1.0.0"></script>
