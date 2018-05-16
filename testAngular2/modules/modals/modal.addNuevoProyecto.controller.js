@@ -11,6 +11,7 @@
 
         vm.cancel = cancel;
         vm.guardar_item = guardar_item;
+        vm.cambio_cantidad_producto = cambio_cantidad_producto;
 
         vm.obj_producto_seleccionado = {};
         vm.list_productos_desarrollados = [];
@@ -18,13 +19,21 @@
 
         get_productos_desarrollados();
         
+        function cambio_cantidad_producto() {
+            if (!_.isNumber(vm.obj_producto_seleccionado.CANTIDAD) || parseFloat(vm.obj_producto_seleccionado.CANTIDAD) < 1)
+                vm.obj_producto_seleccionado.CANTIDAD = 1;
+
+            vm.dataInsumosProducto.forEach((item) => {
+                item.CANTIDAD_REQUERIDA = parseFloat(item.CANTIDAD_BASE) * parseFloat(vm.obj_producto_seleccionado.CANTIDAD);
+            });
+        }
+
         function get_productos_desarrollados() {
 
             vm.objectDialog.LoadingDialog("...");
             RTAService.getProductosDesarrollados()
                 .then(function (data) {
-                    vm.objectDialog.HideDialog();
-
+              
                     if (data.data.length > 0 && data.data[0].length > 0) {
 
                         vm.list_productos_desarrollados = data.data[0];
@@ -53,6 +62,8 @@
                                 data: _.sortBy(vm.list_productos_desarrollados, 'text'),
                                 language: "es"
                             });
+
+                            vm.objectDialog.HideDialog();
                         }, 300);
 
                         $timeout(function () {
@@ -74,7 +85,9 @@
                     }
                 });
         }
-        
+
+        vm.dataInsumosProductoSafe = [];
+        vm.dataInsumosProducto = [];
         function get_materiales_productos_desarrollados() {
 
             vm.objectDialog.LoadingDialog("...");
@@ -83,9 +96,16 @@
                     vm.objectDialog.HideDialog();
                     angular.activarFancybox();
                     if (data.data.length > 0 && data.data[0].length > 0) {
-                        vm.data_materiales_producto = data.data[0];
+                        //vm.data_materiales_producto = data.data[0];
+                        //vm.obj_producto_seleccionado.data_materiales_producto = _.sortBy(data.data[0], 'DESCRIPCION_C');
 
-                        vm.obj_producto_seleccionado.data_materiales_producto = _.sortBy(data.data[0], 'DESCRIPCION_C');
+                        vm.dataInsumosProductoSafe = _.sortBy(data.data[0], 'DESCRIPCION_C');
+                        vm.dataInsumosProducto = angular.copy(vm.dataInsumosProductoSafe);
+
+                        //vm.obj_producto_seleccionado.data_materiales_producto.forEach((item) => {
+                        //    item.CANTIDAD_REQUERIDA_BASE = item.CANTIDAD_REQUERIDA;
+                        //});
+
                     } else {
                         toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
                     }
@@ -112,7 +132,7 @@
                 return;
             }
 
-            if (!isRegistroValido(vm.obj_producto_seleccionado.MARGEN) || parseInt(vm.obj_producto_seleccionado.MARGEN) < 1) {
+            if (!isRegistroValido(vm.obj_producto_seleccionado.MARGEN)) {
                 toastr.warning("Debe ingresar un margen válido del producto.");
                 return;
             }
@@ -138,11 +158,13 @@
                 return;
             }
             
-            if (!isRegistroValido(vm.obj_producto_seleccionado.data_materiales_producto) || vm.obj_producto_seleccionado.data_materiales_producto.length < 1) {
+            if (!isRegistroValido(vm.dataInsumosProducto) || vm.dataInsumosProducto.length < 1) {
                 toastr.warning("No se permite agregar el producto, éste no cuenta con el detalle de material requerido.");
                 return;
             }
-
+            
+            vm.obj_producto_seleccionado.data_insumo_producto = vm.dataInsumosProducto;
+            
             $uibModalInstance.close(vm.obj_producto_seleccionado);
         }
 

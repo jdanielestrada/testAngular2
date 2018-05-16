@@ -16,7 +16,7 @@
                             style="margin-bottom: 10px;"
                             title="Buscar Cotizaciones Generadas"
                             type="button">
-                        <i class="fa fa-search" style="font-size: 28px;"></i>
+                        <i class="fa fa-search" style="font-size: 28px;color: #cefe00;"></i>
                     </button>
 
                     <div ng-if="list_productos_seleccionados.length > 0">
@@ -25,7 +25,7 @@
                                 style="margin-bottom: 10px;"
                                 title="Guardar Cotización"
                                 type="button">
-                            <i class="fa fa-check-square-o" style="font-size: 28px;"></i>
+                            <i class="fa fa-check-square-o" style="font-size: 28px;color: #cefe00;"></i>
                         </button>
                         <!--<button class="btn btn-rta col-sm-12"
                                 ng-click="guardar()"
@@ -112,8 +112,7 @@
                                                 tooltip-placement="left"
                                                uib-tooltip="Comenzar cotizacion">
                                             <i class="fa fa-check-circle"
-                                               style="font-size: 31px;"
-                                               ></i>
+                                               style="font-size: 31px;color: #cefe00;"></i>
                                         </button>
                                 </div>
                             </div>
@@ -128,7 +127,7 @@
                                                     type="button"
                                                     style="height: 40px; width: 40px; padding: 0;">
                                                 <i class="fa fa-plus-circle"
-                                                   style="font-size: 31px;"
+                                                   style="font-size: 31px;color: #cefe00;"
                                                    tooltip-placement="left"
                                                    uib-tooltip="Agregar nuevo proyecto"></i>
                                             </button>
@@ -155,11 +154,11 @@
                                                             <th>CUBICAGE K</th>
                                                             <th>MEDIDAS_PT</th>
                                                             <th>COLOR</th>
-                                                            <th>CANTIDAD</th>
+                                                            <!--<th>CANTIDAD</th>-->
                                                             <th>ULTIMO COSTO</th>
                                                             <th>CANTIDAD UC</th>
                                                             <th>VALOR_CLIENTE</th>
-                                                            <th>MARGEN</th>
+                                                            <!--<th>MARGEN</th>-->
                                                             <th>CANTIDAD</th>
                                                             <th>% MARGEN</th> 
                                                             <th></th>
@@ -184,18 +183,24 @@
                                                         <td>{{item.CUBICAGE_K}}</td>
                                                         <td>{{item.MEDIDAS_PT}}</td>
                                                         <td>{{item.COLOR}}</td>
-                                                        <td>{{item.CANTIDAD}}</td>
+                                                        <!--<td>{{item.CANTIDAD}}</td>-->
                                                         <td>{{item.ULTIMO_COSTO}}</td>
                                                         <td>{{item.CANTIDAD_UC}}</td>
                                                         <td>{{item.VALOR_CLIENTE}}</td>
-                                                        <td>{{item.MARGEN}}</td>
+                                                        <!--<td>{{item.MARGEN}}</td>-->
                                                         <td>{{item.CANTIDAD}}</td>
                                                         <td>{{item.MARGEN}}</td>
-                                                            <td>
-                                                                <button class="btn btn-rta" title="Eliminar el producto de la lista" ng-click="remover_producto(item)">
-                                                                    <i class="fa fa-trash-o" style="font-size: 22px;"></i>
-                                                                </button>
-                                                            </td>
+                                                        <td>
+                                                            <button class="btn btn-rta"
+                                                                    ng-click="editar_producto(item)"
+                                                                    style="margin-bottom: 5px;" 
+                                                                    title="Editar el producto de la lista">
+                                                                <i class="fa fa-pencil" style="font-size: 20px;color: #cefe00;"></i>
+                                                            </button>
+                                                            <button class="btn btn-rta" title="Eliminar el producto de la lista" ng-click="remover_producto(item)">
+                                                                <i class="fa fa-trash-o" style="font-size: 22px;color: #cefe00;"></i>
+                                                            </button>
+                                                        </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

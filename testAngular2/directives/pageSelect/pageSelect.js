@@ -6,12 +6,7 @@
             link: function (scope, element, attrs) {
                 scope.$watch('currentPage', function (c) {
                     scope.inputPage = c;
-
-                    /**
-                     * lo utilizo para filtrar de forma optima las ops en la vista Planeacion
-                     */
-                    $rootScope.listOPsTablePage = [];
-
+                    
                     $("html").animate({
                         scrollTop: 0
                     }, 200);

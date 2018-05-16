@@ -22,6 +22,7 @@
             vm.ver_modal_cotizaciones        = ver_modal_cotizaciones;
             vm.generarConsecutivoCotizacion  = generarConsecutivoCotizacion;
             vm.limpiar_formulario            = limpiar_formulario;
+            vm.editar_producto = editar_producto;
 
             vm.list_productos_seleccionados = [];
 
@@ -62,6 +63,10 @@
 
             }, 300);
             
+            function editar_producto(producto) {
+                
+            }
+
             function ver_modal_cotizaciones() {
 
                 modalService.modalFormBuscarCotizaciones()
@@ -139,8 +144,11 @@
                 producto.CS_H_COTIZACION = vm.obj_encabezado_cotizacion.cs_h_cotizacion;
                 producto.ID_USUARIO = loginService.UserData.ID_USUARIO;
 
+                vm.objectDialog.LoadingDialog("...");
                 RTAService.insertProductosCotizacion(producto)
-                    .then(function(result) {
+                    .then(function (result) {
+
+                        vm.objectDialog.HideDialog();
 
                         if (result.MSG === "OK") {
                             toastr.success("Producto Agregado Correctamente.");
@@ -235,7 +243,7 @@
                         });
                 }
             };
-
+      
             vm.insertEncabezadoCotizacion = function () {
                 RTAService.insertEncabezadoCotizacion(vm.obj_encabezado_cotizacion)
                     .then(function (result) {

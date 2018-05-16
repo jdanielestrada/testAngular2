@@ -4,9 +4,6 @@
         <h4 class="modal-title font-madecentro" style="font-weight: 600;">Selección de proyectos</h4>
     </div>
     <div class="modal-body" style="background-color: #f9f9f9;">
-        <!--<div class="row">
-            <pre>{{obj_producto_seleccionado | json}}</pre>
-        </div>-->
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -17,8 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="overflow-x: scroll;">
-            <!--<pre>{{data_materiales_producto | json}}</pre>-->            
+        <div class="row">                   
             <div class="col-md-12">
                 <table class="table table-hover table-condensed table-striped table-bordered"
                        ng-if="obj_producto_seleccionado.ID_ITEM != null"
@@ -32,14 +28,11 @@
                             <th>DESCRIPCIÓN</th>
                             <th>PROCEDENCIA</th>
                             <th>UM</th>
-
                             <th>MEDIDAS_PT</th>
-                            <th>COLOR</th>
-                            <th>CANTIDAD</th>
+                            <th>COLOR</th>                            
                             <th>ULTIMO COSTO</th>
                             <th>CANTIDAD UC</th>
-                            <th>VALOR_CLIENTE</th>
-                            <th>MARGEN</th>
+                            <th>VALOR_CLIENTE</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -56,20 +49,13 @@
                             <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
                             <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
                             <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
-
                             <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
                             <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
-
-
-
                             <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
-                            <td>{{obj_producto_seleccionado.COLOR}}</td>
-                            <td>{{obj_producto_seleccionado.CANTIDAD}}</td>
+                            <td>{{obj_producto_seleccionado.COLOR}}</td>                            
                             <td>{{obj_producto_seleccionado.ULTIMO_COSTO}}</td>
                             <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
                             <td>{{obj_producto_seleccionado.VALOR_CLIENTE}}</td>
-                            <td>{{obj_producto_seleccionado.MARGEN}}</td>
-
                         </tr>
                     </tbody>
                 </table>
@@ -132,6 +118,7 @@
                             </td>
                             <td>
                                 <input class="form-control"
+                                       ng-change="cambio_cantidad_producto()"
                                        ng-model="obj_producto_seleccionado.CANTIDAD"
                                        placeholder="..."
                                        required
@@ -146,13 +133,10 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
-                
+                </table>                
             </div>            
         </div>
-        <br />
-        <div class="row" ng-if="obj_producto_seleccionado.data_materiales_producto.length > 0">
-            <!--<legend class="font-rta encabezado_legend"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales</legend>-->
+        <div class="row" ng-if="dataInsumosProducto.length > 0">            
             <div class="col-md-10 col-md-offset-1">                
                 <div class="box box-default">
                     <div class="box-header with-border">
@@ -161,23 +145,38 @@
                         </h3>
                     </div>
                     <div class="box-body">
-                        <table class="table table-hover table-condensed table-striped" >
+                        <table class="table table-hover table-condensed table-striped" 
+                               st-safe-src="dataInsumosProductoSafe"
+                               st-table="dataInsumosProducto" 
+                               ng-if="dataInsumosProducto.length > 0">
                             <thead>
                                 <tr>
-                                    <th>Código</th>
-                                    <th>Referencia</th>
-                                    <th>Descripción</th>
-                                    <th>Cantidad Requerida</th>
+                                    <th st-sort="ID_COD_ITEM_C">Código</th>
+                                    <th st-sort="ID_REFER_C">Referencia</th>
+                                    <th st-sort="DESCRIPCION_C">Descripción</th>
+                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad Requerida</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in obj_producto_seleccionado.data_materiales_producto">
+                                <tr ng-repeat="item in dataInsumosProducto">
                                     <td>{{item.ID_COD_ITEM_C}}</td>
                                     <td>{{item.ID_REFER_C}}</td>
                                     <td>{{item.DESCRIPCION_C}}</td>
                                     <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center"
+                                        colspan="4"
+                                        style="background: rgb(239, 239, 239);">
+                                        <div st-displayed-pages="10"
+                                             st-items-by-page="10"
+                                             st-pagination=""
+                                             st-template="pagination.custom.html"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>                        
                     </div>
                 </div>                
@@ -230,3 +229,22 @@
     </div>
 </script>
 
+<script type="text/ng-template" id="pagination.custom.html">
+    <nav ng-if="pages.length >= 2">
+        <ul class="pagination" style="margin: 5px;">
+            <li>
+                <a ng-click="selectPage(1)" style="cursor: pointer;">Primera</a>
+            </li>
+            <li>
+                <a ng-click="selectPage(currentPage - 1)" style="cursor: pointer;">&lt;</a>
+            </li>
+            <li>
+                <a><page-select></page-select> de {{numPages}}</a>
+            </li>
+            <li>
+                <a ng-click="selectPage(currentPage + 1)" style="cursor: pointer;">&gt;</a>
+            </li>
+            <li><a ng-click="selectPage(numPages)" style="cursor: pointer;">Última</a></li>
+        </ul>
+    </nav>
+</script>
