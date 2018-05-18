@@ -25,7 +25,8 @@
             getCotizacionesByUsusario           : getCotizacionesByUsusario,
             getDetalleCotizacion: getDetalleCotizacion,
             insertProductosCotizacion: insertProductosCotizacion,
-            deleteProductoDtCotizacion: deleteProductoDtCotizacion
+            deleteProductoDtCotizacion: deleteProductoDtCotizacion,
+            insertarArchivoCostosMdc: insertarArchivoCostosMdc
         };
         
         function deleteProductoDtCotizacion(request) {
@@ -190,7 +191,24 @@
             }
         }
 
+    
+        function insertarArchivoCostosMdc(request) {
 
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insert_data_costos_mdc/", JSON.stringify(request))
+                .then(insertarArchivoCostosMdcComplete)
+                .catch(insertarArchivoCostosMdcFailed);
+
+            function insertarArchivoCostosMdcComplete(response)
+            {
+                return response.data;
+            }
+
+            function insertarArchivoCostosMdcFailed(error)
+            {
+                console.log('Error en insertarArchivoCostosMdcFailed', error);
+                return error;
+            }
+        }
 
 
         function getParametrosMulti(request) {
