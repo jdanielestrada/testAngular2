@@ -93,6 +93,8 @@
                         </a>
                     </li>
 
+                    <li class="divider-vertical"
+                        ng-if="verificarPerfil('cotProductoModificado')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoModificado' }"
                             ng-if="verificarPerfil('cotProductoModificado')">
                         <a href="javascript:;"
@@ -105,6 +107,8 @@
                         </a>
                     </li>
 
+                    <li class="divider-vertical"
+                        ng-if="verificarPerfil('cotProductoNuevo')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoNuevo' }"
                         ng-if="verificarPerfil('cotProductoNuevo')">
                         <a href="javascript:;"
@@ -116,34 +120,26 @@
                             </span>
                         </a>
                     </li>
-
-
-
+                    <li class="divider-vertical"></li>
                     <li class="dropdown">
-                        <!--&& verificarPerfil('gestion_inventario')-->
-                        <a href="#" class="dropdown-toggle dropdown-madecentro-menu" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-reorder" style="font-size: 20px;"></i>
-                            <span class="font-madecentro">
-                                Administrac&oacute;n<span class="caret"></span>
-                            </span>
+                            Administración <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu madecentro-menu">
-                            <li class="hvr-fade" ng-class="{'active' : location.path() == '/adminUploadArchivos' }" ng-if="verificarPerfil('adminUploadArchivos')">
-                              
-                                <a ui-sref="adminUploadArchivos" class="responsive_headline">
-                                   
+                        <ul class="dropdown-menu" style="right: 0; left: inherit;">
+                            <li ng-class="{'active' : location.path() == '/adminUploadArchivos' }"
+                                ng-if="verificarPerfil('adminUploadArchivos')">
+                                <a href="javascript:;"
+                                   ui-sref="adminUploadArchivos">
+                                    <span class="fa fa-file-excel-o"
+                                          style="font-size: 17px;"></span>
                                     <span class="font-madecentro">
-                                        &nbsp; Gestion de archivos
+                                        &nbsp;Gestión de archivos
                                     </span>
-                                   
                                 </a>
                             </li>
-         
                         </ul>
                     </li>
-
-
                 </ul>
                 <!--current user information-->
                 <div class="navbar-custom-menu">
@@ -278,6 +274,7 @@
     <script src="modules/modals/modal.confirmaciones.controller.js?v=1.0.0"></script>
 <script src="modules/modals/modal.addNuevoProyecto.controller.js?v=1.0.0"></script>
     <script src="modules/modals/modal.busquedaCotizaciones.controller.js"></script>
+    <script src="modules/modals/modal.detalleItemCot.controller.js"></script>
     <!-- Constants -->
     <script src="utils/constants.js?v=1.0.0"></script>
 

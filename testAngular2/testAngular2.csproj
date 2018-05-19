@@ -1675,6 +1675,7 @@
     <Content Include="modules\modals\modal.busquedaCotizaciones.controller.js" />
     <Content Include="modules\modals\modal.confirmaciones.controller.js" />
     <Content Include="modules\modals\modal.addNuevoProyecto.controller.js" />
+    <Content Include="modules\modals\modal.detalleItemCot.controller.js" />
     <Content Include="modules\modals\scriptModal.html" />
     <Content Include="modules\UserLogin\userLogin.controller.js" />
     <Content Include="modules\UserLogin\UserLogin.html" />

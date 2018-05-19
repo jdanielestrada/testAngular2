@@ -16,6 +16,8 @@
         vm.obj_producto_seleccionado = {};
         vm.list_productos_desarrollados = [];
         vm.data_materiales_producto = [];
+        vm.dataInsumosProductoSafe = [];
+        vm.dataInsumosProducto = [];
 
         get_productos_desarrollados();
         
@@ -85,9 +87,7 @@
                     }
                 });
         }
-
-        vm.dataInsumosProductoSafe = [];
-        vm.dataInsumosProducto = [];
+        
         function get_materiales_productos_desarrollados() {
 
             vm.objectDialog.LoadingDialog("...");
