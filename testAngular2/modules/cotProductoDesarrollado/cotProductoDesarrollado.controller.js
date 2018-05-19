@@ -95,7 +95,10 @@
             }
 
             function editar_producto(producto) {
-                
+                modalService.modalFormEditarItemCot(producto)
+                .then((producto) => {
+                    guardar_producto_seleccionado(producto);
+                });
             }
 
             function ver_modal_cotizaciones() {

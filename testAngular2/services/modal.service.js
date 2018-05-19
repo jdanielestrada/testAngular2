@@ -18,8 +18,26 @@
             modalFormConfirmacion: modalFormConfirmacion,
             modalFormAddNuevoProyecto: modalFormAddNuevoProyecto,
             modalFormBuscarCotizaciones: modalFormBuscarCotizaciones,
-            modalFormDetalleItemCot: modalFormDetalleItemCot
+            modalFormDetalleItemCot: modalFormDetalleItemCot,
+            modalFormEditarItemCot: modalFormEditarItemCot
         };
+        
+        function modalFormEditarItemCot(itemCot) {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmEditarItemCot.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "editarItemCot",
+                size: "detalle-producto-cotizacion",
+                resolve: {
+                    itemCot: function () {
+                        return itemCot;
+                    }
+                }
+            });
+
+            return modalInstance.result;
+        }
 
         function modalFormDetalleItemCot(itemCot) {
             var modalInstance = $uibModal.open({
