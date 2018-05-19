@@ -115,6 +115,7 @@
                                 <div class="col-md-2 col-md-offset-5">
                                     <button class="btn btn-box-tool btn-rta col-md-12"
                                             ng-click="generarConsecutivoCotizacion()"
+                                            ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
                                             style="margin-bottom: 15px"
                                             type="button"
                                             tooltip-placement="left"
@@ -200,7 +201,7 @@
                                                         <td>{{item.VALOR_CLIENTE}}</td>
                                                         <td>{{item.CANTIDAD}}</td>
                                                         <td>{{item.MARGEN}}</td>
-                                                        <td>
+                                                        <td class="text-center">
                                                             <div class="btn-group">
                                                                 <button class="btn btn-rta"
                                                                         ng-click="ver_detalle_item_cot(item)"
@@ -242,9 +243,6 @@
                                                                     <i class="fa fa-trash-o" style="font-size: 22px;"></i>
                                                                 </button>
                                                             </div>-->
-
-
-
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -254,7 +252,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

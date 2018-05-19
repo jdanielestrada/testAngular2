@@ -28,9 +28,25 @@
             deleteProductoDtCotizacion: deleteProductoDtCotizacion,
             insertarArchivoCostosMdc: insertarArchivoCostosMdc,
             updateEstadoHCotizaciones: updateEstadoHCotizaciones,
-            getInsumosByProductoCotizacion: getInsumosByProductoCotizacion
+            getInsumosByProductoCotizacion: getInsumosByProductoCotizacion,
+            editarProductoDtCotizacion: editarProductoDtCotizacion
         };
         
+        function editarProductoDtCotizacion(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "editar_producto_dt_cotizacion", JSON.stringify(request))
+                .then(editarProductoDtCotizacioncomplete)
+                .catch(editarProductoDtCotizacionFailed);
+
+            function editarProductoDtCotizacioncomplete(response) {
+                return response.data;
+            }
+
+            function editarProductoDtCotizacionFailed(error) {
+                console.log('Error en editarProductoDtCotizacion', error);
+                return error;
+            }
+        }
+
         function getInsumosByProductoCotizacion(cs_id_dt_cotizacion) {
             return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_insumos_by_producto_cotizacion/" + cs_id_dt_cotizacion)
                 .then(getInsumosByProductoCotizacionComplete)

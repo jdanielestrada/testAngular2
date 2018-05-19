@@ -72,32 +72,37 @@
 
             function cerrar_cotizacion() {
 
-                let request = {
-                    CS_H_COTIZACION: vm.obj_encabezado_cotizacion.cs_h_cotizacion,
-                    ESTADO_COTIZACION: 2,//cerrado
-                    ID_USUARIO: loginService.UserData.ID_USUARIO
-                };
+                let text_confirm = "Está seguro de cerrar la cotización?";
+                modalService.modalFormConfirmacion(text_confirm)
+                    .then(() => {
 
-                vm.objectDialog.LoadingDialog("...");
-                RTAService.updateEstadoHCotizaciones(request)
-                    .then(function (result) {
+                        let request = {
+                            CS_H_COTIZACION: vm.obj_encabezado_cotizacion.cs_h_cotizacion,
+                            ESTADO_COTIZACION: 2, //cerrado
+                            ID_USUARIO: loginService.UserData.ID_USUARIO
+                        };
 
-                        vm.objectDialog.HideDialog();
+                        vm.objectDialog.LoadingDialog("...");
+                        RTAService.updateEstadoHCotizaciones(request)
+                            .then(function(result) {
 
-                        if (result.MSG === "OK") {
-                            swal("COTIZACIÓN CERRADA CORRECTAMENTE.", "", "success");
-                            limpiar_formulario();
-                        } else {
-                            console.error(result.MSG);
-                            toastr.error(result.MSG);
-                        }
+                                vm.objectDialog.HideDialog();
+
+                                if (result.MSG === "OK") {
+                                    swal("COTIZACIÓN CERRADA CORRECTAMENTE.", "", "success");
+                                    limpiar_formulario();
+                                } else {
+                                    console.error(result.MSG);
+                                    toastr.error(result.MSG);
+                                }
+                            });
                     });
             }
 
-            function editar_producto(producto) {
-                modalService.modalFormEditarItemCot(producto)
+            function editar_producto(item) {
+                modalService.modalFormEditarItemCot(angular.copy(item))
                 .then((producto) => {
-                    guardar_producto_seleccionado(producto);
+                      guardar_edicion_producto_seleccionado(producto);
                 });
             }
 
@@ -196,6 +201,54 @@
                             toastr.error("Ocurrió un error al tratar de insertar el producto, intentelo nuevamente.");
                         }
                     });
+            }
+
+            function guardar_edicion_producto_seleccionado(producto) {
+
+                producto.CS_H_COTIZACION = vm.obj_encabezado_cotizacion.cs_h_cotizacion;
+                producto.ID_USUARIO = loginService.UserData.ID_USUARIO;
+                producto.CS_ID_DT_COTIZACION = producto.CS_ID_DT_COTIZACION;
+
+                vm.objectDialog.LoadingDialog("...");
+                RTAService.editarProductoDtCotizacion(producto)
+                    .then(function (result) {
+
+                        vm.objectDialog.HideDialog();
+
+                        if (result.MSG === "OK") {
+                            toastr.success("Producto Editado Correctamente.");
+
+                            getDetalleCotizacion(producto);
+
+                            angular.activarFancybox();
+                        } else {
+                            console.error(result.MSG);
+                            toastr.error("Ocurrió un error al tratar de insertar el producto, intentelo nuevamente.");
+                        }
+                    });
+            }
+
+            function getDetalleCotizacion(item) {
+
+                vm.list_productos_seleccionados = [];
+
+                let csIdCotizacion = item.CS_ID_COTIZACION;
+
+                vm.objectDialog.LoadingDialog("...");
+
+                RTAService.getDetalleCotizacion(csIdCotizacion)
+                   .then(function (data) {
+                       vm.objectDialog.HideDialog();
+
+                       if (data.data.length > 0 && data.data[0].length > 0) {
+                           vm.listaDetalleCotizacion = data.data[0];
+
+                           vm.list_productos_seleccionados = data.data[0];
+                       } else {
+                           toastr.warning("No se encontró items asociados a la cotización");
+                           vm.list_productos_seleccionados = [];
+                       }
+                   });
             }
 
             function remover_producto(producto) {

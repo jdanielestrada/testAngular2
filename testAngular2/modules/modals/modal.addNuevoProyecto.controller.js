@@ -22,7 +22,7 @@
         get_productos_desarrollados();
         
         function cambio_cantidad_producto() {
-            if (!_.isNumber(vm.obj_producto_seleccionado.CANTIDAD) || parseFloat(vm.obj_producto_seleccionado.CANTIDAD) < 1)
+            if (!_.isNumber(parseFloat(vm.obj_producto_seleccionado.CANTIDAD)) || parseFloat(vm.obj_producto_seleccionado.CANTIDAD) < 1)
                 vm.obj_producto_seleccionado.CANTIDAD = 1;
 
             vm.dataInsumosProducto.forEach((item) => {
