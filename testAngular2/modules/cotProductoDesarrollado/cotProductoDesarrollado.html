@@ -1,6 +1,5 @@
 ﻿<div class="content-wrapper"
      style="background-color: #f9f9f9; min-height: 587px; padding-top: 15px;">
-
     <div class="container-fluid">
         <div class="col-md-2">
             <div class="box" style="margin-bottom: 10px;">
@@ -16,16 +15,25 @@
                             style="margin-bottom: 10px;"
                             title="Buscar Cotizaciones Generadas"
                             type="button">
-                        <i class="fa fa-search" style="font-size: 28px;color: #cefe00;"></i>
+                        <i class="fa fa-search" style="font-size: 28px;"></i>
                     </button>
-
                     <div ng-if="list_productos_seleccionados.length > 0">
-                        <button class="btn btn-rta col-sm-12"
+                        <!--<button class="btn btn-rta col-sm-12"
                                 ng-click="guardar()"
+                                ng-if="obj_encabezado_cotizacion.ESTADO_COTIZACION == 1"
                                 style="margin-bottom: 10px;"
                                 title="Guardar Cotización"
                                 type="button">
-                            <i class="fa fa-check-square-o" style="font-size: 28px;color: #cefe00;"></i>
+                            <i class="fa fa-check-square-o" style="font-size: 28px;"></i>
+                        </button>-->
+
+                        <button class="btn btn-rta col-sm-12"
+                                ng-click="cerrar_cotizacion()"
+                                ng-if="obj_encabezado_cotizacion.ESTADO_COTIZACION == 1"
+                                style="margin-bottom: 10px;"
+                                title="Cerrar Cotización"
+                                type="button">
+                            <i class="fa fa-minus-square" style="font-size: 28px;"></i>
                         </button>
                         <!--<button class="btn btn-rta col-sm-12"
                                 ng-click="guardar()"
@@ -49,7 +57,7 @@
                             <button class="btn btn-box-tool"
                                     ng-click="limpiar_formulario()"
                                     tooltip-placement="top"
-                                    type="button" 
+                                    type="button"
                                     uib-tooltip="Limpiar Formulario">
                                 <i class="fa fa-refresh"
                                    style="font-size: 23px;"></i>
@@ -57,7 +65,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form>
+                        <fieldset ng-disabled="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2" id="myFieldset">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -82,7 +90,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Email Cliente</label>
-                                        <input type="text" class="form-control" placeholder="@..." style="text-transform:uppercase"ng-model="obj_encabezado_cotizacion.email">
+                                        <input type="text" class="form-control" placeholder="@..." style="text-transform:uppercase" ng-model="obj_encabezado_cotizacion.email">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -92,7 +100,7 @@
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
-                                            <input disabled="" type="text" class="form-control font_size_15px"/>
+                                            <input disabled="" type="text" class="form-control font_size_15px" />
                                         </div>
                                     </div>
                                 </div>
@@ -105,76 +113,80 @@
                             </div>
                             <div class="row text-center">
                                 <div class="col-md-2 col-md-offset-5">
-                                        <button class="btn btn-box-tool btn-rta col-md-12"
-                                                ng-click="generarConsecutivoCotizacion()"
-                                                style="margin-bottom: 15px"
-                                                type="button"
-                                                tooltip-placement="left"
-                                               uib-tooltip="Comenzar cotizacion">
-                                            <i class="fa fa-check-circle"
-                                               style="font-size: 31px;color: #cefe00;"></i>
-                                        </button>
+                                    <button class="btn btn-box-tool btn-rta col-md-12"
+                                            ng-click="generarConsecutivoCotizacion()"
+                                            ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
+                                            style="margin-bottom: 15px"
+                                            type="button"
+                                            tooltip-placement="left"
+                                            uib-tooltip="Comenzar cotizacion">
+                                        <i class="fa fa-check-circle"
+                                           style="font-size: 31px;"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div>
-                                <div class="box" style="margin-bottom: 10px; border-top: 3px solid #dadada !important;" ng-show="swMostrarItems">
-                                    <div class="box-header with-border"
-                                         style="border-bottom: 1px solid #efefef; padding-bottom: 20px;">
-                                        <h3 class="box-title">Items</h3>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool btn-rta"
-                                                    ng-click="show_modal_seleccion_proyecto()"
-                                                    type="button"
-                                                    style="height: 40px; width: 40px; padding: 0;">
-                                                <i class="fa fa-plus-circle"
-                                                   style="font-size: 31px;color: #cefe00;"
-                                                   tooltip-placement="left"
-                                                   uib-tooltip="Agregar nuevo proyecto"></i>
-                                            </button>
-                                        </div>
+                        </fieldset>
+                        <div>
+                            <div class="box" style="margin-bottom: 10px; border-top: 3px solid #dadada !important;" ng-show="swMostrarItems">
+                                <div class="box-header with-border"
+                                     style="border-bottom: 1px solid #efefef; padding-bottom: 20px;">
+                                    <h3 class="box-title">Items</h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool btn-rta"
+                                                ng-click="show_modal_seleccion_proyecto()"
+                                                ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
+                                                type="button"
+                                                style="height: 40px; width: 40px; padding: 0;">
+                                            <i class="fa fa-plus-circle"
+                                               style="font-size: 31px;"
+                                               tooltip-placement="left"
+                                               uib-tooltip="Agregar nuevo proyecto"></i>
+                                        </button>
                                     </div>
-                                    <div class="box-body">
-                                        <div class="row no-margin" style="overflow-x: scroll;">
-                                            <!--<pre>{{data_materiales_producto | json}}</pre>-->
-                                            <div class="col-md-12">
-                                                <table class="table table-hover table-condensed table-striped table-bordered" ng-if="list_productos_seleccionados.length > 0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>CIDIS</th>
-                                                            <th>CÓDIGO</th>
-                                                            <th>REFERENCIA</th>
-                                                            <th>DESCRIPCIÓN</th>
-                                                            <th>PROCEDENCIA</th>
-                                                            <th>UM</th>
-                                                            <th>EMPAQUE H</th>
-                                                            <th>EMPAQUE W</th>
-                                                            <th>EMPAQUE D</th>
-                                                            <th>CUBICAGE C</th>
-                                                            <th>CUBICAGE K</th>
-                                                            <th>MEDIDAS_PT</th>
-                                                            <th>COLOR</th>
-                                                            <!--<th>CANTIDAD</th>-->
-                                                            <th>ULTIMO COSTO</th>
-                                                            <th>CANTIDAD UC</th>
-                                                            <th>VALOR_CLIENTE</th>
-                                                            <!--<th>MARGEN</th>-->
-                                                            <th>CANTIDAD</th>
-                                                            <th>% MARGEN</th> 
-                                                            <th></th>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row no-margin" style="overflow-x: scroll;">
+                                        <!--<pre>{{data_materiales_producto | json}}</pre>-->
+                                        <div class="col-md-12">
+                                            <table class="table table-hover table-condensed table-striped table-bordered" ng-if="list_productos_seleccionados.length > 0">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>CIDIS</th>
+                                                        <th>CÓDIGO</th>
+                                                        <th>REFERENCIA</th>
+                                                        <th>DESCRIPCIÓN</th>
+
+                                                        <!--<th>PROCEDENCIA</th>
+                                                        <th>UM</th>
+                                                        <th>EMPAQUE H</th>
+                                                        <th>EMPAQUE W</th>
+                                                        <th>EMPAQUE D</th>
+                                                        <th>CUBICAGE C</th>
+                                                        <th>CUBICAGE K</th>
+                                                        <th>MEDIDAS PT</th>
+                                                        <th>COLOR</th>
+                                                        <th>ULTIMO COSTO</th>
+                                                        <th>CANTIDAD UC</th>-->
+
+                                                        <th>VALOR CLIENTE</th>
+                                                        <th>CANTIDAD</th>
+                                                        <th>% MARGEN</th>
+                                                        <th style="width: 140px"></th>
                                                     </tr>
-                                                    </thead>
-                                                    <tbody>
+                                                </thead>
+                                                <tbody>
                                                     <tr ng-repeat="item in list_productos_seleccionados">
                                                         <td>
                                                             <img alt="zoom"
-                                                                 class="img-previa" src="./assets/img/image001.png"/>
+                                                                 class="img-previa" src="./assets/img/image001.png" />
                                                         </td>
                                                         <td>{{item.C_CIDIS}}</td>
                                                         <td>{{item.ID_ITEM}}</td>
                                                         <td>{{item.ID_REFERENCIA}}</td>
                                                         <td>{{item.DESCRIPCION}}</td>
-                                                        <td>{{item.ID_PROCEDENCIA}}</td>
+
+                                                        <!--<td>{{item.ID_PROCEDENCIA}}</td>
                                                         <td>{{item.UNIDAD_MEDIDA}}</td>
                                                         <td>{{item.EMPAQUE_H}}</td>
                                                         <td>{{item.EMPAQUE_W}}</td>
@@ -183,38 +195,67 @@
                                                         <td>{{item.CUBICAGE_K}}</td>
                                                         <td>{{item.MEDIDAS_PT}}</td>
                                                         <td>{{item.COLOR}}</td>
-                                                        <!--<td>{{item.CANTIDAD}}</td>-->
                                                         <td>{{item.ULTIMO_COSTO}}</td>
-                                                        <td>{{item.CANTIDAD_UC}}</td>
+                                                        <td>{{item.CANTIDAD_UC}}</td>-->
+
                                                         <td>{{item.VALOR_CLIENTE}}</td>
-                                                        <!--<td>{{item.MARGEN}}</td>-->
                                                         <td>{{item.CANTIDAD}}</td>
                                                         <td>{{item.MARGEN}}</td>
-                                                        <td>
-                                                            <button class="btn btn-rta"
-                                                                    ng-click="editar_producto(item)"
-                                                                    style="margin-bottom: 5px;" 
-                                                                    title="Editar el producto de la lista">
-                                                                <i class="fa fa-pencil" style="font-size: 20px;color: #cefe00;"></i>
-                                                            </button>
-                                                            <button class="btn btn-rta" title="Eliminar el producto de la lista" ng-click="remover_producto(item)">
-                                                                <i class="fa fa-trash-o" style="font-size: 22px;color: #cefe00;"></i>
-                                                            </button>
+                                                        <td class="text-center">
+                                                            <div class="btn-group">
+                                                                <button class="btn btn-rta"
+                                                                        ng-click="ver_detalle_item_cot(item)"
+                                                                        title="+ Información">
+                                                                    <i class="fa fa-plus" style="font-size: 20px;"></i>
+                                                                </button>
+                                                                <button class="btn btn-rta"
+                                                                        ng-click="editar_producto(item)"
+                                                                        ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
+                                                                        title="Editar el producto de la lista">
+                                                                    <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                                                                </button>
+                                                                <button class="btn btn-rta"
+                                                                        ng-click="remover_producto(item)"
+                                                                        ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
+                                                                        title="Eliminar el producto de la lista">
+                                                                    <i class="fa fa-trash-o" style="font-size: 20px;"></i>
+                                                                </button>
+                                                            </div>
+                                                            <!--<div class="btn-group-vertical">
+                                                                <button class="btn btn-rta"
+                                                                        ng-click="ver_detalle_item_cot(item)"
+                                                                        title="+ Información"
+                                                                        style="border-bottom-color: #32241d !important;">
+                                                                    <i class="fa fa-plus" style="font-size: 20px;"></i>
+                                                                </button>
+                                                                <button class="btn btn-rta"
+                                                                        ng-click="editar_producto(item)"
+                                                                        ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
+                                                                        title="Editar el producto de la lista"
+                                                                        style="border-top-color: #32241d !important;border-bottom-color: #32241d !important;">
+                                                                    <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                                                                </button>
+                                                                <button class="btn btn-rta"
+                                                                        ng-click="remover_producto(item)"
+                                                                        ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
+                                                                        title="Eliminar el producto de la lista"
+                                                                        style="border-top-color: #32241d !important;">
+                                                                    <i class="fa fa-trash-o" style="font-size: 22px;"></i>
+                                                                </button>
+                                                            </div>-->
                                                         </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div ui-view="templateModal"></div>

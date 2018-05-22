@@ -26,9 +26,57 @@
             getDetalleCotizacion: getDetalleCotizacion,
             insertProductosCotizacion: insertProductosCotizacion,
             deleteProductoDtCotizacion: deleteProductoDtCotizacion,
-            insertarArchivoCostosMdc: insertarArchivoCostosMdc
+            insertarArchivoCostosMdc: insertarArchivoCostosMdc,
+            updateEstadoHCotizaciones: updateEstadoHCotizaciones,
+            getInsumosByProductoCotizacion: getInsumosByProductoCotizacion,
+            editarProductoDtCotizacion: editarProductoDtCotizacion
         };
         
+        function editarProductoDtCotizacion(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "editar_producto_dt_cotizacion", JSON.stringify(request))
+                .then(editarProductoDtCotizacioncomplete)
+                .catch(editarProductoDtCotizacionFailed);
+
+            function editarProductoDtCotizacioncomplete(response) {
+                return response.data;
+            }
+
+            function editarProductoDtCotizacionFailed(error) {
+                console.log('Error en editarProductoDtCotizacion', error);
+                return error;
+            }
+        }
+
+        function getInsumosByProductoCotizacion(cs_id_dt_cotizacion) {
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_insumos_by_producto_cotizacion/" + cs_id_dt_cotizacion)
+                .then(getInsumosByProductoCotizacionComplete)
+                .catch(getInsumosByProductoCotizacionFailed);
+
+            function getInsumosByProductoCotizacionComplete(response) {
+                return response.data;
+            }
+
+            function getInsumosByProductoCotizacionFailed(error) {
+                toastr.error('XHR falló en getInsumosByProductoCotizacion', error);
+                return error;
+            }
+        }
+
+        function updateEstadoHCotizaciones(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "update_estado_h_cotizaciones/", JSON.stringify(request))
+                .then(updateEstadoHCotizacionescomplete)
+                .catch(updateEstadoHCotizacionesFailed);
+
+            function updateEstadoHCotizacionescomplete(response) {
+                return response.data;
+            }
+
+            function updateEstadoHCotizacionesFailed(error) {
+                console.log('Error en updateEstadoHCotizaciones', error);
+                return error;
+            }
+        }
+
         function deleteProductoDtCotizacion(request) {
             return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "delete_producto_dt_cotizacion/", JSON.stringify(request))
                 .then(deleteProductoDtCotizacioncomplete)

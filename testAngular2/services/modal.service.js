@@ -10,15 +10,51 @@
         .module('appRTA')
         .factory('modalService', modalService);
 
-    modalService.$inject = ['RTAService', 'parametrosService', '$uibModal', '$timeout'];
+    modalService.$inject = ['RTAService', 'parametrosService', '$uibModal'];
 
     /* @ngInject */
-    function modalService(RTAService, parametrosService, $uibModal, $timeout) {
+    function modalService(RTAService, parametrosService, $uibModal) {
         return {
             modalFormConfirmacion: modalFormConfirmacion,
             modalFormAddNuevoProyecto: modalFormAddNuevoProyecto,
-            modalFormBuscarCotizaciones: modalFormBuscarCotizaciones
+            modalFormBuscarCotizaciones: modalFormBuscarCotizaciones,
+            modalFormDetalleItemCot: modalFormDetalleItemCot,
+            modalFormEditarItemCot: modalFormEditarItemCot
         };
+        
+        function modalFormEditarItemCot(itemCot) {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmEditarItemCot.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "editarItemCot",
+                size: "detalle-producto-cotizacion",
+                resolve: {
+                    itemCot: function () {
+                        return itemCot;
+                    }
+                }
+            });
+
+            return modalInstance.result;
+        }
+
+        function modalFormDetalleItemCot(itemCot) {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmDetalleItemCot.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "detalleItemCot",
+                size: "detalle-producto-cotizacion",
+                resolve: {
+                    itemCot: function () {
+                        return itemCot;
+                    }
+                }
+            });
+
+            return modalInstance.result;
+        }
 
         function modalFormBuscarCotizaciones() {
             var modalInstance = $uibModal.open({
@@ -27,18 +63,13 @@
                 keyboard: false,
                 controller: "busquedaCotizaciones",
                 size: "lg",
-                //resolve: {
-                //    listProductosSeleccionados: function () {
-                //        return list_productos_seleccionados;
-                //    }
-                //}
             });
 
             return modalInstance.result;
         }
 
         function modalFormConfirmacion(message) {
-            var modalHtml = '<div class="modal-body">' + message + '</div>';
+            var modalHtml = '<div class="modal-body" style="font-size: 17px;">' + message + '</div>';
             modalHtml += '<div class="modal-footer"><button class="btn btn-primary" ng-click="ok()">SI</button><button class="btn btn-warning" ng-click="cancel()">No</button></div>';
 
             var modalInstance = $uibModal.open({

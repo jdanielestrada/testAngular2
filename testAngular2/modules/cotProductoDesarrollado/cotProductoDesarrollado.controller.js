@@ -23,6 +23,8 @@
             vm.generarConsecutivoCotizacion  = generarConsecutivoCotizacion;
             vm.limpiar_formulario            = limpiar_formulario;
             vm.editar_producto = editar_producto;
+            vm.cerrar_cotizacion = cerrar_cotizacion;
+            vm.ver_detalle_item_cot = ver_detalle_item_cot;
 
             vm.list_productos_seleccionados = [];
 
@@ -33,7 +35,8 @@
                 fecha_cotizacion: "",
                 cs_id_usuario: loginService.UserData.ID_USUARIO,
                 tipo_cotizacion: loginService.UserData.TIPO_DOCUMENTO,
-                cs_cotizacion: null
+                cs_cotizacion: null,
+                ESTADO_COTIZACION: 1
             };
 
             vm.swMostrarItems = false;
@@ -63,8 +66,44 @@
 
             }, 300);
             
-            function editar_producto(producto) {
-                
+            function ver_detalle_item_cot(item) {
+                modalService.modalFormDetalleItemCot(item);
+            }
+
+            function cerrar_cotizacion() {
+
+                let text_confirm = "Está seguro de cerrar la cotización?";
+                modalService.modalFormConfirmacion(text_confirm)
+                    .then(() => {
+
+                        let request = {
+                            CS_H_COTIZACION: vm.obj_encabezado_cotizacion.cs_h_cotizacion,
+                            ESTADO_COTIZACION: 2, //cerrado
+                            ID_USUARIO: loginService.UserData.ID_USUARIO
+                        };
+
+                        vm.objectDialog.LoadingDialog("...");
+                        RTAService.updateEstadoHCotizaciones(request)
+                            .then(function(result) {
+
+                                vm.objectDialog.HideDialog();
+
+                                if (result.MSG === "OK") {
+                                    swal("COTIZACIÓN CERRADA CORRECTAMENTE.", "", "success");
+                                    limpiar_formulario();
+                                } else {
+                                    console.error(result.MSG);
+                                    toastr.error(result.MSG);
+                                }
+                            });
+                    });
+            }
+
+            function editar_producto(item) {
+                modalService.modalFormEditarItemCot(angular.copy(item))
+                .then((producto) => {
+                      guardar_edicion_producto_seleccionado(producto);
+                });
             }
 
             function ver_modal_cotizaciones() {
@@ -73,7 +112,7 @@
                     .then((cotizacion) => {
                         console.log("dt_cotizacion", cotizacion);
                         limpiar_formulario();
-
+                         
                         vm.obj_encabezado_cotizacion.documento_cliente = cotizacion.DOCUMENTO_CLIENTE;
                         vm.obj_encabezado_cotizacion.nombres_cliente = cotizacion.NOMBRES_CLIENTE;
                         vm.obj_encabezado_cotizacion.apellidos_cliente = cotizacion.APELLIDOS_CLIENTE;
@@ -83,6 +122,8 @@
                         vm.obj_encabezado_cotizacion.tipo_cotizacion = cotizacion.TIPO_COTIZACION;
                         vm.obj_encabezado_cotizacion.cs_cotizacion = cotizacion.CS_TIPO_COTIZACION;
                         vm.obj_encabezado_cotizacion.cs_h_cotizacion = cotizacion.CS_ID_COTIZACION;
+                        vm.obj_encabezado_cotizacion.ESTADO_COTIZACION = cotizacion.ESTADO_COTIZACION;
+                        vm.obj_encabezado_cotizacion.email = cotizacion.EMAIL_CLIENTE;
 
                         if (cotizacion.listaDetalleCotizacion.length > 0) {
                             vm.list_productos_seleccionados = cotizacion.listaDetalleCotizacion;
@@ -162,25 +203,80 @@
                     });
             }
 
-            function remover_producto(producto) {
+            function guardar_edicion_producto_seleccionado(producto) {
 
-                RTAService.deleteProductoDtCotizacion(producto)
-                    .then(function(result) {
+                producto.CS_H_COTIZACION = vm.obj_encabezado_cotizacion.cs_h_cotizacion;
+                producto.ID_USUARIO = loginService.UserData.ID_USUARIO;
+                producto.CS_ID_DT_COTIZACION = producto.CS_ID_DT_COTIZACION;
+
+                vm.objectDialog.LoadingDialog("...");
+                RTAService.editarProductoDtCotizacion(producto)
+                    .then(function (result) {
+
+                        vm.objectDialog.HideDialog();
 
                         if (result.MSG === "OK") {
-                            toastr.success("Producto Eliminado Correctamente.");
+                            toastr.success("Producto Editado Correctamente.");
 
-                            let indice_producto = 0;
-                            vm.list_productos_seleccionados.forEach(function(item, index) {
-                                if (item.CS_ID_DT_COTIZACION === producto.CS_ID_DT_COTIZACION)
-                                    indice_producto = index;
-                            });
+                            getDetalleCotizacion(producto);
 
-                            vm.list_productos_seleccionados.splice(indice_producto, 1);
+                            angular.activarFancybox();
                         } else {
                             console.error(result.MSG);
-                            toastr.error("Ocurrió un error al tratar de eliminar el producto, intentelo nuevamente.");
+                            toastr.error("Ocurrió un error al tratar de insertar el producto, intentelo nuevamente.");
                         }
+                    });
+            }
+
+            function getDetalleCotizacion(item) {
+
+                vm.list_productos_seleccionados = [];
+
+                let csIdCotizacion = item.CS_ID_COTIZACION;
+
+                vm.objectDialog.LoadingDialog("...");
+
+                RTAService.getDetalleCotizacion(csIdCotizacion)
+                   .then(function (data) {
+                       vm.objectDialog.HideDialog();
+
+                       if (data.data.length > 0 && data.data[0].length > 0) {
+                           vm.listaDetalleCotizacion = data.data[0];
+
+                           vm.list_productos_seleccionados = data.data[0];
+                       } else {
+                           toastr.warning("No se encontró items asociados a la cotización");
+                           vm.list_productos_seleccionados = [];
+                       }
+                   });
+            }
+
+            function remover_producto(producto) {
+
+                let text_confirm = "Está seguro de eliminar el item de la cotización?";
+                modalService.modalFormConfirmacion(text_confirm)
+                    .then(() => {
+
+                        vm.objectDialog.LoadingDialog("...");
+                        RTAService.deleteProductoDtCotizacion(producto)
+                            .then(function (result) {
+
+                                vm.objectDialog.HideDialog();
+                                if (result.MSG === "OK") {
+                                    toastr.success("Producto Eliminado Correctamente.");
+
+                                    let indice_producto = 0;
+                                    vm.list_productos_seleccionados.forEach(function(item, index) {
+                                        if (item.CS_ID_DT_COTIZACION === producto.CS_ID_DT_COTIZACION)
+                                            indice_producto = index;
+                                    });
+
+                                    vm.list_productos_seleccionados.splice(indice_producto, 1);
+                                } else {
+                                    console.error(result.MSG);
+                                    toastr.error("Ocurrió un error al tratar de eliminar el producto, intentelo nuevamente.");
+                                }
+                            });
                     });
             }
             
@@ -267,8 +363,9 @@
                 vm.obj_encabezado_cotizacion.cs_cotizacion     = null;
                 vm.obj_encabezado_cotizacion.cs_h_cotizacion   = null;
                 vm.list_productos_seleccionados                = [];
-                vm.swMostrarItems                              = false;
-
+                vm.swMostrarItems = false;
+                vm.obj_encabezado_cotizacion.ESTADO_COTIZACION = 1;
+           
                 $('#dpFechaCotizacion').data("DateTimePicker").date(moment());
 
                 $timeout(() => {

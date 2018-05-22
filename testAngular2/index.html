@@ -6,7 +6,6 @@
     <!--* @github             : github.com/jdanielestrada-->
     <!--* @Inicio de proyecto : 13-Sep-2016-->
     <!--* @Date Versión       : 10-Octubre-2017-->
-
     <style>
         .ng-hide {
             display: none !important;
@@ -22,7 +21,6 @@
         var VERSION_APP = "1.0.0";
         var DATE_VERSION = "201804201522" //YYYYMMDDHHmm
     </script>
-
     <!--Estilos-->
     <link href="assets/vendors/bootstrap-3.3.7/bootstrap-3.3.7/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="assets/vendors/font-awesome-4.7.0/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
@@ -45,7 +43,6 @@
     <!--<link href="assets/css/component_buttons.css" rel="stylesheet" />-->
     <!--estilos principales-->
     <link href="assets/css/RTA.min.css?v=1.0.0" rel="stylesheet" />
-
     <title>Cotizaciones | RTA</title>
     <!--<link rel="shortcut icon" href="favicon.ico" />-->
 </head>
@@ -67,7 +64,6 @@
                  role="navigation"
                  style="box-shadow: 1px 1px 23px -8px #000000;">
                 <!-- boton para mostrar barra filtros-->
-
                 <ul class="nav navbar-nav hidden-xs"
                     style="font-size: 15px;">
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/Home' }">
@@ -78,7 +74,6 @@
                                style="font-size: 20px;"></i>
                         </a>
                     </li>
-
                     <li class="divider-vertical"
                         ng-if="verificarPerfil('cotProductoDesarrollado')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoDesarrollado' }"
@@ -93,8 +88,10 @@
                         </a>
                     </li>
 
+                    <li class="divider-vertical"
+                        ng-if="verificarPerfil('cotProductoModificado')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoModificado' }"
-                            ng-if="verificarPerfil('cotProductoModificado')">
+                        ng-if="verificarPerfil('cotProductoModificado')">
                         <a href="javascript:;"
                            ui-sref="cotProductoDesarrollado"
                            style="padding-top: 15px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);">
@@ -105,6 +102,8 @@
                         </a>
                     </li>
 
+                    <li class="divider-vertical"
+                        ng-if="verificarPerfil('cotProductoNuevo')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoNuevo' }"
                         ng-if="verificarPerfil('cotProductoNuevo')">
                         <a href="javascript:;"
@@ -116,34 +115,26 @@
                             </span>
                         </a>
                     </li>
-
-
-
+                    <li class="divider-vertical"></li>
                     <li class="dropdown">
-                        <!--&& verificarPerfil('gestion_inventario')-->
-                        <a href="#" class="dropdown-toggle dropdown-madecentro-menu" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-reorder" style="font-size: 20px;"></i>
-                            <span class="font-madecentro">
-                                Administrac&oacute;n<span class="caret"></span>
-                            </span>
+                            Administración <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu madecentro-menu">
-                            <li class="hvr-fade" ng-class="{'active' : location.path() == '/adminUploadArchivos' }" ng-if="verificarPerfil('adminUploadArchivos')">
-                              
-                                <a ui-sref="adminUploadArchivos" class="responsive_headline">
-                                   
+                        <ul class="dropdown-menu" style="right: 0; left: inherit;">
+                            <li ng-class="{'active' : location.path() == '/adminUploadArchivos' }"
+                                ng-if="verificarPerfil('adminUploadArchivos')">
+                                <a href="javascript:;"
+                                   ui-sref="adminUploadArchivos">
+                                    <span class="fa fa-file-excel-o"
+                                          style="font-size: 17px;"></span>
                                     <span class="font-madecentro">
-                                        &nbsp; Gestion de archivos
+                                        &nbsp;Gestión de archivos
                                     </span>
-                                   
                                 </a>
                             </li>
-         
                         </ul>
                     </li>
-
-
                 </ul>
                 <!--current user information-->
                 <div class="navbar-custom-menu">
@@ -210,11 +201,9 @@
                 </div>
             </nav>
         </header>
-
         <div id="app-outer-container" style="padding-top: 35px;">
             <div ui-view></div>
         </div>
-
         <div class="load-window" style="z-index: 2000;" id="back-alerts-version">
             <div id="alert-old-version-app" class="bar-old-version-app font-madecentro animated bounceInUp">
                 <span style="color: rgba(255, 255, 255, 0.901961); display: inline-block; margin-right: 10px; text-decoration: none;">¡Existe una nueva versión de la aplicación, la pagina se refrescará en breve..!</span>
@@ -232,10 +221,8 @@
                 </a>
             </div>
         </div>
-
-    </div>    
+    </div>
     <alertdialog control="objectDialog" getdata="ConfirmResult(valor,funcion)"></alertdialog>
-
     <!--vendor-->
     <script src="assets/vendors/Jquery/jquery-1.11.0.js"></script>
     <script src="assets/vendors/jQueryUI/jquery-ui.js"></script>
@@ -273,14 +260,14 @@
     <script type="text/javascript" src="modules/UserLogin/userLogin.controller.js?v=1.0.0"></script>
     <script src="modules/cotProductoDesarrollado/cotProductoDesarrollado.controller.js?v=1.0.0"></script>
     <script src="modules/adminUploadArchivos/adminUploadArchivos.controller.js"></script>
-
     <!--modals-->
     <script src="modules/modals/modal.confirmaciones.controller.js?v=1.0.0"></script>
-<script src="modules/modals/modal.addNuevoProyecto.controller.js?v=1.0.0"></script>
+    <script src="modules/modals/modal.addNuevoProyecto.controller.js?v=1.0.0"></script>
     <script src="modules/modals/modal.busquedaCotizaciones.controller.js"></script>
+    <script src="modules/modals/modal.detalleItemCot.controller.js"></script>
+    <script src="modules/modals/modal.editarItemCot.controller.js"></script>
     <!-- Constants -->
     <script src="utils/constants.js?v=1.0.0"></script>
-
     <!--directives-->
     <script src="directives/LoadingDir/AlertDir.js?v=1.0.0"></script>
     <script src="directives/LoginDir/loginDir.js"></script>
@@ -288,10 +275,8 @@
     <script src="directives/repeatDone/repeatdone.js"></script>
     <script src="directives/sortable/sortable.js"></script>
     <script src="directives/pageSelect/pageSelect.js"></script>
-
     <!--filter-->
     <script type="text/javascript" src="filter/dateFilter.js?v=1.0.0"></script>
-
     <!--services-->
     <script type="text/javascript" src="services/parametros.service.js?v=1.0.0"></script>
     <script type="text/javascript" src="services/modal.service.js?v=1.0.0"></script>
