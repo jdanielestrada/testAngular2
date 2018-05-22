@@ -16,7 +16,7 @@
             "smart-table",
             "ui.sortable",
             "ngClickSelect",
-            'ui.utils.masks'
+            'ui.utils.masks' 
         ])
         .config(config)
         .controller("app", app)
