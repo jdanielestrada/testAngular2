@@ -2,109 +2,282 @@
      style="background-color: #f9f9f9; min-height: 587px; padding-top: 15px;">
 
     <div class="container-fluid">
-        <!--<div class="col-md-2">
-            <div class="box" style="margin-bottom: 10px;">
-                <div class="box-header with-border"
-                     style="border-bottom: 1px solid #efefef;">
-                    <h3 class="box-title">
-                        Subir archivos
-                    </h3>
-                </div>
-                <div class="box-body">
 
-                </div>
-            </div>
-        </div>-->
-        <div class="col-md-12">
-            <div id="form-archivos">
-                <div class="box" style="margin-bottom: 10px;">
-                    <div class="box-header with-border"
-                         style="border-bottom: 1px solid #efefef;">
-                        <h3 class="box-title">
-                            Geston de archivos
-                        </h3>
-
-                    </div>
-                    <div class="box-body">
-
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <label for="files">Subir archivo costos MDC:</label>
-                                <input type="file" id="files" class="form-control" accept=".csv" required />
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" id="submit-file" class="btn btn-rta">Cargar Archivo</button>
-                               <!--<button ng-click="deleteitem()" class="btn btn-primary">PRUEBA</button>-->
-                            </div>
-                        </form>
-
-                        <br/>
-
-                        <div id="parsed_csv_list"></div>
+        <div class="container">
 
 
-                        <!--<div class="row" ng-if="arrayDataCostosMdc.length > 0">
-                            <div class="col-md-10 col-md-offset-1">
-                                <div class="table table-striped">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">
-                                            <i class="fa fa-th" aria-hidden="true"></i>&nbsp;DATOS
-                                        </h3>
-                                    </div>
-                                    <div class="box-body">
-                                        <table class="table table-hover table-condensed table-striped"
-                                               st-safe-src="arrayDataCostosMdc"
-                                               st-table="arrayDataCostosMdc"
-                                               ng-if="arrayDataCostosMdc.length > 0">
-                                            <thead>
-                                                <tr>
-                                                    <th st-sort="REFERENCIA">REFERENCIA</th>
-                                                    <th st-sort="DESCRIPCION">DESCRIPCIÓN</th>
-                                                    <th st-sort="COSTOMDC">COSTO MDC</th>
-                                                    <!--<th st-sort="CANTIDAD_REQUERIDA">Cantidad Requerida</th>-->
-                                                <!--</tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="item in arrayDataCostosMdc">
-                                                    <td>{{item.REFERENCIA}}</td>
-                                                    <td>{{item.DESCRIPCION}}</td>
-                                                    <td>{{item.COSTOMDC | number:2}}</td>-->
-                                                    <!--<td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>-->
-                                                <!--</tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td class="text-center"
-                                                        colspan="3"
-                                                        style="background: rgb(239, 239, 239);">
-                                                        <div st-displayed-pages="20"
-                                                             st-items-by-page="20"
-                                                             st-pagination=""
-                                                             st-template="pagination.custom.html"></div>
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <div class="col-md-12">
+                        <div id="form-archivos">
+                            <div class="box" style="margin-bottom: 10px;">
+                                <div class="box-header with-border"
+                                     style="border-bottom: 1px solid #efefef;">
+                                    <h3 class="box-title">
+                                        Geston de archivos
+                                    </h3>
+
+                                </div>
+                                <div class="box-body">
+
+                                    <form class="form-inline">
+                                        <div class="form-group">
+                                            <label for="files">Subir archivo costos MDC:</label>
+                                            <input type="file" id="files" class="form-control" accept=".csv" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" id="submit-file" class="btn btn-primary">Cargar Archivo</button>
+                                            <!--<button ng-click="deleteitem()" class="btn btn-primary">PRUEBA</button>-->
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-box-tool btn-rta col-md-12"
+                                                    ng-click="insertarArchivoCostosMdc()"
+                                                    style="margin-bottom: 15px;background-color:#cefe00;margin-left: 25px;"
+                                                    type="button"
+                                                    tooltip-placement="right"
+                                                    uib-tooltip="Guardar"
+                                                    ng-if="swArchivoCargado">
+                                                <i class="fa fa-check-circle"
+                                                   style="font-size: 31px;color: #33251e;"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <br />
+
+                                    <div id="parsed_csv_list"></div>
+
+
+                                    <!--<div class="row" ng-if="arrayDataCostosMdc.length > 0">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <div class="table table-striped">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">
+                                                    <i class="fa fa-th" aria-hidden="true"></i>&nbsp;DATOS
+                                                </h3>
+                                            </div>
+                                            <div class="box-body">
+                                                <table class="table table-hover table-condensed table-striped"
+                                                       st-safe-src="arrayDataCostosMdc"
+                                                       st-table="arrayDataCostosMdc"
+                                                       ng-if="arrayDataCostosMdc.length > 0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th st-sort="REFERENCIA">REFERENCIA</th>
+                                                            <th st-sort="DESCRIPCION">DESCRIPCIÓN</th>
+                                                            <th st-sort="COSTOMDC">COSTO MDC</th>
+                                                            <!--<th st-sort="CANTIDAD_REQUERIDA">Cantidad Requerida</th>-->
+                                    <!--</tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in arrayDataCostosMdc">
+                                            <td>{{item.REFERENCIA}}</td>
+                                            <td>{{item.DESCRIPCION}}</td>
+                                            <td>{{item.COSTOMDC | number:2}}</td>-->
+                                    <!--<td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>-->
+                                    <!--</tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td class="text-center"
+                                                                    colspan="3"
+                                                                    style="background: rgb(239, 239, 239);">
+                                                                    <div st-displayed-pages="20"
+                                                                         st-items-by-page="20"
+                                                                         st-pagination=""
+                                                                         st-template="pagination.custom.html"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+
+
+
                                 </div>
                             </div>
-                        </div>-->
-
-                        <button class="btn btn-box-tool btn-rta col-md-4"
-                                ng-click="insertarArchivoCostosMdc()"
-                                style="margin-bottom: 15px"
-                                type="button"
-                                tooltip-placement="top"
-                                uib-tooltip="Guardar">
-                            <i class="fa fa-check-circle"
-                               style="font-size: 31px;"></i>
-                        </button>
-
-
+                        </div>
                     </div>
+
+                    <br />
+                    <br />
+
+
+
+
+
+
                 </div>
+                <!--<div id="menu1" class="tab-pane fade">
+                    <h1>TEST</h1>
+                    <pre>{{listaCostosProductosRtaMdc}}</pre>
+                </div>-->
+
             </div>
         </div>
+
+
+        <div class="container">
+
+            <div class="tab-content">
+                <div id="costos" class="tab-pane fade in active">
+                    <div class="col-md-12">
+                        <div id="form-costos">
+                            <div class="box" style="margin-bottom: 10px;">
+                                <div class="box-header with-border"
+                                     style="border-bottom: 1px solid #efefef;">
+                                    <h3 class="box-title">
+                                        GESTIÓN costos
+                                    </h3>
+
+                                </div>
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>% de cambio</label>
+                                                <input type="text" class="form-control" placeholder="% DE CAMBIO " ng-model="objHeaderCostosCalculados.pjCambio" style="text-transform:uppercase">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Lapso corte(mes)</label>
+                                                <input type="text" class="form-control" placeholder="CORTE" ng-model="objHeaderCostosCalculados.lapsoCorteMes" style="text-transform:uppercase">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Apellidos cliente</label>
+                                                <select class="form-control" ng-model="objHeaderCostosCalculados.tomaMayorMenor">
+
+                                                    <option value="">Seleccione </option>
+                                                    <option value="M">MAYOR</option>
+                                                    <option value="N">MENOR</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Aumentar - Disminuir</label>
+                                                <select class="form-control" ng-model="objHeaderCostosCalculados.aumentarDismuir">
+
+                                                    <option value="">Seleccione </option>
+                                                    <option value="A">AUMENTAR</option>
+                                                    <option value="D">DISMINUIR</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Flexibilidad</label>
+                                                <input type="text" class="form-control" placeholder="..." ng-model="objHeaderCostosCalculados.flexibilidad" style="text-transform: uppercase">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <button type="button" class="hvr-glow btn btn-default" aria-label="Left Align" ng-click="getCostosProductosInsumosRtaMdc();" style="background-color: #c3e81f !important; margin-top: 21px; color:#33251e;">
+
+                                                <span style="font-size: 17px; position: relative; text-align: -webkit-right; margin-top: 3px" title="Buscar" class="glyphicon glyphicon-search" aria-hidden="false">
+                                                </span>
+
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <table class="table table-hover table-condensed table-striped"
+                                                   st-safe-src="listaCostosProductosRtaMdc"
+                                                   st-table="listaCostosProductosRtaMdc"
+                                                   ng-if="listaCostosProductosRtaMdc.length > 0">
+                                                <thead style="color: #fff;border: 0px solid rgba(50, 65, 88, 1);background-color: rgba(163, 106, 65, 1);">
+                                                    <tr>
+                                                        <th st-sort="REFERENCIA">REFERENCIA</th>
+                                                        <th st-sort="DESCRIPCION">DESCRIPCIÓN</th>
+                                                        <th st-sort="COSTO_RTA">COSTO RTA</th>
+                                                        <th st-sort="COSTO_MDC">COSTO MDC</th>
+                                                        <th st-sort="MAYOR_VALOR">MAYOR VALOR</th>
+                                                        <th st-sort="VARIACION">VARIACION</th>
+                                                        <th st-sort="COSTO_FINAL_RTA">COSTO FINAL RTA</th>
+                                                        <th st-sort="OBSERVACION">OBSERVACION</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="background-color: rgb(227, 227, 227);">
+                                                    <tr ng-repeat="item in listaCostosProductosRtaMdc">
+                                                        <td>{{item.REFERENCIA}}</td>
+                                                        <td>{{item.DESCRIPCION}}</td>
+                                                        <td>{{item.COSTO_RTA | number:4}}</td>
+                                                        <td>{{item.COSTO_MDC | number: 4}}</td>
+                                                        <td>{{item.MAYOR_VALOR}}</td>
+                                                        <td>{{item.VARIACION}}</td>
+                                                        <td>{{item.COSTO_FINAL_RTA}}</td>
+                                                        <td>
+                                                            <input class="form-control"
+                                                                   ng-model="item.OBSERVACION"
+                                                                   placeholder="..."
+                                                                   required>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td class="text-center"
+                                                            colspan="8"
+                                                            style="background: rgb(239, 239, 239);">
+                                                            <div st-displayed-pages="20"
+                                                                 st-items-by-page="20"
+                                                                 st-pagination=""
+                                                                 st-template="pagination.custom.html"></div>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-box-tool btn-rta col-md-4"
+                                            ng-click="inserCostosCalculados()"
+                                            style="margin-bottom: 15px;background-color: #cefe00;"
+                                            type="button"
+                                            tooltip-placement="left"
+                                            uib-tooltip="Guardar"
+                                            ng-if="listaCostosProductosRtaMdc.length > 0">
+                                        <i class="fa fa-check-circle"
+                                           style="font-size: 31px; color:  #33251e;"></i>
+                                    </button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+
     </div>
 </div>
-

@@ -11,9 +11,11 @@
 
     function adminUploadArchivos(parametrosService, $scope, configService, loginService, $timeout, $location, $cookieStore, $rootScope, $uibModal, RTAService, modalService, $constants) {
         var vm = $scope;
-        
+
         function init() {
 
+
+            vm.swArchivoCargado = 0;
             //CARGAR ARCHIVO CSV 
 
             $('#submit-file').on("click", function (e) {
@@ -38,18 +40,16 @@
             function displayHTMLTable(results) {
 
                 var table = "<table class='table'>";
-                var data  = results.data;
+                var data = results.data;
                 var array = [];
                 console.log(results.data);
                 vm.arrayDataCostosMdc = [];
-                for (var i = 0; i < data.length; i++)
-                {
+                for (var i = 0; i < data.length; i++) {
                     table += "<tr>";
-                    var row   = data[i];
+                    var row = data[i];
                     var cells = row.join(",").split(",");
                     array.push(cells)
-                    for (var j = 0; j < cells.length; j++)
-                    {
+                    for (var j = 0; j < cells.length; j++) {
                         table += "<td>";
                         table += cells[j];
                         table += "</th>";
@@ -58,12 +58,13 @@
                 }
                 table += "</table>";
 
+                vm.swArchivoCargado = 1;
                 //MOSTRAR DATA CARGADA
                 $("#parsed_csv_list").html(table);
 
                 //LOGICA ASIGNAR PORIEDADES ARRAY 
                 var arrayFinal = [];
-                var keyDes     = "";
+                var keyDes = "";
 
                 for (var j = 0; j < array.length; j++) {
                     var arrayDT = array[j];
@@ -95,52 +96,62 @@
 
             //FUNCIONES 
             vm.insertarArchivoCostosMdc = insertarArchivoCostosMdc;
+            vm.getCostosProductosInsumosRtaMdc = getCostosProductosInsumosRtaMdc;
 
             //ARREGLOS
             //vm.arrayDataCostosMdc = [];
             vm.arrayDataUpload = [];
-                
+            vm.listaCostosProductosRtaMdc = [];
+
             //vm.arrayDataCostosMdc = [{ "REFERENCIA": "XXX", "DESCRIPCION": "XXXX", "COSTOMDC": "1200" }, { "REFERENCIA": "IMMF0654", "DESCRIPCION": "MINIFIX 8 X 34 15MM", "COSTOMDC": "1000" }, { "REFERENCIA": "HMPLUS30", "DESCRIPCION": "PEGANTE HM PLUS 30 GR (GOTERO)", "COSTOMDC": "1100" }, { "REFERENCIA": "PEREXMIN", "DESCRIPCION": "PERNO EXPANSION MINIFIX", "COSTOMDC": "1200" }, { "REFERENCIA": "B4x8x2", "DESCRIPCION": "BOLSAS EMPAQUE 4x8x2 PEQUENA", "COSTOMDC": "1300" }]
 
 
             //OBJETOS
             vm.objHeaderCostosMdc = {
-    
-                 csIdUsuario: loginService.UserData.ID_USUARIO
-             }
-            
 
-                        
+                csIdUsuario: loginService.UserData.ID_USUARIO
+            }
+
+
+            vm.objHeaderCostosCalculados = {
+                pjCambio: "",
+                lapsoCorteMes: "",
+                tomaMayorMenor: "",
+                aumentarDismuir: "",
+                flexibilidad: ""
+            }
+
+            /*
+                INSERTAR ARCHIVO COSTOS MDC 
+            */
             function insertarArchivoCostosMdc() {
-                
+
                 //ELIMINAR LA PRIMERA POSICION DEL ARRAY
                 vm.arrayDataCostosMdc.shift();
 
                 //ELIMINAR LA ULT POSICION DE ARRAY
                 vm.arrayDataCostosMdc.pop();
-            
+
                 console.log('ARRAY DATA COSTOS MDC' + vm.arrayDataCostosMdc);
 
                 //VALIDAR ARCHIVO CARGADO               
-                if (vm.arrayDataCostosMdc.length === 0)
-                {
+                if (vm.arrayDataCostosMdc.length === 0) {
                     toastr.info('Para guardar debe cargar un archivo');
 
                     return;
                 }
-                
+
                 //OBJETO
                 vm.dataCostosMdc =
                 {
-                    dataHeader : vm.objHeaderCostosMdc,
+                    dataHeader: vm.objHeaderCostosMdc,
                     dataDetalle: vm.arrayDataCostosMdc
                 }
-                
+
                 //CALL SERVICES
                 RTAService.insertarArchivoCostosMdc(vm.dataCostosMdc)
                 .then(function (result) {
-                    if (result.MSG === "OK")
-                    {
+                    if (result.MSG === "OK") {
                         console.log('Registros almacenados correctamente');
                         toastr.success('Registros almacenados correctamente');
 
@@ -150,9 +161,9 @@
                         }
                         vm.arrayDataCostosMdc = [];
                         $("#parsed_csv_list").empty();
+                        vm.swArchivoCargado = 0;
                     }
-                    else
-                    {
+                    else {
                         toastr.error(result.MSG);
                         sweetAlert("ERROR", "Ocurrio un error guardando los datos , favor intente de nuevo", "error");
                     }
@@ -160,13 +171,59 @@
                 });
 
 
-            } 
+            }
 
-         
 
-        };
+            /*
+                CONSULTAR COTOS PRODUCTOS RTA VS MDC 
+            */
 
-        
+            function getCostosProductosInsumosRtaMdc() {
+                //vm.objectDialog.LoadingDialog("...");
+                RTAService.getCostosProductosInsumosRtaMdc()
+                    .then(function (data) {
+                        vm.objectDialog.HideDialog();
+                        if (data.data.length > 0 && data.data[0].length > 0) {
+                            vm.listaCostosProductosRtaMdc = data.data[0];
+
+                            vm.listaCostosProductosRtaMdc.forEach(function (item) {
+
+                                //SI EL COSTO MDC ES MAYOR SE COLOCA SINO SE COLOCA EL DE RTA
+                                if (item.COSTO_MDC > item.COSTO_RTA) {
+                                    item.MAYOR_VALOR = item.COSTO_MDC;
+                                } else {
+                                    item.MAYOR_VALOR = item.COSTO_RTA;
+                                }
+
+                                //cALCULAR VARIACIÓN PORCENTUAL 
+                                item.VARIACION = ((item.COSTO_MDC - item.COSTO_MDC) / item.COSTO_MDC) * 100;
+
+                                //ASIGNAR COSTO FINAL 
+
+                                if (item.VARIACION > objHeaderCostosCalculados.pjCambio || item.VARIACION > objHeaderCostosCalculados.flexibilidad) {
+                                    item.sw_alerta = 1;
+                                    item.COSTO_FINAL_RTA = item.MAYOR_VALOR;
+
+                                } else {
+                                    item.COSTO_FINAL_RTA = item.MAYOR_VALOR + item.MAYOR_VALOR * (objHeaderCostosCalculados.pjCambio / 100);
+                                }
+
+
+
+                            });
+                        }
+                        else {
+                            toastr.error("Ocurrió un error al tratar de obtener los últimos costos de insumos");
+                        }
+                    });
+            }
+
+            //getCostosProductosInsumosRtaMdc();
+
+
+        };//FIN INIT()
+
+
         vm.cookieUser = {};
         vm.cookieUser = $cookieStore.get('servlog');
 

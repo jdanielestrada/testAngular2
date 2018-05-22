@@ -29,7 +29,8 @@
             insertarArchivoCostosMdc: insertarArchivoCostosMdc,
             updateEstadoHCotizaciones: updateEstadoHCotizaciones,
             getInsumosByProductoCotizacion: getInsumosByProductoCotizacion,
-            editarProductoDtCotizacion: editarProductoDtCotizacion
+            editarProductoDtCotizacion: editarProductoDtCotizacion,
+            getCostosProductosInsumosRtaMdc: getCostosProductosInsumosRtaMdc
         };
         
         function editarProductoDtCotizacion(request) {
@@ -254,6 +255,25 @@
             function insertarArchivoCostosMdcFailed(error)
             {
                 console.log('Error en insertarArchivoCostosMdcFailed', error);
+                return error;
+            }
+        }
+
+
+        function getCostosProductosInsumosRtaMdc() {
+            //$rootScope.progressbar.start();
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_costos_productos_insumos_rta_mdc")
+                .then(getCostosProductosInsumosRtaMdcComplete)
+                .catch(getCostosProductosInsumosRtaMdcFailed);
+
+            function getCostosProductosInsumosRtaMdcComplete(response) {
+                //$rootScope.progressbar.complete();
+                return response.data;
+            }
+
+            function getCostosProductosInsumosRtaMdcFailed(error) {
+                //$rootScope.progressbar.reset();
+                toastr.error('XHR falló en getCostosProductosInsumosRtaMdcF', error);
                 return error;
             }
         }
