@@ -132,7 +132,7 @@
                                 <div class="box-header with-border"
                                      style="border-bottom: 1px solid #efefef;">
                                     <h3 class="box-title">
-                                        GESTIÓN costos
+                                        GESTIÓN COSTOS
                                     </h3>
 
                                 </div>
@@ -152,7 +152,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Apellidos cliente</label>
+                                                <label>Mayor-Menor</label>
                                                 <select class="form-control" ng-model="objHeaderCostosCalculados.tomaMayorMenor">
 
                                                     <option value="">Seleccione </option>
@@ -203,18 +203,40 @@
                                                    st-safe-src="listaCostosProductosRtaMdc"
                                                    st-table="listaCostosProductosRtaMdc"
                                                    ng-if="listaCostosProductosRtaMdc.length > 0">
-                                                <thead style="color: #fff;border: 0px solid rgba(50, 65, 88, 1);background-color: rgba(163, 106, 65, 1);">
-                                                    <tr>
-                                                        <th st-sort="REFERENCIA">REFERENCIA</th>
-                                                        <th st-sort="DESCRIPCION">DESCRIPCIÓN</th>
-                                                        <th st-sort="COSTO_RTA">COSTO RTA</th>
-                                                        <th st-sort="COSTO_MDC">COSTO MDC</th>
-                                                        <th st-sort="MAYOR_VALOR">MAYOR VALOR</th>
-                                                        <th st-sort="VARIACION">VARIACION</th>
-                                                        <th st-sort="COSTO_FINAL_RTA">COSTO FINAL RTA</th>
-                                                        <th st-sort="OBSERVACION">OBSERVACION</th>
+                                                <thead style="color: black;border: 0px solid rgba(50, 65, 88, 1);background-color: white">
+                                                <tr style="font-weight: bold">
+                                                    <th st-sort="REFERENCIA">REFERENCIA</th>
+                                                    <th st-sort="DESCRIPCION">DESCRIPCIÓN</th>
+                                                    <th st-sort="COSTO_RTA">COSTO RTA</th>
+                                                    <th st-sort="COSTO_MDC">COSTO MDC</th>
+                                                    <th st-sort="MAYOR_VALOR">MAYOR VALOR</th>
+                                                    <th st-sort="VARIACION">VARIACION</th>
+                                                    <th st-sort="COSTO_FINAL_RTA">COSTO FINAL RTA</th>
+                                                    <th st-sort="OBSERVACION">OBSERVACION</th>
 
-                                                    </tr>
+                                                </tr>
+
+                                                <tr style="background: whitesmoke;">
+                                                    <th>
+                                                        <input st-search="REFERENCIA"
+                                                                placeholder="..."
+                                                                class="input-sm form-control"
+                                                                type="search" />
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="DESCRIPCION"
+                                                                placeholder="..."
+                                                                class="input-sm form-control"
+                                                                type="search" />
+                                                    </th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+
                                                 </thead>
                                                 <tbody style="background-color: rgb(227, 227, 227);">
                                                     <tr ng-repeat="item in listaCostosProductosRtaMdc">
@@ -224,12 +246,21 @@
                                                         <td>{{item.COSTO_MDC | number: 4}}</td>
                                                         <td>{{item.MAYOR_VALOR}}</td>
                                                         <td>{{item.VARIACION}}</td>
-                                                        <td>{{item.COSTO_FINAL_RTA}}</td>
-                                                        <td>
+                                                        <td >
+                                                            <input 
+                                                                   ng-model="item.COSTO_FINAL_RTA"
+                                                                   placeholder="..."
+                                                                   required
+                                                                   ng-disabled="!item.SW_ALERTA"
+                                                                   ui-number-mask="2"
+                                                                   ng-class="{'form-control variacion-superada-costo' : item.SW_ALERTA == 1,'form-control' : item.SW_ALERTA == 0}">
+                                                        </td>
+                                                        <td >
                                                             <input class="form-control"
                                                                    ng-model="item.OBSERVACION"
                                                                    placeholder="..."
-                                                                   required>
+                                                                   required
+                                                                   ng-show="item.SW_ALERTA">
                                                         </td>
                                                     </tr>
                                                 </tbody>

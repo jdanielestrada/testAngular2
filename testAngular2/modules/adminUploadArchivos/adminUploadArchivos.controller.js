@@ -15,7 +15,7 @@
         function init() {
 
 
-            vm.swArchivoCargado = 0;
+            vm.swArchivoCargado = 1;
             //CARGAR ARCHIVO CSV 
 
             $('#submit-file').on("click", function (e) {
@@ -179,6 +179,26 @@
             */
 
             function getCostosProductosInsumosRtaMdc() {
+
+                //vm.objHeaderCostosCalculados = {
+                //    pjCambio: "",
+                //    lapsoCorteMes: "",
+                //    tomaMayorMenor: "",
+                //    aumentarDismuir: "",
+                //    flexibilidad: ""
+                //}
+
+                if (vm.objHeaderCostosCalculados.pjCambio === "") {
+                    toastr.info('Debe ingresar un % de cambio');
+                    return;
+                }
+
+
+                if (vm.objHeaderCostosCalculados.flexibilidad === "") {
+                    toastr.info('Debe ingresar la flexibilidad');
+                    return;
+                }
+
                 //vm.objectDialog.LoadingDialog("...");
                 RTAService.getCostosProductosInsumosRtaMdc()
                     .then(function (data) {
@@ -196,16 +216,18 @@
                                 }
 
                                 //cALCULAR VARIACIÓN PORCENTUAL 
-                                item.VARIACION = ((item.COSTO_MDC - item.COSTO_MDC) / item.COSTO_MDC) * 100;
+                                item.VARIACION = (((item.COSTO_MDC - item.COSTO_RTA) / item.COSTO_RTA) * 100).toFixed(2);
+                               
 
                                 //ASIGNAR COSTO FINAL 
 
-                                if (item.VARIACION > objHeaderCostosCalculados.pjCambio || item.VARIACION > objHeaderCostosCalculados.flexibilidad) {
-                                    item.sw_alerta = 1;
+                                if (item.VARIACION > parseFloat(vm.objHeaderCostosCalculados.pjCambio) || item.VARIACION > parseFloat(vm.objHeaderCostosCalculados.flexibilidad)) {
+                                    item.SW_ALERTA = 1;
                                     item.COSTO_FINAL_RTA = item.MAYOR_VALOR;
 
                                 } else {
-                                    item.COSTO_FINAL_RTA = item.MAYOR_VALOR + item.MAYOR_VALOR * (objHeaderCostosCalculados.pjCambio / 100);
+                                    item.COSTO_FINAL_RTA = item.MAYOR_VALOR + item.MAYOR_VALOR * (parseFloat (vm.objHeaderCostosCalculados.pjCambio) / 100);
+                                    item.SW_ALERTA = 0;
                                 }
 
 
@@ -216,6 +238,20 @@
                             toastr.error("Ocurrió un error al tratar de obtener los últimos costos de insumos");
                         }
                     });
+            }
+
+
+            vm.inserCostosCalculados=function() {
+                swal("Datos almacenados correctamente", "", "success");
+                vm.listaCostosProductosRtaMdc = [];
+                vm.objHeaderCostosCalculados = {
+                    pjCambio: "",
+                    lapsoCorteMes: "",
+                    tomaMayorMenor: "",
+                    aumentarDismuir: "",
+                    flexibilidad: ""
+                }
+
             }
 
             //getCostosProductosInsumosRtaMdc();

@@ -5362,3 +5362,8 @@ input[type="checkbox"] {
     font-size: 22px;
 }
 
+.variacion-superada-costo {
+    BACKGROUND: RED;
+    color:white
+}
+
