@@ -85,6 +85,10 @@
                             keyDes = "COSTOMDC";
                         }
 
+                        if (k === 3) {
+                            keyDes = "UNIMED";
+                        }
+
                         objXX[keyDes] = arrayDT[k];
                     }
 
