@@ -99,7 +99,7 @@
 
 
             //FUNCIONES 
-            vm.insertarArchivoCostosMdc = insertarArchivoCostosMdc;
+            vm.insertarArchivoCostosMdc        = insertarArchivoCostosMdc;
             vm.getCostosProductosInsumosRtaMdc = getCostosProductosInsumosRtaMdc;
 
             //ARREGLOS
@@ -213,11 +213,26 @@
                             vm.listaCostosProductosRtaMdc.forEach(function (item) {
 
                                 //SI EL COSTO MDC ES MAYOR SE COLOCA SINO SE COLOCA EL DE RTA
-                                if (item.COSTO_MDC > item.COSTO_RTA) {
-                                    item.MAYOR_VALOR = item.COSTO_MDC;
+                                //if (item.COSTO_MDC > item.COSTO_RTA) {
+                                //    item.MAYOR_VALOR = item.COSTO_MDC;
+                                //} else {
+                                //    item.MAYOR_VALOR = item.COSTO_RTA;
+                                //}
+
+                                if (vm.objHeaderCostosCalculados.tomaMayorMenor === 'M') {
+                                    if (item.COSTO_MDC > item.COSTO_RTA) {
+                                        item.MAYOR_VALOR = item.COSTO_MDC;
+                                    } else {
+                                        item.MAYOR_VALOR = item.COSTO_RTA;
+                                    }
                                 } else {
-                                    item.MAYOR_VALOR = item.COSTO_RTA;
+                                    if (item.COSTO_MDC < item.COSTO_RTA) {
+                                        item.MAYOR_VALOR = item.COSTO_MDC;
+                                    } else {
+                                        item.MAYOR_VALOR = item.COSTO_RTA;
+                                    }
                                 }
+
 
                                 //cALCULAR VARIACIÓN PORCENTUAL 
                                 item.VARIACION = (((item.COSTO_MDC - item.COSTO_RTA) / item.COSTO_RTA) * 100).toFixed(2);
