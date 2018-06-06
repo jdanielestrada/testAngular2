@@ -30,7 +30,8 @@
             updateEstadoHCotizaciones: updateEstadoHCotizaciones,
             getInsumosByProductoCotizacion: getInsumosByProductoCotizacion,
             editarProductoDtCotizacion: editarProductoDtCotizacion,
-            getCostosProductosInsumosRtaMdc: getCostosProductosInsumosRtaMdc
+            getCostosProductosInsumosRtaMdc: getCostosProductosInsumosRtaMdc,
+            updateArchivoCostosMdc: updateArchivoCostosMdc
         };
         
         function editarProductoDtCotizacion(request) {
@@ -296,6 +297,25 @@
                 return error;
             }
         }
+
+
+        function updateArchivoCostosMdc(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "update_costo_mdc/", JSON.stringify(request))
+                .then(updateArchivoCostosMdcComplete)
+                .catch(updateArchivoCostosMdcFailed);
+
+            function updateArchivoCostosMdcComplete(response) {
+                return response.data;
+            }
+
+            function updateArchivoCostosMdcFailed(error) {
+                console.log('Error en updateArchivoCostosMdc', error);
+                return error;
+            }
+        }
+
+
+
 
     }
 })();

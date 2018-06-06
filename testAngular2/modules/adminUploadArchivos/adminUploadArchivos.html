@@ -171,8 +171,8 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Lapso corte(mes)</label>
-                                                <input type="text" class="form-control" placeholder="CORTE" ng-model="objHeaderCostosCalculados.lapsoCorteMes" style="text-transform:uppercase">
+                                                <label>Lapso corte(AAAAMM)</label>
+                                                <input type="text" class="form-control" placeholder="EJM: 201805" ng-model="objHeaderCostosCalculados.lapsoCorteMes" style="text-transform:uppercase">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -239,7 +239,7 @@
                                                     <th></th>
                                                     <th></th>
                                                 </tr>
-
+                                                    <!--{{listaCostosProductosRtaMdc}}-->
                                                 </thead>
                                                 <tbody style="background-color: rgb(227, 227, 227);">
                                                     <tr ng-repeat="item in listaCostosProductosRtaMdc">
@@ -261,7 +261,7 @@
                                                                    ng-class="{'form-control variacion-superada-costo' : item.SW_ALERTA == 1,'form-control' : item.SW_ALERTA == 0}">
                                                         </td>
                                                         <td >
-                                                            <span  ng-show="item.SW_ALERTA">
+                                                            <span  ng-show="item.SW_ALERTA" ng-click="openUpdateArchivoCostosMdc(item)">
                                                                 <i class="fa fa-edit"
                                                                    style="font-size: 31px; color:  #33251e;"></i>
                                                             </span>
@@ -322,3 +322,56 @@
 
     </div>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-update-costo-mdc" role="dialog" style="background: rgba(128, 128, 128, 0.56)">
+    <div class="modal-dialog modal-lg" style="width: 1173px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #33251e; color: white; height: 44px; border-radius: 7px 7px 0px 0px; font-weight: bold;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modificar costo MDC</h4>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="font-madecentro">Costo MDC:</label>
+                        <input class="form-control"
+                               style="padding-left: 4px; padding-right: 0; width: 90%"
+                               type="number"
+                               ng-model="objUpdateCostosMdc.valorCosto"/>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="font-madecentro">Unidad medida:</label>
+                        <input class="form-control"
+                               style="padding-left: 4px; padding-right: 0; width: 90%"
+                               type="text"
+                               ng-model="objUpdateCostosMdc.unidadMededida" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn btn-mdc"
+                        data-dismiss="modal"
+                        ng-click="updateArchivoCostosMdc()"
+                        type="button">
+                    Modificar
+                </button>
+                <button class="btn btn-mdc"
+                        data-dismiss="modal"
+                        ng-click="close_modal()"
+                        type="button">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -203,6 +203,8 @@
                     return;
                 }
 
+
+                vm.listaCostosProductosRtaMdc = [];
                 //vm.objectDialog.LoadingDialog("...");
                 RTAService.getCostosProductosInsumosRtaMdc()
                     .then(function (data) {
@@ -220,6 +222,7 @@
                                 //}
 
                                 if (vm.objHeaderCostosCalculados.tomaMayorMenor === 'M') {
+
                                     if (item.COSTO_MDC > item.COSTO_RTA) {
                                         item.MAYOR_VALOR = item.COSTO_MDC;
                                     } else {
@@ -257,6 +260,78 @@
                             toastr.error("Ocurrió un error al tratar de obtener los últimos costos de insumos");
                         }
                     });
+            }
+
+
+            vm.objUpdateCostosMdc = {
+                cdIdCosto: "",
+                valorCosto: "",
+                unidadMededida:""
+            }
+
+            vm.openUpdateArchivoCostosMdc = function (item) {
+                toastr.info('Entra!!');
+
+                vm.objUpdateCostosMdc.cdIdCosto = item.CS_ID_MV;
+                vm.objUpdateCostosMdc.valorCosto = item.COSTO_MDC;
+                vm.objUpdateCostosMdc.unidadMededida = item.UNIDAD_MEDIDA_MDC;
+                 
+                angular.element(document).ready(function () {
+                    $("#modal-update-costo-mdc").modal(
+                        { 
+                            show: true,
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                });
+
+
+
+            }
+
+
+            vm.updateArchivoCostosMdc = function () {
+
+
+                if (vm.objUpdateCostosMdc.valorCosto === "") {
+                    toastr.info('Debe ingresar el valor costo MDC');
+                    return;
+                }
+                if (vm.objUpdateCostosMdc.unidadMededida === "") {
+                    toastr.info('Debe ingresar una UNIDAD DE MEDIDA');
+                    return;
+                }
+      
+
+                RTAService.updateArchivoCostosMdc(vm.objUpdateCostosMdc)
+
+                .then(function (result) {
+
+                    if (result.MSG === "OK") {
+                        console.log('Registros actualizados correctamente');
+
+                        swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
+                        vm.swUpdate = 0;
+                        //limpiar data
+                        vm.objUpdateCostosMdc = {
+                            cdIdCosto: "",
+                            valorCosto: "",
+                            unidadMededida: ""
+                        }
+
+                        getCostosProductosInsumosRtaMdc();
+
+                    }
+                    else {
+
+                        toastr.warning(result.MSG);
+                        sweetAlert("ERROR", "No se actualizaron los datos", "error");
+                    }
+
+                });
+
+
+                
             }
 
 
