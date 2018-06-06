@@ -75,6 +75,7 @@
     <Content Include="assets\css\SpinKit.css" />
     <Content Include="assets\css\_all-skins.min.css" />
     <Content Include="assets\img\buscar_usuario.png" />
+    <Content Include="assets\img\excel_logo.png" />
     <Content Include="assets\img\fondo_madera.jpg" />
     <Content Include="assets\img\fondo_madera1.jpg" />
     <Content Include="assets\img\ico-cortar.png" />

@@ -5363,7 +5363,18 @@ input[type="checkbox"] {
 }
 
 .variacion-superada-costo {
-    BACKGROUND: RED;
+    background: RED;
     color:white
 }
 
+.btn-download-excel {
+    background: url('../img/excel_logo.png') no-repeat;
+    cursor: pointer;
+    border: none;
+    background-size: 36px;
+    background-position-x: 0px;
+    border-radius: 3px;
+    height: 39px;
+    width: 36px;
+    margin-left: 5px;
+}

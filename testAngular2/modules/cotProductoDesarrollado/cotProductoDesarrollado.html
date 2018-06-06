@@ -132,6 +132,25 @@
                          style="border-bottom: 1px solid #efefef; padding-bottom: 20px;">
                         <h3 class="box-title">Productos terminados</h3>
                         <div class="box-tools pull-right">
+                            <!--<button class="btn btn-box-tool btn-rta"
+                                    ng-show="list_productos_seleccionados.length > 0"
+                                    type="button"
+                                    style="height: 40px; width: 40px; padding: 0;"
+                                    id="myButtonControlID">
+                                <i class="fa fa-file-excel-o"
+                                   style="font-size: 31px;"
+                                   tooltip-placement="left"
+                                   uib-tooltip="Exportar a Excel"></i>
+                            </button>-->
+
+                            <input class="btn-download-excel btn btn-box-tool"
+                                   ng-show="list_productos_seleccionados.length > 0"
+                                   id="myButtonControlID"
+                                   uib-tooltip="Exportar a excel"
+                                   uib-tooltip-placement="left"
+                                   uib-tooltip-trigger="mouseenter"
+                                   type="button">
+
                             <button class="btn btn-box-tool btn-rta"
                                     ng-click="show_modal_seleccion_proyecto()"
                                     ng-hide="obj_encabezado_cotizacion.ESTADO_COTIZACION == 2"
@@ -256,126 +275,71 @@
         </div>
         </div>
 
-        <div id="divTableDataHolder">
+        <div id="divTableDataHolder" style="display: none">
             <!--style="display: none"-->
 
             <table class="table table-hover table-condensed table-striped table-bordered"
                    ng-if="list_productos_seleccionados.length > 0"
-                   style="border: 1px solid black;font-size: 11px;border-spacing: 0;border-collapse: collapse;">
+                   style="border: 1px solid #797979;font-size: 12px;border-spacing: 0;border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th style="background: #c5c3c3; font-weight: 100;border: 1px solid black;" rowspan="2">PRODUCT</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;" rowspan="2">DESCRIPCTION</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;" rowspan="2">REFERENCIA</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;" rowspan="2">EAN</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;" colspan="3">EMPAQUE</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;" colspan="2">CUBICAGE</th>
-                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid black;" rowspan="2">MEDIDAS ( H x W x D )</th>
-                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid black;" rowspan="2">MATERIAL</th>
-                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid black;" rowspan="2">COLOR</th>
-                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid black;" rowspan="2">COSTO</th>
-
-                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid black;" rowspan="2">TC</th>
-                        <th style="background: black;font-weight: 100;border: 1px solid black;color: white;" rowspan="2">FOB</th>
+                        <th style="background: #c5c3c3; font-weight: 100;border: 1px solid #797979;" rowspan="2">PRODUCT</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;" rowspan="2">DESCRIPCTION</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;" rowspan="2">REFERENCIA</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;" rowspan="2">EAN</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;width: 80px;" colspan="3">EMPAQUE</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;width: 80px;" colspan="2">CUBICAGE</th>
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;" rowspan="2">MEDIDAS ( H x W x D )</th>
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;" rowspan="2">MATERIAL</th>
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;" rowspan="2">COLOR</th>
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;" rowspan="2">COSTO</th>
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;" rowspan="2">TC</th>
+                        <th style="background: black; font-weight: 100; border: 1px solid #797979; color: white;" rowspan="2">FOB</th>
+                        <th style="background: white; font-weight: 100; border: 1px solid #797979;width: 12px;" rowspan="2"></th>
+                        <th style="background: #ffc800;font-weight: 100;border: 1px solid #797979;" colspan="3">Modulacion x Contenedor 4o pies</th>
                     </tr>
                     <tr>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;">H</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;">W</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;">D</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;">Cbm</th>
-                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid black;">Kg</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;">H</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;">W</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;">D</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;">Cbm</th>
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;">Kg</th>
+
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;">QTY</th>
+                        <th style="background: #c5c3c3; font-weight: 100; border: 1px solid #797979;">CBM</th>
+                        <th style="background: #c5c3c3;font-weight: 100;border: 1px solid #797979;">KG</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="item in list_productos_seleccionados" style="height: 212px;">
-                        <!--<td>
-                    <img alt="zoom"
-                         class="img-previa" src="./assets/img/image001.png"/>
-                </td>-->
-                        <td style="border: 1px solid black; width: 215px; vertical-align: middle; text-align: center;">
-                            <img src='{{dominio}}/img_rta/{{item.ID_ITEM}}.png' style="width: 215px;height: 212px"/>
+                    <tr ng-repeat="item in list_productos_seleccionados" style="height: 230px;">
+                        <td style="border: 1px solid #797979; width: 230px; vertical-align: middle; text-align: center;padding: 15px;">
+                            <img src='{{dominio}}/img_rta/{{item.ID_ITEM}}.png' width="215" height="212" style="margin-top: 5px"/>
                         </td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.DESCRIPCION}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.ID_REFERENCIA}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;"></td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.EMPAQUE_H}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.EMPAQUE_W}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.EMPAQUE_D}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.CUBICAGE_C}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.CUBICAGE_K}}</td>
-                        
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.MEDIDAS_PT}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;"></td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.COLOR}}</td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;">{{item.ULTIMO_COSTO}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.DESCRIPCION}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.ID_REFERENCIA}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;"></td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.EMPAQUE_H}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.EMPAQUE_W}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.EMPAQUE_D}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.CUBICAGE_C}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.CUBICAGE_K}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.MEDIDAS_PT}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;"></td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.COLOR}}</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle; text-align: center;">{{item.ULTIMO_COSTO | currency:"$":0}}</td>
 
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;"></td>
-                        <td style="border: 1px solid black; vertical-align: middle;text-align: center;"></td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">$0</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">$0</td>
+
+                        <td style="border: 1px solid #797979; vertical-align: middle; text-align: center;"></td>
+
+                        <td style="border: 1px solid #797979; vertical-align: middle; text-align: center;">0</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle; text-align: center;">0</td>
+                        <td style="border: 1px solid #797979; vertical-align: middle; text-align: center;">0</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        
-
-            <button id="myButtonControlID">Export Table data into Excel</button>
-            <!--<div id="divTableDataHolder2">
-                <title>Demo for huge data</title>
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="5">
-                                Demoe By <a href="http://codePattern.net/blog">CodePattern.net</a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <td>Anil Kumar</td>
-                            <td>2012</td>
-                            <td>Delhi</td>
-                            <td>India</td>
-                            <td><img src='http://codepattern.net/Blog/pics/CodepatternLogoN.png' alt='' /></td>
-                        </tr>
-                        <tr>
-                            <td>abc</td>
-                            <td>12</td>
-                            <td>Delhi</td>
-                            <td>India</td>
-                            <td>Earth</td>
-                        </tr>
-                        <tr>
-                            <td>abc</td>
-                            <td>12</td>
-                            <td>Delhi</td>
-                            <td>India</td>
-                            <td>Earth</td>
-                        </tr>
-                        <tr>
-                            <td>abc</td>
-                            <td>12</td>
-                            <td>Delhi</td>
-                            <td>India</td>
-                            <td>Earth</td>
-                        </tr>
-                        <tr>
-                            <td>abc</td>
-                            <td>12</td>
-                            <td>Delhi</td>
-                            <td>India</td>
-                            <td>Earth</td>
-                        </tr>
-                        <tr>
-                            <td>abc</td>
-                            <td>12</td>
-                            <td>Delhi</td>
-                            <td>India</td>
-                            <td>Earth</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>-->
         </div>
     </div>
 </div>
