@@ -45,6 +45,7 @@
             vm.listaDetalleCotizacion           = [];
             vm.listaMaterialesByItemCotizacion  = [];
             
+            vm.dominio = 'http://192.168.1.20'
             $timeout(function() {
                 $("#dpFechaCotizacion").datetimepicker({
                     dayViewHeaderFormat: "MMMM YYYY",
@@ -354,7 +355,10 @@
                         }
                     });
             };
-
+            $("[id$=myButtonControlID]").click(function (e) {
+                window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=divTableDataHolder]').html()));
+                e.preventDefault();
+            });
             function limpiar_formulario() {
                 vm.obj_encabezado_cotizacion.documento_cliente = "";
                 vm.obj_encabezado_cotizacion.nombres_cliente   = "";
@@ -367,6 +371,7 @@
                 vm.obj_encabezado_cotizacion.ESTADO_COTIZACION = 1;
            
                 $('#dpFechaCotizacion').data("DateTimePicker").date(moment());
+
 
                 $timeout(() => {
                     vm.$apply();
