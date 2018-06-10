@@ -132,7 +132,7 @@
                          style="border-bottom: 1px solid #efefef; padding-bottom: 20px;">
                         <h3 class="box-title">Productos terminados</h3>
                         <div class="box-tools pull-right">
-                            <!--<button class="btn btn-box-tool btn-rta"
+                            <button class="btn btn-box-tool btn-rta"
                                     ng-show="list_productos_seleccionados.length > 0"
                                     type="button"
                                     style="height: 40px; width: 40px; padding: 0;"
@@ -141,7 +141,7 @@
                                    style="font-size: 31px;"
                                    tooltip-placement="left"
                                    uib-tooltip="Exportar a Excel"></i>
-                            </button>-->
+                            </button>
 
                             <input class="btn-download-excel btn btn-box-tool"
                                    ng-show="list_productos_seleccionados.length > 0"
@@ -171,7 +171,7 @@
                                     <thead>
                                     <tr>
                                         <th></th>
-                                        <th>CIDIS</th>
+                                        <!--<th>CIDIS</th>-->
                                         <th>CÓDIGO</th>
                                         <th>REFERENCIA</th>
                                         <th>DESCRIPCIÓN</th>
@@ -200,7 +200,7 @@
                                             <img alt="zoom"
                                                  class="img-previa" src="{{dominio}}/img_rta/{{item.ID_ITEM}}.png"/>
                                         </td>
-                                        <td>{{item.C_CIDIS}}</td>
+                                        <!--<td>{{item.C_CIDIS}}</td>-->
                                         <td>{{item.ID_ITEM}}</td>
                                         <td>{{item.ID_REFERENCIA}}</td>
                                         <td>{{item.DESCRIPCION}}</td>
@@ -217,7 +217,7 @@
                                         <td>{{item.ULTIMO_COSTO}}</td>
                                         <td>{{item.CANTIDAD_UC}}</td>-->
 
-                                        <td>{{item.VALOR_CLIENTE}}</td>
+                                        <td>${{item.VALOR_CLIENTE | number:2}}</td>
                                         <td>{{item.CANTIDAD}}</td>
                                         <td>{{item.MARGEN}}</td>
                                         <td class="text-center">
