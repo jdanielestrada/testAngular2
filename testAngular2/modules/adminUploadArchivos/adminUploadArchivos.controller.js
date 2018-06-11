@@ -126,18 +126,17 @@
                 flexibilidad: ""
             }
 
+            vm.swAlarmaCostos = false;
+
             /*
                 INSERTAR ARCHIVO COSTOS MDC 
             */
             function insertarArchivoCostosMdc() {
 
-                //ELIMINAR LA PRIMERA POSICION DEL ARRAY
-                vm.arrayDataCostosMdc.shift();
-
-                //ELIMINAR LA ULT POSICION DE ARRAY
-                vm.arrayDataCostosMdc.pop();
-
-                console.log('ARRAY DATA COSTOS MDC' + vm.arrayDataCostosMdc);
+                if (vm.objHeaderCostosMdc.descripcionArchivo === "") {
+                    toastr.info('Debe ingresar una descripción para el archivo');
+                    return;
+                }
 
                 //VALIDAR ARCHIVO CARGADO               
                 if (vm.arrayDataCostosMdc.length === 0) {
@@ -146,11 +145,14 @@
                     return;
                 }
 
-                if (vm.objHeaderCostosMdc.descripcionArchivo === "") {
-                    toastr.info('Debe ingresar una descripción para el archivo');
-                    return;
-                }
 
+                //ELIMINAR LA PRIMERA POSICION DEL ARRAY
+                vm.arrayDataCostosMdc.shift();
+
+                //ELIMINAR LA ULT POSICION DE ARRAY
+                vm.arrayDataCostosMdc.pop();
+
+                console.log('ARRAY DATA COSTOS MDC' + vm.arrayDataCostosMdc);
 
                 //OBJETO
                 vm.dataCostosMdc =
@@ -253,6 +255,7 @@
                                 if (item.VARIACION > parseFloat(vm.objHeaderCostosCalculados.pjCambio) || item.VARIACION > parseFloat(vm.objHeaderCostosCalculados.flexibilidad)) {
                                     item.SW_ALERTA = 1;
                                     item.COSTO_FINAL_RTA = item.MAYOR_VALOR;
+                                    vm.swAlarmaCostos = true;
 
                                 } else {
                                     item.COSTO_FINAL_RTA = item.MAYOR_VALOR + item.MAYOR_VALOR * (parseFloat (vm.objHeaderCostosCalculados.pjCambio) / 100);
