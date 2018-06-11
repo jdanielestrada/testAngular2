@@ -317,7 +317,7 @@
                 color: "white",
                 'line-height': "40px",
                 'text-align': "center",
-                'background-color': "#de7d2b",
+                'background-color': "#cffe00",
                 cursor: "pointer",
                 'border-radius': "8px",
                 'z-index': "1049",
