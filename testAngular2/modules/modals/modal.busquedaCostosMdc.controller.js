@@ -11,6 +11,7 @@
         
         vm.cancel = cancel;
         vm.getDetalleCotizacion = getDetalleCotizacion;
+        vm.anularCostoMdc = anularCostoMdc;
 
         vm.listaHistoricoCostosMdc = [];
         vm.listaDetalleCotizacion  = [];
@@ -59,6 +60,42 @@
                         vm.listaHistoricoCostosMdc = [];
                     }
                 });
+        }
+
+
+        function anularCostoMdc(item) {
+            vm.objanularCostoMdc =
+            {
+                cdIdCostos: "",
+                csIdUsuario: loginService.UserData.ID_USUARIO
+            }
+
+            vm.objanularCostoMdc.cdIdCostos = item.CS_ID_COSTOS_MDC;
+
+            RTAService.anularCostoMdc(vm.objanularCostoMdc)
+
+             .then(function (result) {
+
+                 if (result.MSG === "OK") {
+                     console.log('Registros actualizados correctamente');
+
+                     swal("DATOS actualizados", "se realizo la anulacion correctamente", "success");
+                
+                     $uibModalInstance.close();
+                  
+
+                 }
+                 else {
+
+                     toastr.warning(result.MSG);
+                     sweetAlert("ERROR", "No se actualizaron los datos", "error");
+                 }
+
+             });
+
+
+
+
         }
 
         function cancel() {

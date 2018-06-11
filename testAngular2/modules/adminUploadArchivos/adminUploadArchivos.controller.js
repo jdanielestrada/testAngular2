@@ -101,6 +101,7 @@
             //FUNCIONES 
             vm.insertarArchivoCostosMdc        = insertarArchivoCostosMdc;
             vm.getCostosProductosInsumosRtaMdc = getCostosProductosInsumosRtaMdc;
+            //vm.anularCostoMdc = anularCostoMdc;
 
             //ARREGLOS
             //vm.arrayDataCostosMdc = [];
@@ -126,6 +127,10 @@
                 flexibilidad: ""
             }
 
+            vm.objanularCostoMdc = {
+                cdIdCostos: "",
+                csIdUsuario: loginService.UserData.ID_USUARIO
+            }
 
             vm.listaHistoricoCostosMdc = [];
             vm.swAlarmaCostos = false;
@@ -361,10 +366,6 @@
             }
 
             //getCostosProductosInsumosRtaMdc();
-
-
-
-
 
 
             vm.verModalCostosMdc= function() {

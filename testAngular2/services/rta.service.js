@@ -32,7 +32,8 @@
             editarProductoDtCotizacion          : editarProductoDtCotizacion,
             getCostosProductosInsumosRtaMdc     : getCostosProductosInsumosRtaMdc,
             updateArchivoCostosMdc              : updateArchivoCostosMdc,
-            getHistoricoCostosMdc               : getHistoricoCostosMdc
+            getHistoricoCostosMdc               : getHistoricoCostosMdc,
+            anularCostoMdc                      : anularCostoMdc
         };
         
         function editarProductoDtCotizacion(request) {
@@ -333,6 +334,21 @@
             }
         }
 
+
+        function anularCostoMdc(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "anular_costos_mdc/", JSON.stringify(request))
+                .then(anularCostoMdcComplete)
+                .catch(anularCostoMdcFailed);
+
+            function anularCostoMdcComplete(response) {
+                return response.data;
+            }
+
+            function anularCostoMdcFailed(error) {
+                console.log('Error en anularCostoMdc', error);
+                return error;
+            }
+        }
 
 
     }
