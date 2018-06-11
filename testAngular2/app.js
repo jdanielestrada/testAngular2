@@ -269,6 +269,9 @@
                     '': {
                         templateUrl: "modules/adminUploadArchivos/adminUploadArchivos.html?rand=" + rand,
                         controller: "adminUploadArchivos"
+                    },
+                    'templateModal@adminUploadArchivos': {
+                        templateUrl: "modules/modals/scriptModal.html?rand=" + rand
                     }
                 }
             });

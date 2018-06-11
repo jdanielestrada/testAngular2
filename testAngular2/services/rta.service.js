@@ -23,15 +23,16 @@
             generarConsecutivoCotizacion        : generarConsecutivoCotizacion,
             insertEncabezadoCotizacion          : insertEncabezadoCotizacion,
             getCotizacionesByUsusario           : getCotizacionesByUsusario,
-            getDetalleCotizacion: getDetalleCotizacion,
-            insertProductosCotizacion: insertProductosCotizacion,
-            deleteProductoDtCotizacion: deleteProductoDtCotizacion,
-            insertarArchivoCostosMdc: insertarArchivoCostosMdc,
-            updateEstadoHCotizaciones: updateEstadoHCotizaciones,
-            getInsumosByProductoCotizacion: getInsumosByProductoCotizacion,
-            editarProductoDtCotizacion: editarProductoDtCotizacion,
-            getCostosProductosInsumosRtaMdc: getCostosProductosInsumosRtaMdc,
-            updateArchivoCostosMdc: updateArchivoCostosMdc
+            getDetalleCotizacion                : getDetalleCotizacion,
+            insertProductosCotizacion           : insertProductosCotizacion,
+            deleteProductoDtCotizacion          : deleteProductoDtCotizacion,
+            insertarArchivoCostosMdc            : insertarArchivoCostosMdc,
+            updateEstadoHCotizaciones           : updateEstadoHCotizaciones,
+            getInsumosByProductoCotizacion      : getInsumosByProductoCotizacion,
+            editarProductoDtCotizacion          : editarProductoDtCotizacion,
+            getCostosProductosInsumosRtaMdc     : getCostosProductosInsumosRtaMdc,
+            updateArchivoCostosMdc              : updateArchivoCostosMdc,
+            getHistoricoCostosMdc               : getHistoricoCostosMdc
         };
         
         function editarProductoDtCotizacion(request) {
@@ -314,6 +315,23 @@
             }
         }
 
+        function getHistoricoCostosMdc() {
+            //$rootScope.progressbar.start();
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_historico_costos_mdc")
+                .then(getHistoricoCostosMdcComplete)
+                .catch(getHistoricoCostosMdcFailed);
+
+            function getHistoricoCostosMdcComplete(response) {
+                //$rootScope.progressbar.complete();
+                return response.data;
+            }
+
+            function getHistoricoCostosMdcFailed(error) {
+                //$rootScope.progressbar.reset();
+                toastr.error('XHR falló en getHistoricoCostosMdc', error);
+                return error;
+            }
+        }
 
 
 

@@ -126,6 +126,8 @@
                 flexibilidad: ""
             }
 
+
+            vm.listaHistoricoCostosMdc = [];
             vm.swAlarmaCostos = false;
 
             /*
@@ -359,6 +361,43 @@
             }
 
             //getCostosProductosInsumosRtaMdc();
+
+
+
+
+
+
+            vm.verModalCostosMdc= function() {
+
+                modalService.modalFormBuscarCostosMdc()
+                    .then((costos) => {
+                        console.log("costos mdc", costos);
+                        //limpiar_formulario();
+
+                        //vm.obj_encabezado_cotizacion.documento_cliente = cotizacion.DOCUMENTO_CLIENTE;
+                        //vm.obj_encabezado_cotizacion.nombres_cliente = cotizacion.NOMBRES_CLIENTE;
+                        //vm.obj_encabezado_cotizacion.apellidos_cliente = cotizacion.APELLIDOS_CLIENTE;
+                        //vm.obj_encabezado_cotizacion.fecha_cotizacion = cotizacion.FECHA_COTIZACION;
+                        //$('#dpFechaCotizacion').data("DateTimePicker").date(moment(cotizacion.FECHA_COTIZACION));
+
+                        //vm.obj_encabezado_cotizacion.tipo_cotizacion = cotizacion.TIPO_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.cs_cotizacion = cotizacion.CS_TIPO_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.cs_h_cotizacion = cotizacion.CS_ID_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.ESTADO_COTIZACION = cotizacion.ESTADO_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.email = cotizacion.EMAIL_CLIENTE;
+
+                        //if (cotizacion.listaDetalleCotizacion.length > 0) {
+                        //    vm.list_productos_seleccionados = cotizacion.listaDetalleCotizacion;
+                        //    vm.swMostrarItems = true;
+                        //    angular.activarFancybox();
+                        //}
+
+                        $timeout(() => {
+                            vm.$apply();
+                        }, 0);
+                    });
+            }
+
 
 
         };//FIN INIT()
