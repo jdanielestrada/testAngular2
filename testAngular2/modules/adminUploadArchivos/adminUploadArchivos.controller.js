@@ -107,6 +107,7 @@
             //vm.arrayDataCostosMdc = [];
             vm.arrayDataUpload = [];
             vm.listaCostosProductosRtaMdc = [];
+            vm.listaDetalleCostosMDC = [];
 
             //vm.arrayDataCostosMdc = [{ "REFERENCIA": "XXX", "DESCRIPCION": "XXXX", "COSTOMDC": "1200" }, { "REFERENCIA": "IMMF0654", "DESCRIPCION": "MINIFIX 8 X 34 15MM", "COSTOMDC": "1000" }, { "REFERENCIA": "HMPLUS30", "DESCRIPCION": "PEGANTE HM PLUS 30 GR (GOTERO)", "COSTOMDC": "1100" }, { "REFERENCIA": "PEREXMIN", "DESCRIPCION": "PERNO EXPANSION MINIFIX", "COSTOMDC": "1200" }, { "REFERENCIA": "B4x8x2", "DESCRIPCION": "BOLSAS EMPAQUE 4x8x2 PEQUENA", "COSTOMDC": "1300" }]
 

@@ -33,7 +33,8 @@
             getCostosProductosInsumosRtaMdc     : getCostosProductosInsumosRtaMdc,
             updateArchivoCostosMdc              : updateArchivoCostosMdc,
             getHistoricoCostosMdc               : getHistoricoCostosMdc,
-            anularCostoMdc                      : anularCostoMdc
+            anularCostoMdc: anularCostoMdc,
+            getDetallearchivoCostos: getDetallearchivoCostos
         };
         
         function editarProductoDtCotizacion(request) {
@@ -349,6 +350,23 @@
                 return error;
             }
         }
+
+
+        function getDetallearchivoCostos(cs_id_costos) {
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_detalle_archivo_costos_mdc/" + cs_id_costos)
+                .then(getDetallearchivoCostosComplete)
+                .catch(getDetallearchivoCostosFailed);
+
+            function getDetallearchivoCostosComplete(response) {
+                return response.data;
+            }
+
+            function getDetallearchivoCostosFailed(error) {
+                toastr.error('XHR falló en getDetallearchivoCostos', error);
+                return error;
+            }
+        }
+
 
 
     }

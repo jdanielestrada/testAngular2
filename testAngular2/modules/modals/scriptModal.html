@@ -280,8 +280,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in listaHistoricoCostosMdc  track by $index" ng-click="getDetalleCostosMdc(item);" style="cursor: pointer">
-                    <td>
+                <tr ng-repeat="item in listaHistoricoCostosMdc  track by $index"style="cursor: pointer">
+                    <td  ng-click="getDetallearchivoCostos(item);" >
                         {{item.CS_ID_COSTOS_MDC}}
                     </td>
              

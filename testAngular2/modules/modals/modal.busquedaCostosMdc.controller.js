@@ -12,9 +12,11 @@
         vm.cancel = cancel;
         vm.getDetalleCotizacion = getDetalleCotizacion;
         vm.anularCostoMdc = anularCostoMdc;
+        vm.mostrarDetallearchivoCostos = mostrarDetallearchivoCostos;
 
         vm.listaHistoricoCostosMdc = [];
-        vm.listaDetalleCotizacion  = [];
+        vm.listaDetalleCotizacion = [];
+        vm.listaDetalleCostosMDC = []
 
         getHistoricoCostosMdc();
 
@@ -79,7 +81,7 @@
                  if (result.MSG === "OK") {
                      console.log('Registros actualizados correctamente');
 
-                     swal("DATOS actualizados", "se realizo la anulacion correctamente", "success");
+                     swal("DATOS ACTUALIZADOS", "se realizo la anulacion correctamente", "success");
                 
                      $uibModalInstance.close();
                   
@@ -93,10 +95,36 @@
 
              });
 
+        }
+
+        function getDetallearchivoCostos() {
+            angular.element(document).ready(function () {
+                $("#modal-detalle-costo-mdc").modal(
+                    {
+                        show: true,
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+            });
 
 
+            vm.objectDialog.LoadingDialog("...");
+            let cdIdCosto = item.CS_ID_COSTOS_MDC
+            RTAService.getDetallearchivoCostos(cdIdCosto)
+                .then(function (data) {
+                    vm.objectDialog.HideDialog();
+
+                    if (data.data.length > 0 && data.data[0].length > 0) {
+                        vm.listaDetalleCostosMDC = data.data[0];
+
+                    } else {
+                        toastr.warning("No se encontró ningun costo MDC ");
+                        vm.listaDetalleCostosMDC = [];
+                    }
+                });
 
         }
+
 
         function cancel() {
             $uibModalInstance.dismiss('cancel');
