@@ -28,18 +28,24 @@
                                             <button type="submit" id="submit-file" class="btn btn-primary">Cargar Archivo</button>
                                             <!--<button ng-click="deleteitem()" class="btn btn-primary">PRUEBA</button>-->
                                         </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="DESCRIPCION ARCHIVO" ng-model="objHeaderCostosMdc.descripcionArchivo" style="width: 308px;text-transform: uppercase;margin-left: 27px;">
+                                        </div>
+
                                         <div class="form-group">
                                             <button class="btn btn-box-tool btn-rta col-md-12"
                                                     ng-click="insertarArchivoCostosMdc()"
-                                                    style="margin-bottom: 15px;background-color:#cefe00;margin-left: 25px;"
+                                                    style="background-color: #cefe00; margin-left: 25px;"
                                                     type="button"
                                                     tooltip-placement="right"
                                                     uib-tooltip="Guardar"
                                                     ng-if="swArchivoCargado">
                                                 <i class="fa fa-check-circle"
-                                                   style="font-size: 31px;color: #33251e;"></i>
+                                                   style="font-size: 31px; color: #33251e;"></i>
                                             </button>
                                         </div>
+
                                     </form>
 
                                     <br />

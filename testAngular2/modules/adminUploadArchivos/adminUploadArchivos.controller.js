@@ -113,7 +113,8 @@
             //OBJETOS
             vm.objHeaderCostosMdc = {
 
-                csIdUsuario: loginService.UserData.ID_USUARIO
+                csIdUsuario: loginService.UserData.ID_USUARIO,
+                descripcionArchivo:""
             }
 
 
@@ -144,6 +145,12 @@
 
                     return;
                 }
+
+                if (vm.objHeaderCostosMdc.descripcionArchivo === "") {
+                    toastr.info('Debe ingresar una descripción para el archivo');
+                    return;
+                }
+
 
                 //OBJETO
                 vm.dataCostosMdc =
