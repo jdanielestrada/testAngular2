@@ -1,7 +1,5 @@
 /**
- * @author: Jose Daniel Estrada Pulgarin.
- * @email : jdanielestrada18@gmail.com
- * @github: github.com/jdanielestrada
+ * @author: desarrollo web
  */
 (function () {
     "use strict";

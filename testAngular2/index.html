@@ -87,7 +87,6 @@
                             </span>
                         </a>
                     </li>
-
                     <li class="divider-vertical"
                         ng-if="verificarPerfil('cotProductoModificado')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoModificado' }"
@@ -101,13 +100,12 @@
                             </span>
                         </a>
                     </li>
-
                     <li class="divider-vertical"
                         ng-if="verificarPerfil('cotProductoNuevo')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoNuevo' }"
                         ng-if="verificarPerfil('cotProductoNuevo')">
                         <a href="javascript:;"
-                           ui-sref="cotProductoDesarrollado"
+                           ui-sref="cotProductoNuevo"
                            style="padding-top: 15px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);">
                             <!--<i class="fa fa-plus-square-o" style="font-size: 20px;"></i>-->
                             <span class="font-madecentro">
@@ -254,12 +252,16 @@
     <script src="assets/vendors/SweetAlert2/sweetalert2.min.js"></script>
     <script src="assets/vendors/angular-input-masks/angular-input-masks-standalone.min.js"></script>
     <script src="assets/vendors/PapaParse-4.4.0/papaparse.min.js"></script>
+    <script src="assets/vendors/angular-file-upload-master/angular-file-upload-shim.min.js"></script>
+    <script src="assets/vendors/angular-file-upload-master/angular-file-upload.min.js"></script>
+    <!--<script src="assets/vendors/BootstrapFileInput/fileinput.min.js"></script>-->
     <!--modules-->
     <script type="text/javascript" src="app.js?v=1.0.0"></script>
     <script type="text/javascript" src="modules/Home/home.controller.js?v=1.0.0"></script>
     <script type="text/javascript" src="modules/UserLogin/userLogin.controller.js?v=1.0.0"></script>
     <script src="modules/cotProductoDesarrollado/cotProductoDesarrollado.controller.js?v=1.0.0"></script>
-    <script src="modules/adminUploadArchivos/adminUploadArchivos.controller.js"></script>
+    <script src="modules/adminUploadArchivos/adminUploadArchivos.controller.js?v=1.0.0"></script>
+    <script src="modules/cotProductoNuevo/cotProductoNuevo.controller.js?v=1.0.0"></script>
     <!--modals-->
     <script src="modules/modals/modal.confirmaciones.controller.js?v=1.0.0"></script>
     <script src="modules/modals/modal.addNuevoProyecto.controller.js?v=1.0.0"></script>

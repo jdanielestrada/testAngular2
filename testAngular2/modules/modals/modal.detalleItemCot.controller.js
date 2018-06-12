@@ -4,9 +4,9 @@
         .module('appRTA')
         .controller('detalleItemCot', detalleItemCot);
 
-    detalleItemCot.$inject = ['RTAService', '$scope', '$uibModalInstance', 'itemCot'];
+    detalleItemCot.$inject = ['configService', 'RTAService', '$scope', '$uibModalInstance', 'itemCot'];
 
-    function detalleItemCot(RTAService, $scope, $uibModalInstance, itemCot) {
+    function detalleItemCot(configService, RTAService, $scope, $uibModalInstance, itemCot) {
         var vm = $scope;
 
         vm.cancel = cancel;
@@ -14,6 +14,8 @@
         vm.dataInsumosProducto = [];
         vm.dataInsumosProductoSafe = [];
         vm.obj_producto_seleccionado = itemCot;
+
+        vm.dominio = configService.variables.Dominio;
 
         get_insumos_by_producto_cotizacion();
 

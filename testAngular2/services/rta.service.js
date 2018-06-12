@@ -1,7 +1,5 @@
 ﻿/**
- * @author: Jose Daniel Estrada Pulgarin.
- * @email : jdanielestrada18@gmail.com
- * @github: github.com/jdanielestrada
+ * @author: desarrollo web
  */
 (function () {
     "use strict";
@@ -17,21 +15,20 @@
 
             getParametrosMulti                  : getParametrosMulti,
             getOpsForGestionOperarioExtraLaboral: getOpsForGestionOperarioExtraLaboral,
-
             getProductosDesarrollados           : getProductosDesarrollados,
             getMaterialesProductosDesarrollados : getMaterialesProductosDesarrollados,
             generarConsecutivoCotizacion        : generarConsecutivoCotizacion,
             insertEncabezadoCotizacion          : insertEncabezadoCotizacion,
             getCotizacionesByUsusario           : getCotizacionesByUsusario,
-            getDetalleCotizacion: getDetalleCotizacion,
-            insertProductosCotizacion: insertProductosCotizacion,
-            deleteProductoDtCotizacion: deleteProductoDtCotizacion,
-            insertarArchivoCostosMdc: insertarArchivoCostosMdc,
-            updateEstadoHCotizaciones: updateEstadoHCotizaciones,
-            getInsumosByProductoCotizacion: getInsumosByProductoCotizacion,
-            editarProductoDtCotizacion: editarProductoDtCotizacion,
-            getCostosProductosInsumosRtaMdc: getCostosProductosInsumosRtaMdc,
-            updateArchivoCostosMdc: updateArchivoCostosMdc
+            getDetalleCotizacion                : getDetalleCotizacion,
+            insertProductosCotizacion           : insertProductosCotizacion,
+            deleteProductoDtCotizacion          : deleteProductoDtCotizacion,
+            insertarArchivoCostosMdc            : insertarArchivoCostosMdc,
+            updateEstadoHCotizaciones           : updateEstadoHCotizaciones,
+            getInsumosByProductoCotizacion      : getInsumosByProductoCotizacion,
+            editarProductoDtCotizacion          : editarProductoDtCotizacion,
+            getCostosProductosInsumosRtaMdc     : getCostosProductosInsumosRtaMdc,
+            updateArchivoCostosMdc              : updateArchivoCostosMdc
         };
         
         function editarProductoDtCotizacion(request) {

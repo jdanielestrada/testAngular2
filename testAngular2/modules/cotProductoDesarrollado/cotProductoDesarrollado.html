@@ -119,7 +119,7 @@
                                 style="margin-bottom: 15px"
                                 type="button"
                                 tooltip-placement="left"
-                                uib-tooltip="Comenzar cotizacion">
+                                uib-tooltip="Comenzar cotización">
                             <i class="fa fa-check-circle"
                                style="font-size: 31px;"></i>
                         </button>
@@ -132,24 +132,15 @@
                          style="border-bottom: 1px solid #efefef; padding-bottom: 20px;">
                         <h3 class="box-title">Productos terminados</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool btn-rta"
-                                    ng-show="list_productos_seleccionados.length > 0"
-                                    type="button"
-                                    style="height: 40px; width: 40px; padding: 0;"
-                                    id="myButtonControlID">
-                                <i class="fa fa-file-excel-o"
-                                   style="font-size: 31px;"
-                                   tooltip-placement="left"
-                                   uib-tooltip="Exportar a Excel"></i>
-                            </button>
 
-                            <input class="btn-download-excel btn btn-box-tool"
-                                   ng-show="list_productos_seleccionados.length > 0"
+                            <input class="btn-download-excel"
                                    id="myButtonControlID"
+                                   ng-show="list_productos_seleccionados.length > 0"
+                                   style="vertical-align: middle;"
+                                   type="button"
                                    uib-tooltip="Exportar a excel"
-                                   uib-tooltip-placement="left"
-                                   uib-tooltip-trigger="mouseenter"
-                                   type="button">
+                                   uib-tooltip-placement="left" 
+                                   uib-tooltip-trigger="mouseenter">
 
                             <button class="btn btn-box-tool btn-rta"
                                     ng-click="show_modal_seleccion_proyecto()"
@@ -198,7 +189,9 @@
                                     <tr ng-repeat="item in list_productos_seleccionados">
                                         <td>
                                             <img alt="zoom"
-                                                 class="img-previa" src="{{dominio}}/img_rta/{{item.ID_ITEM}}.png"/>
+                                                 class="img-previa"
+                                                 src="{{dominio}}/img_rta/{{item.ID_ITEM}}.png"/>
+                                            <!--onerror="this.src = 'assets/img/placeholder.png';"-->
                                         </td>
                                         <!--<td>{{item.C_CIDIS}}</td>-->
                                         <td>{{item.ID_ITEM}}</td>
@@ -313,7 +306,12 @@
                 <tbody>
                     <tr ng-repeat="item in list_productos_seleccionados" style="height: 230px;">
                         <td style="border: 1px solid #797979; width: 230px; vertical-align: middle; text-align: center;padding: 15px;">
-                            <img src='{{dominio}}/img_rta/{{item.ID_ITEM}}.png' width="215" height="212" style="margin-top: 5px"/>
+                            <img height="212"
+
+                                 src='{{dominio}}/img_rta/{{item.ID_ITEM}}.png'
+                                 style="margin-top: 5px"
+                                 width="215"/>
+                            <!--onerror="this.src = 'assets/img/placeholder.png';"-->
                         </td>
                         <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.DESCRIPCION}}</td>
                         <td style="border: 1px solid #797979; vertical-align: middle;text-align: center;">{{item.ID_REFERENCIA}}</td>

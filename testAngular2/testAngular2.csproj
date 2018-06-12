@@ -128,6 +128,8 @@
     <Content Include="assets\vendors\Angular-bootstrap\ui-bootstrap-tpls-0.13.4.js" />
     <Content Include="assets\vendors\Angular-bootstrap\ui-bootstrap-tpls-0.13.4.min.js" />
     <Content Include="assets\vendors\Angular-bootstrap\ui-bootstrap-tpls-2.0.1.min.js" />
+    <Content Include="assets\vendors\angular-file-upload-master\angular-file-upload-shim.min.js" />
+    <Content Include="assets\vendors\angular-file-upload-master\angular-file-upload.min.js" />
     <Content Include="assets\vendors\angular-input-masks\angular-input-masks-standalone.js" />
     <Content Include="assets\vendors\angular-input-masks\angular-input-masks-standalone.min.js" />
     <Content Include="assets\vendors\async\async.js" />
@@ -151,6 +153,10 @@
     <Content Include="assets\vendors\bootstrap-daterangepicker\bootstrap-daterangepicker-master\website\index.html" />
     <Content Include="assets\vendors\bootstrap-daterangepicker\bootstrap-daterangepicker-master\website\website.css" />
     <Content Include="assets\vendors\bootstrap-daterangepicker\bootstrap-daterangepicker-master\website\website.js" />
+    <Content Include="assets\vendors\BootstrapFileInput\fileinput.css" />
+    <Content Include="assets\vendors\BootstrapFileInput\fileinput.min.css" />
+    <Content Include="assets\vendors\BootstrapFileInput\fileinput.min.js" />
+    <Content Include="assets\vendors\BootstrapFileInput\fileinput_locale_es.js" />
     <Content Include="assets\vendors\Chartjs\Chart.bundle.js" />
     <Content Include="assets\vendors\Chartjs\Chart.bundle.min.js" />
     <Content Include="assets\vendors\Chartjs\Chart.js" />
@@ -1671,6 +1677,8 @@
     <Content Include="modules\adminUploadArchivos\adminUploadArchivos.html" />
     <Content Include="modules\cotProductoDesarrollado\cotProductoDesarrollado.controller.js" />
     <Content Include="modules\cotProductoDesarrollado\cotProductoDesarrollado.html" />
+    <Content Include="modules\cotProductoNuevo\cotProductoNuevo.controller.js" />
+    <Content Include="modules\cotProductoNuevo\cotProductoNuevo.html" />
     <Content Include="modules\Home\home.controller.js" />
     <Content Include="modules\Home\Home.html" />
     <Content Include="modules\modals\modal.busquedaCotizaciones.controller.js" />

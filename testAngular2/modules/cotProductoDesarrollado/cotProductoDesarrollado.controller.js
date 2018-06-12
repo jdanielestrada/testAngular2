@@ -1,7 +1,5 @@
 ﻿/**
- * @author: Jose Daniel Estrada Pulgarin.
- * @email : jdanielestrada18@gmail.com
- * @github: github.com/jdanielestrada
+ * @author: desarrollo web
  */
 (function () {
     'use strict';
@@ -22,9 +20,9 @@
             vm.ver_modal_cotizaciones        = ver_modal_cotizaciones;
             vm.generarConsecutivoCotizacion  = generarConsecutivoCotizacion;
             vm.limpiar_formulario            = limpiar_formulario;
-            vm.editar_producto = editar_producto;
-            vm.cerrar_cotizacion = cerrar_cotizacion;
-            vm.ver_detalle_item_cot = ver_detalle_item_cot;
+            vm.editar_producto               = editar_producto;
+            vm.cerrar_cotizacion             = cerrar_cotizacion;
+            vm.ver_detalle_item_cot          = ver_detalle_item_cot;
 
             vm.list_productos_seleccionados = [];
 
@@ -44,8 +42,9 @@
             vm.listaCotizacionesUsuario         = [];
             vm.listaDetalleCotizacion           = [];
             vm.listaMaterialesByItemCotizacion  = [];
-            
-            vm.dominio = 'http://192.168.1.20'
+
+            vm.dominio = configService.variables.Dominio;
+
             $timeout(function() {
                 $("#dpFechaCotizacion").datetimepicker({
                     dayViewHeaderFormat: "MMMM YYYY",

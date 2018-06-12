@@ -19,10 +19,10 @@
                 //NODE URL LOCAL
                 pathApiNode = "http://localhost:1600";
 
-                urlbase = "http://192.168.1.43";
+                urlbase = 'http://192.168.1.20';
             } else {
-                pathApiMVC = urlbase + "/TiMeter/WebApiTickets";
-                pathApiNode = urlbase + "/webapinode_pos";
+                
+                //pathApiNode = urlbase + "/webapinode_pos";
             }
 
             //urlbase = "http://192.168.1.43";
@@ -31,17 +31,9 @@
 
             var configService = {
                 ApiUrls: {
-                    UrlGestionProduccion: "http://192.168.1.43/webapinode_pos/produccion/gestion_produccion/",
+                    
                     UrlGestionCotizaciones: pathApiNode + "/cotizaciones/gestion_cotizaciones/",
-
-                    //UrlCheckVersionsApp: pathApiNode + "/app_versions/check_versions_app/",
-                    //UrlNuevaOrden          : pathApiNode + "/pos/nuevaorden/",
-                    //UrlForgotPassword      : pathApiMVC + "/api/ForgotPassword/",
-                    //UrlGestionProduccionMVC: pathApiMVC + "/api/AtencionTicket/",
-                    //UrlPeticiones          : pathApiMVC + "/api/Peticiones/",
-                    //UrlTercerosUnoeNodejs  : pathApiNode + "/terceros/unoe/",
-                    //UrlApiUNOEE            : urlbase + "/WebApiUNOEE/api/request/",
-                   
+                    
                 },
                 variables: {
                     Dominio: urlbase

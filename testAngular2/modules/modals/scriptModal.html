@@ -40,11 +40,10 @@
                         <tr>
                             <td>
                                 <img alt="zoom"
-                                     class="img-previa" src="./assets/img/image001.png" />
-                                <!--<img alt="zoom1"
-                             class="img-previa"
-                             onerror="this.src = 'Assets/img/placeholder.png';">-->
-                                <!--ng-src="http://192.168.1.42/SGD/PRO/G4/AGNRNGW215.jpg"-->
+                                     class="img-previa" 
+                                     src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png"
+                                      />
+                                <!--onerror="this.src = 'assets/img/placeholder.png';"-->
                             </td>
                             <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
                             <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
@@ -74,6 +73,7 @@
                             <th colspan="2" class="text-center">CUBICAGE</th>       
                             <th rowspan="2">CANTIDAD</th>                          
                             <th rowspan="2">% MARGEN</th>    
+                            <th rowspan="2">% DSCTO</th>   
                         </tr>
                         <tr>
                             <th>H</th>
@@ -145,14 +145,22 @@
                                        required
                                        x-validacion-auto="porcentaje">
                             </td>
+                            <td>
+                                <input class="form-control"
+                                       ng-change="totalizar_producto()"
+                                       ng-model="obj_producto_seleccionado.PJ_DSCTO"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td>
                         </tr>
                     </tbody>
                 </table>                
             </div>            
         </div>
         <div class="row" ng-if="dataInsumosProducto.length > 0">            
-            <div class="col-md-10 col-md-offset-1">                
-                <div class="box box-default">
+            <div class="col-md-12">                
+                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
                     <div class="box-header with-border">
                         <h3 class="box-title">
                             <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales
@@ -204,12 +212,54 @@
                 </div>                
             </div>
         </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-4 col-md-offset-8">
+                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
+    
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped">
+                  
+                            <tbody>
+                                <tr>
+                                    <td><span>Costo Cliente:</span></td>
+                                    <td><b>{{obj_totales.costo_cliente | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Descuento:</span></td>
+                                    <td><b>{{obj_totales.descuento | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Variación:</span></td>
+                                    <td><b>{{obj_totales.variacion | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Mano de Obra:</span></td>
+                                    <td><b>{{obj_totales.mano_obra | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span title="Costos Indirectos Fabricación">CIF:</span></td>
+                                    <td><b>{{obj_totales.cif | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Valor Total:</span></td>
+                                    <td><b>{{obj_totales.total | currency:"$":0}}</b></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
     </div>
     <div class="modal-footer text-center">
         <button class="btn btn-rta font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>
         <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Cancelar</button>
     </div>
 </script>
+
+
 
 <script type="text/ng-template" id="frmBusquedaCotizaciones.html">
     <div class="modal-header text-center">
@@ -310,11 +360,10 @@
                         <tr>
                             <td>
                                 <img alt="zoom"
-                                     class="img-previa" src="./assets/img/image001.png" />
-                                <!--<img alt="zoom1"
-                                class="img-previa"
-                                onerror="this.src = 'Assets/img/placeholder.png';">-->
-                                <!--ng-src="http://192.168.1.42/SGD/PRO/G4/AGNRNGW215.jpg"-->
+                                     class="img-previa" 
+                                     src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png"
+                                      />
+                                <!--onerror="this.src = 'assets/img/placeholder.png';"-->
                             </td>
                             <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
                             <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
@@ -343,6 +392,7 @@
                             <th colspan="2" class="text-center">CUBICAGE</th>
                             <th rowspan="2">CANTIDAD</th>
                             <th rowspan="2">% MARGEN</th>
+                            <th rowspan="2">% DSCTO</th>  
                         </tr>
                         <tr>
                             <th>H</th>
@@ -374,13 +424,14 @@
                             <td>{{obj_producto_seleccionado.CUBICAGE_K}}</td>
                             <td>{{obj_producto_seleccionado.CANTIDAD}}</td>
                             <td>{{obj_producto_seleccionado.MARGEN}}</td>
+                            <td>{{obj_producto_seleccionado.PJ_DSCTO}}</td>   
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="row" ng-if="dataInsumosProducto.length > 0">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <h3 class="box-title">
@@ -433,6 +484,44 @@
                 </div>
             </div>
         </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-4 col-md-offset-8">
+                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
+
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped">
+                            <tbody>
+                                <tr>
+                                    <td><span>Costo Cliente:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.VALOR_CLIENTE | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Descuento:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.VR_DSCTO | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Variación:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Mano de Obra:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.MANO_OBRA | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span title="Costos Indirectos Fabricación">CIF:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.CIF | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Valor Total:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.TOTAL_PRODUCTO | currency:"$":0}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
     </div>
     <div class="modal-footer text-center">
         <!--<button class="btn btn-rta font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>-->
@@ -462,20 +551,20 @@
                             <th>UM</th>
                             <th>MEDIDAS PT</th>
                             <th>COLOR</th>
-                            <th>ULTIMO COSTO</th>
-                            <!--<th>CANTIDAD UC</th>-->
+                            <th>ULTIMO COSTO</th> 
+                            <th>CANTIDAD UC</th>
                             <th>VALOR CLIENTE</th>
+                            <th>CANT DISPONIBLE</th> 
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
                                 <img alt="zoom"
-                                     class="img-previa" src="./assets/img/image001.png" />
-                                <!--<img alt="zoom1"
-                                class="img-previa"
-                                onerror="this.src = 'Assets/img/placeholder.png';">-->
-                                <!--ng-src="http://192.168.1.42/SGD/PRO/G4/AGNRNGW215.jpg"-->
+                                     class="img-previa" 
+                                     src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png"
+                                      />
+                                <!--onerror="this.src = 'assets/img/placeholder.png';"-->
                             </td>
                             <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
                             <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
@@ -484,10 +573,11 @@
                             <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
                             <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
                             <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
-                            <td>{{obj_producto_seleccionado.COLOR}}</td>
-                            <td>{{obj_producto_seleccionado.ULTIMO_COSTO | number:2}}</td>
-                            <!--<td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>-->
-                            <td>{{obj_producto_seleccionado.VALOR_CLIENTE | number:2}}</td>
+                            <td>{{obj_producto_seleccionado.COLOR}}</td>                            
+                            <td>{{obj_producto_seleccionado.ULTIMO_COSTO}}</td>
+                            <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
+                            <td>{{obj_producto_seleccionado.VALOR_CLIENTE}}</td>
+                            <td>{{obj_producto_seleccionado.CANT_DISP | number: 2}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -503,6 +593,7 @@
                             <th colspan="2" class="text-center">CUBICAGE</th>
                             <th rowspan="2">CANTIDAD</th>
                             <th rowspan="2">% MARGEN</th>
+                            <th rowspan="2">% DSCTO</th>   
                         </tr>
                         <tr>
                             <th>H</th>
@@ -583,13 +674,21 @@
                                        required
                                        x-validacion-auto="porcentaje">
                             </td>
+                            <td>
+                                <input class="form-control"
+                                       ng-change="totalizar_producto()"
+                                       ng-model="obj_producto_seleccionado.PJ_DSCTO"
+                                       placeholder="..."
+                                       required
+                                       x-validacion-auto="porcentaje">
+                            </td> 
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="row" ng-if="dataInsumosProducto.length > 0">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <h3 class="box-title">
@@ -626,7 +725,7 @@
                             <tfoot>
                                 <tr>
                                     <td class="text-center"
-                                        colspan="5"
+                                        colspan="7"
                                         style="background: rgb(239, 239, 239);">
                                         <div st-displayed-pages="10"
                                              st-items-by-page="10"
@@ -639,6 +738,46 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0"> 
+            <div class="col-md-4 col-md-offset-8">
+                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
+
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped">
+
+                            <tbody>
+                                <tr>
+                                    <td><span>Costo Cliente:</span></td>
+                                    <td><b>{{obj_totales.costo_cliente | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Descuento:</span></td>
+                                    <td><b>{{obj_totales.descuento | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Variación:</span></td>
+                                    <td><b>{{obj_totales.variacion | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Mano de Obra:</span></td>
+                                    <td><b>{{obj_totales.mano_obra | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span title="Costos Indirectos Fabricación">CIF:</span></td>
+                                    <td><b>{{obj_totales.cif | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Valor Total:</span></td>
+                                    <td><b>{{obj_totales.total | currency:"$":0}}</b></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
         </div>
     </div>
     <div class="modal-footer text-center">

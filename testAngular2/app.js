@@ -1,7 +1,5 @@
 /**
- * @author: Jose Daniel Estrada Pulgarin.
- * @email : jdanielestrada18@gmail.com
- * @github: github.com/jdanielestrada
+ * @author: desarrollo web
  */
 (function() {
     "use strict";
@@ -16,7 +14,8 @@
             "smart-table",
             "ui.sortable",
             "ngClickSelect",
-            'ui.utils.masks' 
+            'ui.utils.masks',
+            'angularFileUpload'
         ])
         .config(config)
         .controller("app", app)
@@ -259,6 +258,18 @@
                         controller: "cotProductoDesarrollado"
                     },
                     'templateModal@cotProductoDesarrollado': {
+                        templateUrl: "modules/modals/scriptModal.html?rand=" + rand
+                    }
+                }
+            })
+            .state("cotProductoNuevo", {
+                url: "/cotProductoNuevo",
+                views: {
+                    '': {
+                        templateUrl: "modules/cotProductoNuevo/cotProductoNuevo.html?rand=" + rand,
+                        controller: "cotProductoNuevo"
+                    },
+                    'templateModal@cotProductoNuevo': {
                         templateUrl: "modules/modals/scriptModal.html?rand=" + rand
                     }
                 }

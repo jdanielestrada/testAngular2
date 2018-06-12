@@ -9,15 +9,26 @@
     function modalFrmAddNuevoProyecto(modalService, parametrosService, configService, RTAService, $scope, $uibModalInstance, $timeout, listProductosSeleccionados) {
         var vm = $scope;
 
-        vm.cancel = cancel;
-        vm.guardar_item = guardar_item;
+        vm.cancel                   = cancel;
+        vm.guardar_item             = guardar_item;
         vm.cambio_cantidad_producto = cambio_cantidad_producto;
+        vm.totalizar_producto       = totalizar_producto;
 
         vm.obj_producto_seleccionado = {};
         vm.list_productos_desarrollados = [];
         vm.data_materiales_producto = [];
         vm.dataInsumosProductoSafe = [];
         vm.dataInsumosProducto = [];
+        vm.dominio = configService.variables.Dominio;
+
+        vm.obj_totales = {
+            costo_cliente: 0,
+            descuento: 0,
+            variacion: 0,
+            mano_obra: 0,
+            cif: 0,
+            total: 0
+        };
 
         get_productos_desarrollados();
         
@@ -27,7 +38,37 @@
 
             vm.dataInsumosProducto.forEach((item) => {
                 item.CANTIDAD_REQUERIDA = parseFloat(item.CANTIDAD_BASE) * parseFloat(vm.obj_producto_seleccionado.CANTIDAD);
+                item.COSTO_PROM_FINAL = parseFloat(item.CANTIDAD_REQUERIDA) * parseFloat(item.COSTO_PROM_FINAL_BASE);
             });
+
+            /*totalizar costos*/
+            totalizar_producto();
+        }
+
+        function totalizar_producto() {
+           
+            vm.obj_totales.costo_cliente = 0;
+            vm.obj_totales.mano_obra     = 0;
+            vm.obj_totales.cif           = 0;
+            vm.obj_totales.variacion     = 0;
+            vm.obj_totales.total         = 0;
+
+            vm.obj_totales.descuento = 0;
+
+            vm.dataInsumosProducto.forEach((item) => {
+                vm.obj_totales.costo_cliente += parseFloat(item.COSTO_PROM_FINAL);
+            });
+
+            vm.obj_totales.mano_obra = vm.obj_producto_seleccionado.MANO_OBRA;
+            vm.obj_totales.cif = vm.obj_producto_seleccionado.CIF;
+            vm.obj_totales.variacion = vm.obj_producto_seleccionado.VARIACION;
+
+            vm.obj_totales.descuento = parseFloat(vm.obj_producto_seleccionado.PJ_DSCTO / 100) * parseFloat(vm.obj_totales.costo_cliente);
+
+            vm.obj_totales.total = (vm.obj_totales.costo_cliente +
+                vm.obj_totales.mano_obra +
+                vm.obj_totales.cif +
+                vm.obj_totales.variacion) - (vm.obj_totales.descuento);
         }
 
         function get_productos_desarrollados() {
@@ -40,10 +81,12 @@
 
                         vm.list_productos_desarrollados = data.data[0];
                         vm.list_productos_desarrollados.forEach(function (item, index) {
-                            item.D_REFERENCIA = item.ID_REFERENCIA.trim() + " - " + item.DESCRIPCION.trim();
-
+                            item.D_REFERENCIA = item.ID_ITEM.trim() + " - " + item.ID_REFERENCIA.trim() + " - " + item.DESCRIPCION.trim();
+                            
                             item.ID_REFERENCIA = item.ID_REFERENCIA.trim();
                             item.DESCRIPCION = item.DESCRIPCION.trim();
+                            item.PJ_DSCTO = item.PJ_DSCTO.toString();
+                            item.MARGEN = item.MARGEN.toString();
                         });
 
                         vm.list_productos_desarrollados.push({
@@ -99,13 +142,14 @@
                         //vm.data_materiales_producto = data.data[0];
                         //vm.obj_producto_seleccionado.data_materiales_producto = _.sortBy(data.data[0], 'DESCRIPCION_C');
 
+                        data.data[0].forEach((item) => {
+                            item.COSTO_PROM_FINAL_BASE =  item.COSTO_PROM_FINAL;
+                        });
+
                         vm.dataInsumosProductoSafe = _.sortBy(data.data[0], 'DESCRIPCION_C');
                         vm.dataInsumosProducto = angular.copy(vm.dataInsumosProductoSafe);
 
-                        //vm.obj_producto_seleccionado.data_materiales_producto.forEach((item) => {
-                        //    item.CANTIDAD_REQUERIDA_BASE = item.CANTIDAD_REQUERIDA;
-                        //});
-
+                        totalizar_producto();
                     } else {
                         toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
                     }
@@ -164,7 +208,8 @@
             }
             
             vm.obj_producto_seleccionado.data_insumo_producto = vm.dataInsumosProducto;
-            
+            vm.obj_producto_seleccionado.data_totales         = vm.obj_totales;
+
             $uibModalInstance.close(vm.obj_producto_seleccionado);
         }
 
