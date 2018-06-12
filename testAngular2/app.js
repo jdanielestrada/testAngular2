@@ -274,6 +274,18 @@
                     }
                 }
             })
+            .state("uploadImagenProducto", {
+                url: "/uploadImagenProducto",
+                views: {
+                    '': {
+                        templateUrl: "modules/uploadImagenProducto/uploadImagenProducto.html?rand=" + rand,
+                        controller: "uploadImagenProducto"
+                    },
+                    'templateModal@uploadImagenProducto': {
+                        templateUrl: "modules/modals/scriptModal.html?rand=" + rand
+                    }
+                }
+            })
             .state("adminUploadArchivos", {
                 url: "/adminUploadArchivos",
                 views: {

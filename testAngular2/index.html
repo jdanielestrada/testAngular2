@@ -100,19 +100,18 @@
                             </span>
                         </a>
                     </li>
-                    <li class="divider-vertical"
+                    <!--<li class="divider-vertical"
                         ng-if="verificarPerfil('cotProductoNuevo')"></li>
                     <li class="hvr-fade" ng-class="{'active' : location.path() == '/cotProductoNuevo' }"
                         ng-if="verificarPerfil('cotProductoNuevo')">
                         <a href="javascript:;"
                            ui-sref="cotProductoNuevo"
                            style="padding-top: 15px; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);">
-                            <!--<i class="fa fa-plus-square-o" style="font-size: 20px;"></i>-->
                             <span class="font-madecentro">
                                 &nbsp;P. Nuevo
                             </span>
                         </a>
-                    </li>
+                    </li>-->
                     <li class="divider-vertical"></li>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -124,10 +123,18 @@
                                 ng-if="verificarPerfil('adminUploadArchivos')">
                                 <a href="javascript:;"
                                    ui-sref="adminUploadArchivos">
-                                    <!--<span class="fa fa-file-excel-o"
-                                          style="font-size: 17px;"></span>-->
                                     <span class="font-madecentro">
                                         &nbsp;Gestión de archivos
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li ng-class="{'active' : location.path() == '/uploadImagenProducto' }"
+                                ng-if="verificarPerfil('uploadImagenProducto')">
+                                <a href="javascript:;"
+                                   ui-sref="uploadImagenProducto">
+                                    <span class="font-madecentro">
+                                        &nbsp;Gestión Imagen Producto
                                     </span>
                                 </a>
                             </li>
@@ -262,6 +269,7 @@
     <script src="modules/cotProductoDesarrollado/cotProductoDesarrollado.controller.js?v=1.0.0"></script>
     <script src="modules/adminUploadArchivos/adminUploadArchivos.controller.js?v=1.0.0"></script>
     <script src="modules/cotProductoNuevo/cotProductoNuevo.controller.js?v=1.0.0"></script>
+    <script src="modules/uploadImagenProducto/uploadImagenProducto.controller.js?v=1.0.0"></script>
     <!--modals-->
     <script src="modules/modals/modal.confirmaciones.controller.js?v=1.0.0"></script>
     <script src="modules/modals/modal.addNuevoProyecto.controller.js?v=1.0.0"></script>
