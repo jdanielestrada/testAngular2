@@ -28,7 +28,10 @@
             getInsumosByProductoCotizacion      : getInsumosByProductoCotizacion,
             editarProductoDtCotizacion          : editarProductoDtCotizacion,
             getCostosProductosInsumosRtaMdc     : getCostosProductosInsumosRtaMdc,
-            updateArchivoCostosMdc              : updateArchivoCostosMdc
+            updateArchivoCostosMdc              : updateArchivoCostosMdc,
+            getHistoricoCostosMdc               : getHistoricoCostosMdc,
+            anularCostoMdc: anularCostoMdc,
+            getDetallearchivoCostos: getDetallearchivoCostos
         };
         
         function editarProductoDtCotizacion(request) {
@@ -311,6 +314,55 @@
             }
         }
 
+        function getHistoricoCostosMdc() {
+            //$rootScope.progressbar.start();
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_historico_costos_mdc")
+                .then(getHistoricoCostosMdcComplete)
+                .catch(getHistoricoCostosMdcFailed);
+
+            function getHistoricoCostosMdcComplete(response) {
+                //$rootScope.progressbar.complete();
+                return response.data;
+            }
+
+            function getHistoricoCostosMdcFailed(error) {
+                //$rootScope.progressbar.reset();
+                toastr.error('XHR falló en getHistoricoCostosMdc', error);
+                return error;
+            }
+        }
+
+
+        function anularCostoMdc(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "anular_costos_mdc/", JSON.stringify(request))
+                .then(anularCostoMdcComplete)
+                .catch(anularCostoMdcFailed);
+
+            function anularCostoMdcComplete(response) {
+                return response.data;
+            }
+
+            function anularCostoMdcFailed(error) {
+                console.log('Error en anularCostoMdc', error);
+                return error;
+            }
+        }
+
+
+        function getDetallearchivoCostos(cs_id_costos) {
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_detalle_archivo_costos_mdc/" + cs_id_costos)
+                .then(getDetallearchivoCostosComplete)
+                .catch(getDetallearchivoCostosFailed);
+
+            function getDetallearchivoCostosComplete(response) {
+                return response.data;
+            }
+
+            function getDetallearchivoCostosFailed(error) {
+                toastr.error('XHR falló en getDetallearchivoCostos', error);
+                return error;
+            }
+        }
 
 
 

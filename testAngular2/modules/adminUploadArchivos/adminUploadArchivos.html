@@ -12,8 +12,9 @@
                             <div class="box" style="margin-bottom: 10px;">
                                 <div class="box-header with-border"
                                      style="border-bottom: 1px solid #efefef;">
-                                    <h3 class="box-title">
-                                        GESTIÓN ARCHIVOS
+                                    <h3 class="box-title" style="font-weight:bold">
+                                        GESTIÓN ARCHIVOS &nbsp;
+                                        <i class="fa fa-bars" style="font-size: 20px;" ng-click="verModalCostosMdc()"></i>          
                                     </h3>
 
                                 </div>
@@ -117,7 +118,7 @@
             </div>
         </div>
 
-
+        
         <div class="container">
 
             <div class="tab-content">
@@ -127,8 +128,9 @@
                             <div class="box" style="margin-bottom: 10px;">
                                 <div class="box-header with-border"
                                      style="border-bottom: 1px solid #efefef;">
-                                    <h3 class="box-title">
-                                        GESTIÓN COSTOS
+                                    <h3 class="box-title" style="font-weight: bold">
+                                        GESTIÓN COSTOS &nbsp;
+                                       
                                     </h3>
 
                                 </div>
@@ -335,30 +337,50 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modal-update-costo-mdc" role="dialog" style="background: rgba(128, 128, 128, 0.56)">
+<div class="modal fade" id="modal-detalle-costo-mdc" role="dialog" style="background: rgba(128, 128, 128, 0.56)">
     <div class="modal-dialog modal-lg" style="width: 1173px;">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #33251e; color: white; height: 44px; border-radius: 7px 7px 0px 0px; font-weight: bold;">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modificar costo MDC</h4>
+                <h4 class="modal-title" id="myModalLabel">Detalle costos MDC</h4>
             </div>
-            <div class="modal-body" style="padding: 20px;">
+            <div class="modal-body" style="padding: 30px;">
 
                 <div class="row">
-                    <div class="col-sm-6">
-                        <label class="font-madecentro">Costo MDC:</label>
-                        <input class="form-control"
-                               style="padding-left: 4px; padding-right: 0; width: 90%"
-                               type="number"
-                               ng-model="objUpdateCostosMdc.valorCosto"/>
-                    </div>
+                    <div class="col-sm-12">
 
-                    <div class="col-sm-6">
-                        <label class="font-madecentro">Unidad medida:</label>
-                        <input class="form-control"
-                               style="padding-left: 4px; padding-right: 0; width: 90%"
-                               type="text"
-                               ng-model="objUpdateCostosMdc.unidadMededida" />
+                        <table class="table table-condensed table-hover table-striped">
+                            <thead>
+                                <tr>
+
+                                    <th>REFERENCIA</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>COSTO MDC</th>
+                                    <th>UNIDAD MEDIDA</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in listaDetalleCostosMDC  track by $index" style="cursor: pointer">
+                      
+
+                                    <td>
+                                        <span>{{item.REFERENCIA}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.DESCRIPCION}}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{item.COSTOS_MDC}}</span>
+                                    </td>
+
+                                    <td>
+                                        <span>{{item.UNIDAD_MEDIDA}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
 

@@ -17,7 +17,8 @@
             modalFormAddNuevoProyecto: modalFormAddNuevoProyecto,
             modalFormBuscarCotizaciones: modalFormBuscarCotizaciones,
             modalFormDetalleItemCot: modalFormDetalleItemCot,
-            modalFormEditarItemCot: modalFormEditarItemCot
+            modalFormEditarItemCot: modalFormEditarItemCot,
+            modalFormBuscarCostosMdc: modalFormBuscarCostosMdc,
         };
         
         function modalFormEditarItemCot(itemCot) {
@@ -96,5 +97,21 @@
 
             return modalInstance.result;
         }
+
+
+
+        function modalFormBuscarCostosMdc() {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmBusquedaArchivosMdc.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "busquedaCostosMdc",
+                size: "lg"
+            });
+
+            return modalInstance.result;
+        }
+
+
     }
 })();

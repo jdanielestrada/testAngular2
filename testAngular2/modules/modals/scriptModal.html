@@ -308,6 +308,70 @@
     </div>
 </script>
 
+
+
+
+<script type="text/ng-template" id="frmBusquedaArchivosMdc.html">
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title font-madecentro" style="font-weight: 600;">Lista historico costos MDC</h4>
+    </div>
+    <div class="modal-body" style="background-color: #f9f9f9;">
+        <table class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                
+                    <th># Archivo</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in listaHistoricoCostosMdc  track by $index"style="cursor: pointer">
+                    <td  ng-click="getDetallearchivoCostos(item);" >
+                        {{item.CS_ID_COSTOS_MDC}}
+                    </td>
+             
+                    <td>
+                        <span>{{item.DESCRIPCION_ARCHIVO}}</span>
+                    </td>
+                    <td>
+                        <span>{{item.FECHA_GUARDADO_ARCHIVO | toMomentDate}}</span>
+                    </td>
+                    <td>
+                        <span style="text-transform: uppercase">{{item.NOMBRE_USUARIO}} </span>
+                    
+                    </td>
+                
+                    
+                    <td>
+                        <i title="Estado archivo"
+                           class="fa"
+                           ng-class="{'indicador-cotizacion-cerrada fa-ban' : item.SW_ANULADO, 
+                                     'indicador-cotizacion-abierta fa-check' : !item.SW_ANULADO}"></i>
+                    </td>
+                    <td ng-show="!item.SW_ANULADO">
+                        <i title="anular" style="font-size:22px;"
+                           class="fa fa-trash" ng-click="anularCostoMdc(item)"></i>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer text-center">
+        <!--<button class="btn btn-rta font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>-->
+        <button class="btn btn-rta font_size_16px" ng-click="cancel()" type="button">Salir</button>
+    </div>
+</script>
+
+
+
+
+
 <script type="text/ng-template" id="pagination.custom.html">
     <nav ng-if="pages.length >= 2">
         <ul class="pagination" style="margin: 5px;">

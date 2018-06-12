@@ -101,11 +101,13 @@
             //FUNCIONES 
             vm.insertarArchivoCostosMdc        = insertarArchivoCostosMdc;
             vm.getCostosProductosInsumosRtaMdc = getCostosProductosInsumosRtaMdc;
+            //vm.anularCostoMdc = anularCostoMdc;
 
             //ARREGLOS
             //vm.arrayDataCostosMdc = [];
             vm.arrayDataUpload = [];
             vm.listaCostosProductosRtaMdc = [];
+            vm.listaDetalleCostosMDC = [];
 
             //vm.arrayDataCostosMdc = [{ "REFERENCIA": "XXX", "DESCRIPCION": "XXXX", "COSTOMDC": "1200" }, { "REFERENCIA": "IMMF0654", "DESCRIPCION": "MINIFIX 8 X 34 15MM", "COSTOMDC": "1000" }, { "REFERENCIA": "HMPLUS30", "DESCRIPCION": "PEGANTE HM PLUS 30 GR (GOTERO)", "COSTOMDC": "1100" }, { "REFERENCIA": "PEREXMIN", "DESCRIPCION": "PERNO EXPANSION MINIFIX", "COSTOMDC": "1200" }, { "REFERENCIA": "B4x8x2", "DESCRIPCION": "BOLSAS EMPAQUE 4x8x2 PEQUENA", "COSTOMDC": "1300" }]
 
@@ -126,6 +128,12 @@
                 flexibilidad: ""
             }
 
+            vm.objanularCostoMdc = {
+                cdIdCostos: "",
+                csIdUsuario: loginService.UserData.ID_USUARIO
+            }
+
+            vm.listaHistoricoCostosMdc = [];
             vm.swAlarmaCostos = false;
 
             /*
@@ -359,6 +367,39 @@
             }
 
             //getCostosProductosInsumosRtaMdc();
+
+
+            vm.verModalCostosMdc= function() {
+
+                modalService.modalFormBuscarCostosMdc()
+                    .then((costos) => {
+                        console.log("costos mdc", costos);
+                        //limpiar_formulario();
+
+                        //vm.obj_encabezado_cotizacion.documento_cliente = cotizacion.DOCUMENTO_CLIENTE;
+                        //vm.obj_encabezado_cotizacion.nombres_cliente = cotizacion.NOMBRES_CLIENTE;
+                        //vm.obj_encabezado_cotizacion.apellidos_cliente = cotizacion.APELLIDOS_CLIENTE;
+                        //vm.obj_encabezado_cotizacion.fecha_cotizacion = cotizacion.FECHA_COTIZACION;
+                        //$('#dpFechaCotizacion').data("DateTimePicker").date(moment(cotizacion.FECHA_COTIZACION));
+
+                        //vm.obj_encabezado_cotizacion.tipo_cotizacion = cotizacion.TIPO_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.cs_cotizacion = cotizacion.CS_TIPO_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.cs_h_cotizacion = cotizacion.CS_ID_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.ESTADO_COTIZACION = cotizacion.ESTADO_COTIZACION;
+                        //vm.obj_encabezado_cotizacion.email = cotizacion.EMAIL_CLIENTE;
+
+                        //if (cotizacion.listaDetalleCotizacion.length > 0) {
+                        //    vm.list_productos_seleccionados = cotizacion.listaDetalleCotizacion;
+                        //    vm.swMostrarItems = true;
+                        //    angular.activarFancybox();
+                        //}
+
+                        $timeout(() => {
+                            vm.$apply();
+                        }, 0);
+                    });
+            }
+
 
 
         };//FIN INIT()
