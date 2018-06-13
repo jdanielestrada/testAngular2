@@ -2,7 +2,7 @@
      style="background-color: #f9f9f9; min-height: 587px; padding-top: 15px;">
     <div class="container-fluid">
 
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-8 col-md-offset-2">
             <div class="box" style="margin-bottom: 10px;">
                 <div class="box-header with-border"
                      style="border-bottom: 1px solid #efefef;">
@@ -23,19 +23,21 @@
                 <div class="box-body">
                     <fieldset id="myFieldset">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>ID Producto</label>
-                                    <input type="text" class="form-control" placeholder="Nombres" ng-model="obj_registro_nuevo_producto.codigo_producto" style="text-transform: uppercase">
+                                    <label>Producto</label>
+                                    <select class="form-control font-madecentro font_size_15px"
+                                            id="seleccion_proyecto"></select>
+                                    <!--<input type="text" class="form-control" placeholder="Nombres" ng-model="obj_registro_nuevo_producto.codigo_producto" style="text-transform: uppercase">-->
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <!--<div class="col-md-4">
                                 <div class="form-group">
                                     <label>Referencia</label>
                                     <input type="text" class="form-control" placeholder="Documento " ng-model="obj_registro_nuevo_producto.referencia" style="text-transform: uppercase">
                                 </div>
-                            </div>
-                            <div class="col-md-4">
+                            </div>-->
+                            <div class="col-md-6">
                                 <div class="form-group"
                                      style="padding-top: 29px;">
                                     <span style="font-size: 18px;" title="Adjuntar Archivo">

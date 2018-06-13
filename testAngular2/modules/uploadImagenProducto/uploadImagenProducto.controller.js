@@ -19,25 +19,76 @@
             vm.delete_adjunto = delete_adjunto;
             vm.guardar_producto = guardar_producto;
 
-            vm.obj_registro_nuevo_producto = {
-                codigo_producto: "",
-                referencia: "",
-                adjunto: [],
-                log_user: loginService.UserData.ID_USUARIO
-            };
-
+            vm.obj_producto_seleccionado = {};
             vm.list_adjuntos = [];
-            
+            vm.list_productos_desarrollados = [];
+
+            get_productos_desarrollados_for_gestion_imagen();
+
             function limpiar_formulario() {
                 vm.list_adjuntos = [];
-
-                vm.obj_registro_nuevo_producto.codigo_producto = "";
-                vm.obj_registro_nuevo_producto.referencia = "";
-                vm.obj_registro_nuevo_producto.adjunto = [];
+                vm.obj_producto_seleccionado = {};
+                $('#seleccion_proyecto').val(null).trigger('change');
 
                 $timeout(() => {
                     vm.$apply();
                 }, 0);
+            }
+            
+            function get_productos_desarrollados_for_gestion_imagen() {
+
+                vm.objectDialog.LoadingDialog("...");
+                RTAService.getProductosDesarrolladosForGestionImagen()
+                    .then(function (data) {
+
+                        if (data.data.length > 0 && data.data[0].length > 0) {
+
+                            vm.list_productos_desarrollados = data.data[0];
+                            vm.list_productos_desarrollados.forEach(function (item, index) {
+                                item.D_REFERENCIA = item.ID_ITEM.trim() + " - " + item.ID_REFERENCIA.trim() + " - " + item.DESCRIPCION.trim();
+
+                                item.ID_REFERENCIA = item.ID_REFERENCIA.trim();
+                                item.DESCRIPCION = item.DESCRIPCION.trim();
+                            });
+
+                            vm.list_productos_desarrollados.push({
+                                ID_ITEM: 0,
+                                D_REFERENCIA: "..."
+                            });
+
+                            vm.list_productos_desarrollados.forEach(function (item, index) {
+                                item.id = item.ID_ITEM;
+                                item.text = item.D_REFERENCIA;
+
+                                if (item.ID_ITEM === 0)
+                                    item.selected = true;
+                            });
+
+                            $timeout(function () {
+                                $("#seleccion_proyecto").select2({
+                                    data: _.sortBy(vm.list_productos_desarrollados, 'text'),
+                                    language: "es"
+                                });
+
+                                vm.objectDialog.HideDialog();
+                            }, 300);
+                            
+                            $timeout(function () {
+                                var $eventSelect = $("#seleccion_proyecto");
+                                $eventSelect.on("select2:select", function (e) {
+
+                                    vm.obj_producto_seleccionado = {};
+                                    vm.obj_producto_seleccionado = e.params.data;
+
+                                    $timeout(function () {
+                                        vm.$apply();
+                                    }, 0);
+                                });
+                            }, 300);
+                        } else {
+                            toastr.error("Ocurrió un error al tratar de obtener los tipos de proyectos.");
+                        }
+                    });
             }
 
             function validar_adjunto(files) {
@@ -64,19 +115,11 @@
 
             function guardar_producto() {
 
-                if (vm.obj_registro_nuevo_producto.codigo_producto === undefined||
-                    vm.obj_registro_nuevo_producto.codigo_producto === null||
-                    vm.obj_registro_nuevo_producto.codigo_producto === "") {
+                if (vm.obj_producto_seleccionado.ID_ITEM === undefined ||
+                    vm.obj_producto_seleccionado.ID_ITEM === null ||
+                    vm.obj_producto_seleccionado.ID_ITEM === "") {
 
-                    toastr.warning("Es requerido ingresar el código del producto.");
-                    return;
-                }
-
-                if (vm.obj_registro_nuevo_producto.referencia === undefined ||
-                    vm.obj_registro_nuevo_producto.referencia === null ||
-                    vm.obj_registro_nuevo_producto.referencia === "") {
-
-                    toastr.warning("Es requerido ingresar la referencia del producto.");
+                    toastr.warning("Debe seleccionar un producto.");
                     return;
                 }
                 
@@ -85,14 +128,14 @@
                     return;
                 }
 
-                vm.obj_registro_nuevo_producto.adjunto = vm.list_adjuntos;
+                vm.obj_producto_seleccionado.adjunto = vm.list_adjuntos;
 
                 $upload.upload({
                     url: configService.ApiUrls.UrlGestionCotizaciones + "almacenar_imagen_producto",
                     method: "POST",
                     headers: { 'Content-Type': 'multipart/form-data' },
-                    file: vm.obj_registro_nuevo_producto.adjunto,
-                    data: vm.obj_registro_nuevo_producto
+                    file: vm.obj_producto_seleccionado.adjunto,
+                    data: vm.obj_producto_seleccionado
                 }).success(function (result, status, headers, config) {
 
                     if (result.MSG === "OK") {

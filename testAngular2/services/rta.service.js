@@ -13,27 +13,43 @@
     function RTAService($http, configService, $rootScope) {
         return {
 
-            getParametrosMulti                  : getParametrosMulti,
-            getOpsForGestionOperarioExtraLaboral: getOpsForGestionOperarioExtraLaboral,
-            getProductosDesarrollados           : getProductosDesarrollados,
-            getMaterialesProductosDesarrollados : getMaterialesProductosDesarrollados,
-            generarConsecutivoCotizacion        : generarConsecutivoCotizacion,
-            insertEncabezadoCotizacion          : insertEncabezadoCotizacion,
-            getCotizacionesByUsusario           : getCotizacionesByUsusario,
-            getDetalleCotizacion                : getDetalleCotizacion,
-            insertProductosCotizacion           : insertProductosCotizacion,
-            deleteProductoDtCotizacion          : deleteProductoDtCotizacion,
-            insertarArchivoCostosMdc            : insertarArchivoCostosMdc,
-            updateEstadoHCotizaciones           : updateEstadoHCotizaciones,
-            getInsumosByProductoCotizacion      : getInsumosByProductoCotizacion,
-            editarProductoDtCotizacion          : editarProductoDtCotizacion,
-            getCostosProductosInsumosRtaMdc     : getCostosProductosInsumosRtaMdc,
-            updateArchivoCostosMdc              : updateArchivoCostosMdc,
-            getHistoricoCostosMdc               : getHistoricoCostosMdc,
-            anularCostoMdc: anularCostoMdc,
-            getDetallearchivoCostos: getDetallearchivoCostos
+            getParametrosMulti                       : getParametrosMulti,
+            getOpsForGestionOperarioExtraLaboral     : getOpsForGestionOperarioExtraLaboral,
+            getProductosDesarrollados                : getProductosDesarrollados,
+            getMaterialesProductosDesarrollados      : getMaterialesProductosDesarrollados,
+            generarConsecutivoCotizacion             : generarConsecutivoCotizacion,
+            insertEncabezadoCotizacion               : insertEncabezadoCotizacion,
+            getCotizacionesByUsusario                : getCotizacionesByUsusario,
+            getDetalleCotizacion                     : getDetalleCotizacion,
+            insertProductosCotizacion                : insertProductosCotizacion,
+            deleteProductoDtCotizacion               : deleteProductoDtCotizacion,
+            insertarArchivoCostosMdc                 : insertarArchivoCostosMdc,
+            updateEstadoHCotizaciones                : updateEstadoHCotizaciones,
+            getInsumosByProductoCotizacion           : getInsumosByProductoCotizacion,
+            editarProductoDtCotizacion               : editarProductoDtCotizacion,
+            getCostosProductosInsumosRtaMdc          : getCostosProductosInsumosRtaMdc,
+            updateArchivoCostosMdc                   : updateArchivoCostosMdc,
+            getHistoricoCostosMdc                    : getHistoricoCostosMdc,
+            anularCostoMdc                           : anularCostoMdc,
+            getDetallearchivoCostos                  : getDetallearchivoCostos,
+            getProductosDesarrolladosForGestionImagen: getProductosDesarrolladosForGestionImagen
         };
         
+        function getProductosDesarrolladosForGestionImagen() {
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_productos_desarrollados_for_gestion_imagen")
+                .then(getProductosDesarrolladosForGestionImagenComplete)
+                .catch(getProductosDesarrolladosForGestionImagenFailed);
+
+            function getProductosDesarrolladosForGestionImagenComplete(response) {
+                return response.data;
+            }
+
+            function getProductosDesarrolladosForGestionImagenFailed(error) {
+                toastr.error('XHR falló en getProductosDesarrolladosForGestionImagen', error);
+                return error;
+            }
+        }
+
         function editarProductoDtCotizacion(request) {
             return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "editar_producto_dt_cotizacion", JSON.stringify(request))
                 .then(editarProductoDtCotizacioncomplete)
