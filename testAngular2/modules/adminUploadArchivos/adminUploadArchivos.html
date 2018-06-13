@@ -334,6 +334,71 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modal-update-costo-mdc" role="dialog" style="background: rgba(128, 128, 128, 0.56)">
+    <div class="modal-dialog modal-lg" style="width: 1173px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #33251e; color: white; height: 44px; border-radius: 7px 7px 0px 0px; font-weight: bold;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modificar costo MDC</h4>
+            </div>
+            <div class="modal-body" style="padding: 20px;">
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="font-madecentro">Costo MDC:</label>
+                        <input class="form-control"
+                               style="padding-left: 4px; padding-right: 0; width: 90%"
+                               type="number"
+                               ng-model="objUpdateCostosMdc.valorCosto"/>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label class="font-madecentro">Unidad medida:</label>
+                        <input class="form-control"
+                               style="padding-left: 4px; padding-right: 0; width: 90%"
+                               type="text"
+                               ng-model="objUpdateCostosMdc.unidadMededida"/>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label class="font-madecentro">Observación:</label>
+                        <input class="form-control"
+                               style="padding-left: 4px; padding-right: 0; width: 90%"
+                               type="number"
+                               ng-model="objUpdateCostosMdc.observacion" />
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer text-center">
+                <button class="btn btn-mdc"
+                        data-dismiss="modal"
+                        ng-click="updateArchivoCostosMdc()"
+                        type="button">
+                    Modificar
+                </button>
+                <button class="btn btn-mdc"
+                        data-dismiss="modal"
+                        ng-click="close_modal()"
+                        type="button">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 
 <!-- Modal -->
