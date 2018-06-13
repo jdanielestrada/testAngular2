@@ -22,6 +22,7 @@
             vm.obj_producto_seleccionado = {};
             vm.list_adjuntos = [];
             vm.list_productos_desarrollados = [];
+            vm.obj_data_adjunto = {};
 
             get_productos_desarrollados_for_gestion_imagen();
 
@@ -106,6 +107,7 @@
                     }
 
                     vm.list_adjuntos.push(files[i]);
+                    vm.obj_data_adjunto = files[i];
                 }
             };
 

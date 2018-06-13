@@ -37,7 +37,7 @@
                                     <input type="text" class="form-control" placeholder="Documento " ng-model="obj_registro_nuevo_producto.referencia" style="text-transform: uppercase">
                                 </div>
                             </div>-->
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group"
                                      style="padding-top: 29px;">
                                     <span style="font-size: 18px;" title="Adjuntar Archivo">
@@ -47,7 +47,22 @@
                                         </label>
                                         <span class="font-rta" style="font-size: x-small; color: gray;">(Formatos .png .jpg)</span>
                                     </span>
-                                    <input id="fichero" name="importArchivo" type="file" ng-file-select="validar_adjunto($files)" style="display: none" />
+                                    <input id="fichero" name="importArchivo" type="file" ng-file-select="validar_adjunto($files)" style="display: none"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3" ng-show="list_adjuntos.length > 0">
+                                <div class="form-group" style="padding-top: 30px;">
+                                    <label class="sr-only">File</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon" style="background-color: #fff;border-right: 0;">
+                                            <i class="fa fa-check" style="color: #b5df03;font-size: 19px;"></i>
+                                        </div>
+                                        <input class="form-control"
+                                               disabled
+                                               ng-model="obj_data_adjunto.name"
+                                               style="background-color: #fff; border-left: 0; padding-left: 0; text-overflow: ellipsis;" 
+                                               type="text">
+                                    </div>
                                 </div>
                             </div>
                         </div>
