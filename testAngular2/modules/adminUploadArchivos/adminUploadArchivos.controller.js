@@ -284,7 +284,8 @@
             vm.objUpdateCostosMdc = {
                 cdIdCosto: "",
                 valorCosto: "",
-                unidadMededida:""
+                unidadMededida: "",
+                observacion: ""
             }
 
             vm.openUpdateArchivoCostosMdc = function (item) {
@@ -331,11 +332,7 @@
                         swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
                         vm.swUpdate = 0;
                         //limpiar data
-                        vm.objUpdateCostosMdc = {
-                            cdIdCosto: "",
-                            valorCosto: "",
-                            unidadMededida: ""
-                        }
+                    
 
                         getCostosProductosInsumosRtaMdc();
 
