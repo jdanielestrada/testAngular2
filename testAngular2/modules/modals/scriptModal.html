@@ -16,154 +16,162 @@
         </div>
         <div class="row">                   
             <div class="col-md-12">
-                <table class="table table-hover table-condensed table-striped table-bordered"
-                       ng-if="obj_producto_seleccionado.ID_ITEM != null"
-                       style="font-size: 13px;margin-bottom: 10px;">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>CIDIS</th>
-                            <th>CÓDIGO</th>
-                            <th>REFERENCIA</th>
-                            <th>DESCRIPCIÓN</th>
-                            <th>PROCEDENCIA</th>
-                            <th>UM</th>
-                            <th>MEDIDAS PT</th>
-                            <th>COLOR</th>                            
-                            <th>ULTIMO COSTO</th>
-                            <th>CANTIDAD UC</th>
-                            <th>VALOR CLIENTE</th>     
-                            <th>CANT DISPONIBLE</th>                         
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <img alt="zoom"
-                                     class="img-previa" 
-                                     src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png"
-                                      />
-                                <!--onerror="this.src = 'assets/img/placeholder.png';"-->
-                            </td>
-                            <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
-                            <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
-                            <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
-                            <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
-                            <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
-                            <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
-                            <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
-                            <td>{{obj_producto_seleccionado.COLOR}}</td>                            
-                            <td>{{obj_producto_seleccionado.ULTIMO_COSTO}}</td>
-                            <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
-                            <td>{{obj_producto_seleccionado.VALOR_CLIENTE}}</td>
-                            <td>{{obj_producto_seleccionado.CANT_DISP | number: 2}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table table-hover table-condensed table-striped table-bordered"
-                       ng-if="obj_producto_seleccionado.ID_ITEM != null"
-                       style="font-size: 13px;">
-                    <thead>
-                        <tr>
-                            <th rowspan="2">MANO OBRA</th>
-                            <th rowspan="2" title="Costos Indirectos Fabricación">CIF</th>    
-                            <th rowspan="2">VARIACIÓN</th>    
+  
+                <div class="box box-default" style="border-top: 3px solid #b9e400">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Producto
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped table-bordered"
+                               ng-if="obj_producto_seleccionado.ID_ITEM != null"
+                               style="font-size: 13px;margin-bottom: 10px;">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>CIDIS</th>
+                                    <th>CÓDIGO</th>
+                                    <th>REFERENCIA</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>PROCEDENCIA</th>
+                                    <th>UM</th>
+                                    <th>MEDIDAS PT</th>
+                                    <th>COLOR</th>
+                                    <th>ULTIMO COSTO</th>
+                                    <th>CANTIDAD UC</th>
+                                    <th>VALOR CLIENTE</th>
+                                    <th>CANT DISPONIBLE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img alt="zoom"
+                                             class="img-previa"
+                                             src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png" />
+                                        <!--onerror="this.src = 'assets/img/placeholder.png';"-->
+                                    </td>
+                                    <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
+                                    <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
+                                    <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
+                                    <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
+                                    <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
+                                    <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
+                                    <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
+                                    <td>{{obj_producto_seleccionado.COLOR}}</td>
+                                    <td>{{obj_producto_seleccionado.ULTIMO_COSTO}}</td>
+                                    <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
+                                    <td>{{obj_producto_seleccionado.VALOR_CLIENTE}}</td>
+                                    <td>{{obj_producto_seleccionado.CANT_DISP | number: 2}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-hover table-condensed table-striped table-bordered"
+                               ng-if="obj_producto_seleccionado.ID_ITEM != null"
+                               style="font-size: 13px;">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">MANO OBRA</th>
+                                    <th rowspan="2" title="Costos Indirectos Fabricación">CIF</th>
+                                    <th rowspan="2">VARIACIÓN</th>
+                                    <th colspan="3" class="text-center">EMPAQUE</th>
+                                    <th colspan="2" class="text-center">CUBICAGE</th>
+                                    <th rowspan="2">CANTIDAD</th>
+                                    <th rowspan="2">% MARGEN</th>
+                                    <th rowspan="2">% DSCTO</th>
+                                </tr>
+                                <tr>
+                                    <th>H</th>
+                                    <th>W</th>
+                                    <th>D</th>
+                                    <th>C</th>
+                                    <th>K</th>
+                                </tr>
 
-                            <th colspan="3" class="text-center">EMPAQUE</th>  
-                            <th colspan="2" class="text-center">CUBICAGE</th>       
-                            <th rowspan="2">CANTIDAD</th>                          
-                            <th rowspan="2">% MARGEN</th>    
-                            <th rowspan="2">% DSCTO</th>   
-                        </tr>
-                        <tr>
-                            <th>H</th>
-                            <th>W</th>
-                            <th>D</th>
-                            <th>C</th>
-                            <th>K</th>
-                        </tr>
-                    
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{obj_producto_seleccionado.MANO_OBRA | currency:"$":0}}</td>
-                            <td>{{obj_producto_seleccionado.CIF | currency:"$":0}}</td>
-                            <td>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</td>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{obj_producto_seleccionado.MANO_OBRA | currency:"$":0}}</td>
+                                    <td>{{obj_producto_seleccionado.CIF | currency:"$":0}}</td>
+                                    <td>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</td>
+                                    <td>
+                                        <input aria-describedby="basic-addon1"
+                                               class="form-control"
+                                               ng-model="obj_producto_seleccionado.EMPAQUE_H"
+                                               placeholder="..."
+                                               required
+                                               x-validacion-auto="porcentaje">
+                                    </td>
+                                    <td>
+                                        <input aria-describedby="basic-addon1"
+                                               class="form-control"
+                                               ng-model="obj_producto_seleccionado.EMPAQUE_W"
+                                               placeholder="..."
+                                               required
+                                               x-validacion-auto="porcentaje">
+                                    </td>
+                                    <td>
+                                        <input aria-describedby="basic-addon1"
+                                               class="form-control"
+                                               ng-model="obj_producto_seleccionado.EMPAQUE_D"
+                                               placeholder="..."
+                                               required
+                                               x-validacion-auto="porcentaje">
+                                    </td>
+                                    <td>
+                                        <input aria-describedby="basic-addon1"
+                                               class="form-control"
+                                               ng-model="obj_producto_seleccionado.CUBICAGE_C"
+                                               placeholder="..."
+                                               required
+                                               x-validacion-auto="porcentaje">
+                                    </td>
+                                    <td>
+                                        <input aria-describedby="basic-addon1"
+                                               class="form-control"
+                                               ng-model="obj_producto_seleccionado.CUBICAGE_K"
+                                               placeholder="..."
+                                               required
+                                               x-validacion-auto="porcentaje">
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                               ng-change="cambio_cantidad_producto()"
+                                               ng-model="obj_producto_seleccionado.CANTIDAD"
+                                               placeholder="..."
+                                               required
+                                               ui-number-mask="0">
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                               ng-model="obj_producto_seleccionado.MARGEN"
+                                               placeholder="..."
+                                               required
+                                               x-validacion-auto="porcentaje">
+                                    </td>
+                                    <td>
+                                        <input class="form-control"
+                                               ng-change="totalizar_producto()"
+                                               ng-model="obj_producto_seleccionado.PJ_DSCTO"
+                                               placeholder="..."
+                                               required
+                                               x-validacion-auto="porcentaje">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-                            <td>
-                                <input aria-describedby="basic-addon1"
-                                       class="form-control"
-                                       ng-model="obj_producto_seleccionado.EMPAQUE_H"
-                                       placeholder="..."
-                                       required
-                                       x-validacion-auto="porcentaje">
-                            </td>
-                            <td>
-                                <input aria-describedby="basic-addon1"
-                                       class="form-control"
-                                       ng-model="obj_producto_seleccionado.EMPAQUE_W"
-                                       placeholder="..."
-                                       required
-                                       x-validacion-auto="porcentaje">
-                            </td>
-                            <td>
-                                <input aria-describedby="basic-addon1"
-                                       class="form-control"
-                                       ng-model="obj_producto_seleccionado.EMPAQUE_D"
-                                       placeholder="..."
-                                       required
-                                       x-validacion-auto="porcentaje">
-                            </td>
-                            <td>
-                                <input aria-describedby="basic-addon1"
-                                       class="form-control"
-                                       ng-model="obj_producto_seleccionado.CUBICAGE_C"
-                                       placeholder="..."
-                                       required
-                                       x-validacion-auto="porcentaje">
-                            </td>
-                            <td>
-                                <input aria-describedby="basic-addon1"
-                                       class="form-control"
-                                       ng-model="obj_producto_seleccionado.CUBICAGE_K"
-                                       placeholder="..."
-                                       required
-                                       x-validacion-auto="porcentaje">
-                            </td>
-                            <td>
-                                <input class="form-control"
-                                       ng-change="cambio_cantidad_producto()"
-                                       ng-model="obj_producto_seleccionado.CANTIDAD"
-                                       placeholder="..."
-                                       required
-                                       ui-number-mask="0">
-                            </td>
-                            <td>
-                                <input class="form-control"
-                                       ng-model="obj_producto_seleccionado.MARGEN"
-                                       placeholder="..."
-                                       required
-                                       x-validacion-auto="porcentaje">
-                            </td>
-                            <td>
-                                <input class="form-control"
-                                       ng-change="totalizar_producto()"
-                                       ng-model="obj_producto_seleccionado.PJ_DSCTO"
-                                       placeholder="..."
-                                       required
-                                       x-validacion-auto="porcentaje">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>                
+                    </div>
+                </div>              
             </div>            
         </div>
         <div class="row" ng-if="dataInsumosProducto.length > 0">            
             <div class="col-md-12">                
-                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
+                <div class="box box-default" style="border-top: 3px solid #b9e400;">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales
+                            Insumos
                         </h3>
                     </div>
                     <div class="box-body">
@@ -214,8 +222,12 @@
         </div>
         <div class="row" ng-if="dataInsumosProducto.length > 0">
             <div class="col-md-4 col-md-offset-8">
-                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
-    
+                <div class="box box-default" style="border-top: 3px solid #b9e400;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Totales
+                        </h3>
+                    </div>
                     <div class="box-body">
                         <table class="table table-hover table-condensed table-striped">
                   
