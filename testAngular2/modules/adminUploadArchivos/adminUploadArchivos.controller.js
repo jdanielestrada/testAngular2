@@ -101,6 +101,7 @@
             //FUNCIONES 
             vm.insertarArchivoCostosMdc        = insertarArchivoCostosMdc;
             vm.getCostosProductosInsumosRtaMdc = getCostosProductosInsumosRtaMdc;
+            //vm.mostrarDetallearchivoCostos = mostrarDetallearchivoCostos;
             //vm.anularCostoMdc = anularCostoMdc;
 
             //ARREGLOS
