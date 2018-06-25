@@ -210,7 +210,6 @@
                                         <div class="col-sm-12">
 
                                             <table class="table table-hover table-condensed table-striped"
-                                                   st-safe-src="listaCostosProductosRtaMdc"
                                                    st-table="listaCostosProductosRtaMdc"
                                                    ng-if="listaCostosProductosRtaMdc.length > 0">
                                                 <thead style="color: black;border: 0px solid rgba(50, 65, 88, 1);background-color: white">
@@ -228,7 +227,7 @@
 
                                                 </tr>
 
-                                                <tr style="background: whitesmoke;">
+                                                <!--<tr style="background: whitesmoke;">
                                                     <th>
                                                         <input st-search="REFERENCIA"
                                                                 placeholder="..."
@@ -249,7 +248,7 @@
                                                     <th></th>
                                                     <th></th>
                                                     <th></th>
-                                                </tr>
+                                                </tr>-->
                                                     <!--{{listaCostosProductosRtaMdc}}-->
                                                 </thead>
                                                 <tbody style="background-color: rgb(227, 227, 227);">
@@ -290,8 +289,8 @@
                                                         <td class="text-center"
                                                             colspan="8"
                                                             style="background: rgb(239, 239, 239);">
-                                                            <div st-displayed-pages="20"
-                                                                 st-items-by-page="20"
+                                                            <div st-displayed-pages="30"
+                                                                 st-items-by-page="30"
                                                                  st-pagination=""
                                                                  st-template="pagination.custom.html"></div>
                                                         </td>

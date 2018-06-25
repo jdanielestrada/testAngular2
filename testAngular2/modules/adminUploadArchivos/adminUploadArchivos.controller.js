@@ -223,11 +223,12 @@
 
 
                 vm.listaCostosProductosRtaMdc = [];
-                //vm.objectDialog.LoadingDialog("...");
+                vm.objectDialog.LoadingDialog("...");
                 RTAService.getCostosProductosInsumosRtaMdc()
                     .then(function (data) {
-                        vm.objectDialog.HideDialog();
+                     
                         if (data.data.length > 0 && data.data[0].length > 0) {
+                            vm.objectDialog.HideDialog();
                             vm.listaCostosProductosRtaMdc = data.data[0];
 
                             vm.listaCostosProductosRtaMdc.forEach(function (item) {
@@ -256,7 +257,12 @@
 
 
                                 //cALCULAR VARIACIÓN PORCENTUAL 
-                                item.VARIACION = (((item.COSTO_MDC - item.COSTO_RTA) / item.COSTO_RTA) * 100).toFixed(2);
+                                if (item.COSTO_MDC === 0) {
+                                    item.VARIACION = 0;
+                                } else {
+                                    item.VARIACION = (((item.COSTO_MDC - item.COSTO_RTA) / item.COSTO_RTA) * 100).toFixed(2);
+                                }
+                               
                                
 
                                 //ASIGNAR COSTO FINAL 
@@ -271,11 +277,12 @@
                                     item.SW_ALERTA = 0;
                                 }
 
-
+                               
 
                             });
                         }
                         else {
+                            //vm.objectDialog.HideDialog();
                             toastr.error("Ocurrió un error al tratar de obtener los últimos costos de insumos");
                         }
                     });
@@ -290,7 +297,7 @@
             }
 
             vm.openUpdateArchivoCostosMdc = function (item) {
-                toastr.info('Entra!!');
+                //toastr.info('Entra!!');
 
                 vm.objUpdateCostosMdc.cdIdCosto = item.CS_ID_MV;
                 vm.objUpdateCostosMdc.valorCosto = item.COSTO_MDC;
