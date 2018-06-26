@@ -60,9 +60,9 @@
                                     <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
                                     <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
                                     <td>{{obj_producto_seleccionado.COLOR}}</td>
-                                    <td>{{obj_producto_seleccionado.ULTIMO_COSTO}}</td>
+                                    <td>{{obj_producto_seleccionado.ULTIMO_COSTO | number:2}}</td>
                                     <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
-                                    <td>{{obj_producto_seleccionado.VALOR_CLIENTE}}</td>
+                                    <td>{{obj_producto_seleccionado.VALOR_CLIENTE | number:2}}</td>
                                     <td>{{obj_producto_seleccionado.CANT_DISP | number: 2}}</td>
                                 </tr>
                             </tbody>
@@ -171,7 +171,7 @@
                 <div class="box box-default" style="border-top: 3px solid #b9e400;">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            Insumos
+                            Insumos 
                         </h3>
                     </div>
                     <div class="box-body">
@@ -184,8 +184,8 @@
                                     <th st-sort="ID_COD_ITEM_C">Código</th>
                                     <th st-sort="ID_REFER_C">Referencia</th>
                                     <th st-sort="DESCRIPCION_C">Descripción</th>
-                                    <th st-sort="CANTIDAD_BASE">Cantidad Base</th>
-                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad Requerida</th>
+                                    <!--<th st-sort="CANTIDAD_BASE">Cantidad Base</th>-->
+                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad consumo</th>
                                     
                                     <th st-sort="CANT_DISP">Cantidad Disponible</th>
                                     <th st-sort="COSTO_PROM_FINAL">Costo Final</th>
@@ -196,7 +196,7 @@
                                     <td>{{item.ID_COD_ITEM_C}}</td>
                                     <td>{{item.ID_REFER_C}}</td>
                                     <td>{{item.DESCRIPCION_C}}</td>
-                                    <td>{{item.CANTIDAD_BASE | number: 2}}</td>
+                                    <!--<td>{{item.CANTIDAD_BASE | number: 2}}</td>-->
                                     <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
                                     
                                     <td>{{item.CANT_DISP | number: 2}}</td>
@@ -206,7 +206,7 @@
                             <tfoot>
                                 <tr>
                                     <td class="text-center"
-                                        colspan="7"
+                                        colspan="6"
                                         style="background: rgb(239, 239, 239);">
                                         <div st-displayed-pages="10"
                                              st-items-by-page="10"
@@ -233,7 +233,7 @@
                   
                             <tbody>
                                 <tr>
-                                    <td><span>Costo Cliente:</span></td>
+                                    <td><span>Valor insumos:</span></td>
                                     <td><b>{{obj_totales.costo_cliente | currency:"$":0}}</b></td>
                                 </tr>
                                 <tr>
@@ -524,11 +524,11 @@
                                     <th st-sort="ID_COD_ITEM_INS">Código</th>
                                     <th st-sort="REFERENCIA_INS">Referencia</th>
                                     <th st-sort="D_REFERENCIA_INS">Descripción</th>
-                                    <th st-sort="CANTIDAD_BASE">Cantidad Base</th>
-                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad Requerida</th>
+                                    <!--<th st-sort="CANTIDAD_BASE">Cantidad Base</th>-->
+                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad consumo</th>
 
                                     <th st-sort="CANT_DISP">Cantidad Disponible</th>
-                                    <th st-sort="COSTO_PROM_FINAL">Costo Final</th>
+                                    <th st-sort="COSTO_PROM_FINAL">Valor Final</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -536,7 +536,7 @@
                                     <td>{{item.ID_COD_ITEM_INS}}</td>
                                     <td>{{item.REFERENCIA_INS}}</td>
                                     <td>{{item.D_REFERENCIA_INS}}</td>
-                                    <td>{{item.CANTIDAD_BASE | number: 2}}</td> 
+                                    <!--<td>{{item.CANTIDAD_BASE | number: 2}}</td>--> 
                                     <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
                                     
                                     <td>{{item.CANT_DISP | number: 2}}</td>
@@ -546,7 +546,7 @@
                             <tfoot>
                                 <tr>
                                     <td class="text-center"
-                                        colspan="7"
+                                        colspan="6"
                                         style="background: rgb(239, 239, 239);">
                                         <div st-displayed-pages="10"
                                              st-items-by-page="10"
@@ -568,7 +568,7 @@
                         <table class="table table-hover table-condensed table-striped">
                             <tbody>
                                 <tr>
-                                    <td><span>Costo Cliente:</span></td>
+                                    <td><span>TOTAL MATERIAS PRIMAS:</span></td>
                                     <td><b>{{obj_producto_seleccionado.VALOR_CLIENTE | currency:"$":0}}</b></td>
                                 </tr>
                                 <tr>
@@ -576,15 +576,15 @@
                                     <td><b>{{obj_producto_seleccionado.VR_DSCTO | currency:"$":0}}</b></td>
                                 </tr>
                                 <tr>
-                                    <td><span>Variación:</span></td>
+                                    <td><span>Variaciones:</span></td>
                                     <td><b>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</b></td>
                                 </tr>
                                 <tr>
-                                    <td><span>Mano de Obra:</span></td>
+                                    <td><span>Mano de Obra calculado:</span></td>
                                     <td><b>{{obj_producto_seleccionado.MANO_OBRA | currency:"$":0}}</b></td>
                                 </tr>
                                 <tr>
-                                    <td><span title="Costos Indirectos Fabricación">CIF:</span></td>
+                                    <td><span title="Costos Indirectos Fabricación">CIF calculado:</span></td>
                                     <td><b>{{obj_producto_seleccionado.CIF | currency:"$":0}}</b></td>
                                 </tr>
                                 <tr>
@@ -781,10 +781,10 @@
                                     <th st-sort="ID_COD_ITEM_INS">Código</th>
                                     <th st-sort="REFERENCIA_INS">Referencia</th>
                                     <th st-sort="D_REFERENCIA_INS">Descripción</th>
-                                    <th st-sort="CANTIDAD_BASE">Cantidad Base</th>
-                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad Requerida</th>
+                                    <!--<th st-sort="CANTIDAD_BASE">Cantidad Base</th>-->
+                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad consumo</th>
                                     <th st-sort="CANT_DISP">Cantidad Disponible</th>
-                                    <th st-sort="COSTO_PROM_FINAL">Costo Final</th>
+                                    <th st-sort="COSTO_PROM_FINAL">valor Final</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -792,7 +792,7 @@
                                     <td>{{item.ID_COD_ITEM_C}}</td>
                                     <td>{{item.ID_REFER_C}}</td>
                                     <td>{{item.DESCRIPCION_C}}</td>
-                                    <td>{{item.CANTIDAD_BASE | number: 2}}</td>
+                                    <!--<td>{{item.CANTIDAD_BASE | number: 2}}</td>-->
                                     <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
                                     <td>{{item.CANT_DISP | number: 2}}</td>
                                     <td>{{item.COSTO_PROM_FINAL | currency:"$":0}}</td>
@@ -801,7 +801,7 @@
                             <tfoot>
                                 <tr>
                                     <td class="text-center"
-                                        colspan="7"
+                                        colspan="6"
                                         style="background: rgb(239, 239, 239);">
                                         <div st-displayed-pages="10"
                                              st-items-by-page="10"
@@ -824,7 +824,7 @@
 
                             <tbody>
                                 <tr>
-                                    <td><span>Costo Cliente:</span></td>
+                                    <td><span>Valor final:</span></td>
                                     <td><b>{{obj_totales.costo_cliente | currency:"$":0}}</b></td>
                                 </tr>
                                 <tr>

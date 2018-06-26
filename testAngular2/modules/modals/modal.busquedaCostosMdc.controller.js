@@ -10,13 +10,13 @@
         var vm = $scope;
         
         vm.cancel = cancel;
-        vm.getDetalleCotizacion = getDetalleCotizacion;
+        //vm.getDetalleCotizacion = getDetalleCotizacion;
         vm.anularCostoMdc = anularCostoMdc;
-        vm.mostrarDetallearchivoCostos = mostrarDetallearchivoCostos;
+        //vm.mostrarDetallearchivoCostos = mostrarDetallearchivoCostos;
 
         vm.listaHistoricoCostosMdc = [];
         vm.listaDetalleCotizacion = [];
-        vm.listaDetalleCostosMDC = []
+        vm.listaDetalleCostosMDC = [];
 
         getHistoricoCostosMdc();
 
