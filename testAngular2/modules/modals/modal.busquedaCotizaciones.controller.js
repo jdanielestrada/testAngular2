@@ -54,6 +54,10 @@
                     if (data.data.length > 0 && data.data[0].length > 0) {
                         vm.listaCotizacionesUsuario = data.data[0];
 
+                        vm.listaCotizacionesUsuario.forEach((item) => {
+                            item.FECHA_COTIZACION_FORMAT = moment(item.FECHA_COTIZACION).format("DD-MMMM-YYYY");
+                        });
+
                     } else {
                         toastr.warning("No se encontró ninguna cotización realizada por el usuario" + loginService.UserData.NOMBRES_USUARIO + ' ' + loginService.UserData.APELLIDOS_USUARIO);
                         vm.listaCotizacionesUsuario = [];

@@ -10,6 +10,7 @@
         var vm = $scope;
 
         vm.cancel = cancel;
+        vm.export_file_insumos = export_file_insumos;
 
         vm.dataInsumosProducto = [];
         vm.dataInsumosProductoSafe = [];
@@ -18,6 +19,16 @@
         vm.dominio = configService.variables.Dominio;
 
         get_insumos_by_producto_cotizacion();
+
+        function export_file_insumos() {
+
+            if (vm.dataInsumosProducto.length <= 0)
+                return;
+
+            var name_file = 'ISUMOS_' + vm.obj_producto_seleccionado.ID_REFERENCIA;
+
+            alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.dataInsumosProducto]);
+        };
 
         function get_insumos_by_producto_cotizacion() {
 

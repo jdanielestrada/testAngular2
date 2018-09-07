@@ -434,7 +434,7 @@ a {
         margin-bottom: 0;
         margin-left: 180px;
         border: none;
-        min-height: 50px;
+        min-height: 70px;
         border-radius: 0;
     }
 
@@ -537,7 +537,7 @@ a {
     transition: width .3s ease-in-out;
     display: block;
     float: left;
-    height: 51px;
+    height: 70px;
     font-size: 20px;
     line-height: 50px;
     text-align: center;
@@ -5185,6 +5185,8 @@ input[type="checkbox"] {
     display: block;
     padding-right: 5px;
     padding-left: 5px;
+    padding-top: 22px;
+    padding-bottom: 27px;
 }
 
 .padding-left-15px {
@@ -5207,7 +5209,7 @@ input[type="checkbox"] {
 
 .navbar .divider-vertical {
     height: 24px;
-    margin: 13px 0;
+    margin: 20px 0;
     border-right: 1px solid #cffe01;
 }
 

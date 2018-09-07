@@ -13,6 +13,7 @@
         vm.guardar_item             = guardar_item;
         vm.cambio_cantidad_producto = cambio_cantidad_producto;
         vm.totalizar_producto       = totalizar_producto;
+        vm.export_file_insumos = export_file_insumos;
 
         vm.obj_producto_seleccionado = {};
         vm.list_productos_desarrollados = [];
@@ -31,7 +32,17 @@
         };
 
         get_productos_desarrollados();
-        
+
+        function export_file_insumos() {
+
+            if (vm.dataInsumosProducto.length <= 0)
+                return;
+            
+            var name_file = 'ISUMOS_' + vm.obj_producto_seleccionado.ID_REFERENCIA;
+
+            alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.dataInsumosProducto]);
+        };
+
         function cambio_cantidad_producto() {
             if (!_.isNumber(parseFloat(vm.obj_producto_seleccionado.CANTIDAD)) || parseFloat(vm.obj_producto_seleccionado.CANTIDAD) < 1)
                 vm.obj_producto_seleccionado.CANTIDAD = 1;

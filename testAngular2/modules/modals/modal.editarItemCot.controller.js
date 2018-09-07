@@ -13,6 +13,7 @@
         vm.cambio_cantidad_producto = cambio_cantidad_producto;
         vm.guardar_item = guardar_item;
         vm.totalizar_producto = totalizar_producto;
+        vm.export_file_insumos = export_file_insumos;
 
         vm.dataInsumosProducto = [];
         vm.dataInsumosProductoSafe = [];
@@ -39,6 +40,16 @@
 
         //get_insumos_by_producto_cotizacion();
         get_materiales_productos_desarrollados();
+
+        function export_file_insumos() {
+
+            if (vm.dataInsumosProducto.length <= 0)
+                return;
+
+            var name_file = 'ISUMOS_' + vm.obj_producto_seleccionado.ID_REFERENCIA;
+
+            alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.dataInsumosProducto]);
+        };
 
         function isRegistroValido(valor) {
 

@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,6 +88,8 @@
     <Content Include="assets\img\select2.png" />
     <Content Include="assets\img\separador_menu_prinicipal.jpg" />
     <Content Include="assets\img\xlsx-image.png" />
+    <Content Include="assets\vendors\alasql\alasql.min.js" />
+    <Content Include="assets\vendors\alasql\xlsx.core.min.js" />
     <Content Include="assets\vendors\alertify\alertify.js" />
     <Content Include="assets\vendors\alertify\alertify.min.js" />
     <Content Include="assets\vendors\alertify\css\alertify.css" />

@@ -171,8 +171,18 @@
                 <div class="box box-default" style="border-top: 3px solid #b9e400;">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            Insumos 
+                            Insumos
                         </h3>
+                        <div class="box-tools pull-right">
+
+                            <input class="btn-download-excel"
+                                   ng-click="export_file_insumos()"                                   
+                                   style="vertical-align: middle;"
+                                   type="button"
+                                   uib-tooltip="Exportar a excel"
+                                   uib-tooltip-placement="left"
+                                   uib-tooltip-trigger="mouseenter">
+                        </div>
                     </div>
                     <div class="box-body">
                         <table class="table table-hover table-condensed table-striped" 
@@ -279,14 +289,24 @@
         <h4 class="modal-title font-madecentro" style="font-weight: 600;">Lista de Cotizaciones</h4>
     </div>
     <div class="modal-body" style="background-color: #f9f9f9;">
-        <table class="table table-condensed table-hover table-striped">
+        <table class="table table-condensed table-hover table-striped"
+               st-table="listaCotizacionesUsuario"
+               ng-if="listaCotizacionesUsuario.length > 0">
             <thead>
                 <tr>
                     <th></th>
-                    <th># Cotización</th>
-                    <th>Documento</th>
-                    <th>Cliente</th>
-                    <th>Fecha</th>                    
+                    <th st-sort="CS_TIPO_COTIZACION"># Cotización</th>
+                    <th st-sort="DOCUMENTO_CLIENTE">Documento</th>
+                    <th st-sort="NOMBRES_CLIENTE">Cliente</th>
+                    <th st-sort="FECHA_COTIZACION">Fecha</th>
+                </tr>
+                <tr>
+                    <th colspan="5">
+                        <input class="form-control"
+                               placeholder="Búsqueda general"
+                               st-search
+                               type="search" />
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -309,6 +329,7 @@
                     </td>
                     <td>
                         <span>{{item.FECHA_COTIZACION | toMomentDate}}</span>
+                        <span style="display:none">{{item.FECHA_COTIZACION_FORMAT | toMomentDate}}</span>
                     </td>
                 </tr>
             </tbody>
@@ -513,6 +534,16 @@
                         <h3 class="box-title">
                             <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Insumos
                         </h3>
+                        <div class="box-tools pull-right">
+
+                            <input class="btn-download-excel"
+                                   ng-click="export_file_insumos()"
+                                   style="vertical-align: middle;"
+                                   type="button"
+                                   uib-tooltip="Exportar a excel"
+                                   uib-tooltip-placement="left"
+                                   uib-tooltip-trigger="mouseenter">
+                        </div>
                     </div>
                     <div class="box-body">
                         <table class="table table-hover table-condensed table-striped"
@@ -768,8 +799,18 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Materiales
+                            <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Insumos
                         </h3>
+                        <div class="box-tools pull-right">
+
+                            <input class="btn-download-excel"
+                                   ng-click="export_file_insumos()"
+                                   style="vertical-align: middle;"
+                                   type="button"
+                                   uib-tooltip="Exportar a excel"
+                                   uib-tooltip-placement="left"
+                                   uib-tooltip-trigger="mouseenter">
+                        </div>
                     </div>
                     <div class="box-body">
                         <table class="table table-hover table-condensed table-striped"
