@@ -138,6 +138,27 @@
                                     </span>
                                 </a>
                             </li>
+
+                            <li ng-class="{'active' : location.path() == '/ManoObra' }"
+                                ng-if="verificarPerfil('ManoObra')">
+                                <a href="javascript:;"
+                                   ui-sref="uploadImagenProducto">
+                                    <span class="font-madecentro">
+                                        &nbsp;Mano de obra
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li ng-class="{'active' : location.path() == '/CIF' }"
+                                ng-if="verificarPerfil('CIF')">
+                                <a href="javascript:;"
+                                   ui-sref="uploadImagenProducto">
+                                    <span class="font-madecentro">
+                                        &nbsp;CIF
+                                    </span>
+                                </a>
+                            </li>
+
                         </ul>
                     </li>
                 </ul>
