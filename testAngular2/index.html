@@ -139,25 +139,26 @@
                                 </a>
                             </li>
 
-                            <li ng-class="{'active' : location.path() == '/ManoObra' }"
-                                ng-if="verificarPerfil('ManoObra')">
+                            <li ng-class="{'active' : location.path() == '/gestionManoObraCif' }"
+                                ng-if="verificarPerfil('gestionManoObraCif')">
                                 <a href="javascript:;"
-                                   ui-sref="uploadImagenProducto">
+                                   ui-sref="gestionManoObraCif">
                                     <span class="font-madecentro">
-                                        &nbsp;Mano de obra
+                                        &nbsp;Gestión Mano de obra / CIF
                                     </span>
                                 </a>
                             </li>
 
-                            <li ng-class="{'active' : location.path() == '/CIF' }"
-                                ng-if="verificarPerfil('CIF')">
+                            <li ng-class="{'active' : location.path() == '/gestionEspesores' }"
+                                ng-if="verificarPerfil('gestionEspesores')">
                                 <a href="javascript:;"
-                                   ui-sref="uploadImagenProducto">
+                                   ui-sref="gestionEspesores">
                                     <span class="font-madecentro">
-                                        &nbsp;CIF
+                                        &nbsp;Gestión espesores
                                     </span>
                                 </a>
                             </li>
+
 
                         </ul>
                     </li>
@@ -294,6 +295,8 @@
     <script src="modules/adminUploadArchivos/adminUploadArchivos.controller.js?v=1.0.0"></script>
     <script src="modules/cotProductoNuevo/cotProductoNuevo.controller.js?v=1.0.0"></script>
     <script src="modules/uploadImagenProducto/uploadImagenProducto.controller.js?v=1.0.0"></script>
+    <script src="modules/gestionManoObraCif/gestionManoObraCif.controller.js?=1.0.0"></script>
+    <script src="modules/gestionEspesores/gestionEspesores.controller.js?=1.0.0"></script>
     <!--modals-->
     <script src="modules/modals/modal.confirmaciones.controller.js?v=1.0.0"></script>
     <script src="modules/modals/modal.addNuevoProyecto.controller.js?v=1.0.0"></script>

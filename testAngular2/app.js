@@ -297,7 +297,33 @@
                         templateUrl: "modules/modals/scriptModal.html?rand=" + rand
                     }
                 }
+            })
+            .state("gestionManoObraCif", {
+                url: "/gestionManoObraCif",
+                views: {
+                    '': {
+                        templateUrl: "modules/gestionManoObraCif/gestionManoObraCif.html?rand=" + rand,
+                        controller: "gestionManoObraCif"
+                    },
+                    'templateModal@adminUploadArchivos': {
+                        templateUrl: "modules/modals/scriptModal.html?rand=" + rand
+                    }
+                }
+            })
+            .state("gestionEspesores", {
+                url: "/gestionEspesores",
+                views: {
+                    '': {
+                        templateUrl: "modules/gestionEspesores/gestionEspesores.html?rand=" + rand,
+                        controller: "gestionEspesores"
+                    },
+                    'templateModal@adminUploadArchivos': {
+                        templateUrl: "modules/modals/scriptModal.html?rand=" + rand
+                    }
+                }
             });
+
+
 
         $urlRouterProvider.otherwise("/");
 
