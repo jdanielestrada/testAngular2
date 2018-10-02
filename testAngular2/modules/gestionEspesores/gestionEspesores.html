@@ -22,10 +22,27 @@
                 </div>
                 <div class="box-body">
                     <fieldset id="myFieldset">
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>SELECCIONE TIPO ESPESOR</label>
+                                    <select class="form-control" ng-model="objDataEspesor.tipoEspesor">
+
+                                        <option value="">Seleccione </option>
+                                        <option value="M">MADERAS</option>
+                                        <option value="C">CANTOS</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+           
+
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>TIPO ESPESOR</label>
+                                    <label></label>
                                     <select class="form-control font-madecentro font_size_15px"
                                             id="seleccion_proyecto"></select>
                                     <!--<input type="text" class="form-control" placeholder="Nombres" ng-model="obj_registro_nuevo_producto.codigo_producto" style="text-transform: uppercase">-->
@@ -37,9 +54,9 @@
                                     <input type="text" class="form-control" placeholder="Documento " ng-model="obj_registro_nuevo_producto.referencia" style="text-transform: uppercase">
                                 </div>
                             </div>-->
-                        
+
                         </div>
-                        
+
                         <div class="row text-center">
                             <div class="col-md-2 col-md-offset-5">
                                 <button class="btn btn-box-tool btn-rta col-md-12"

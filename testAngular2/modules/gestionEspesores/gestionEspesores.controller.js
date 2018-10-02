@@ -15,14 +15,21 @@
         function init() {
 
             vm.limpiar_formulario = limpiar_formulario;
-            vm.validar_adjunto = validar_adjunto;
-            vm.delete_adjunto = delete_adjunto;
-            vm.guardar_producto = guardar_producto;
+            //vm.validar_adjunto = validar_adjunto;
+            //vm.delete_adjunto = delete_adjunto;
+            //vm.guardar_producto = guardar_producto;
 
             vm.obj_producto_seleccionado = {};
             vm.list_adjuntos = [];
             vm.list_productos_desarrollados = [];
-            vm.obj_data_adjunto = {};
+            vm.objDataEspesor = {
+                tipoEspesor: "",
+                referencia: "",
+                espesor:""
+
+            };
+
+
 
             get_productos_desarrollados_for_gestion_imagen();
 
@@ -92,69 +99,7 @@
                     });
             }
 
-            function validar_adjunto(files) {
-          
-                vm.list_adjuntos = [];
-
-                for (var i = 0; i < files.length; i++) {
-
-                    var ext = (files[i].name).split(".");
-                    ext = ext[ext.length - 1].toUpperCase();
-
-                    if (ext !== "PNG" && ext !== "JPG" && ext !== "JPEG") {
-                        toastr.warning("Solo se puede cargar archivos de imagenes.");
-                        return;
-                    }
-
-                    vm.list_adjuntos.push(files[i]);
-                    vm.obj_data_adjunto = files[i];
-                }
-            };
-
-            function delete_adjunto(index) {
-                vm.list_adjuntos.splice(index, 1);
-            };
-
-            function guardar_producto() {
-
-                if (vm.obj_producto_seleccionado.ID_ITEM === undefined ||
-                    vm.obj_producto_seleccionado.ID_ITEM === null ||
-                    vm.obj_producto_seleccionado.ID_ITEM === "") {
-
-                    toastr.warning("Debe seleccionar un producto.");
-                    return;
-                }
-                
-                if (vm.list_adjuntos.length === 0) {
-                    toastr.warning("Es requerido adjuntar una imagen.");
-                    return;
-                }
-
-                vm.obj_producto_seleccionado.adjunto = vm.list_adjuntos;
-
-                $upload.upload({
-                    url: configService.ApiUrls.UrlGestionCotizaciones + "almacenar_imagen_producto",
-                    method: "POST",
-                    headers: { 'Content-Type': 'multipart/form-data' },
-                    file: vm.obj_producto_seleccionado.adjunto,
-                    data: vm.obj_producto_seleccionado
-                }).success(function (result, status, headers, config) {
-
-                    if (result.MSG === "OK") {
-                        swal({
-                            type: "success",
-                            text: "Archivo almacenado correctamente."
-                        });
-
-                        limpiar_formulario();
-                    } else {
-                        toastr.error("Error: " + result.MSG);
-                    }
-
-                }).error(function (data, status, headers, config) {
-                    console.error("almacenar_imagen_producto", data);
-                });
-            }
+    
         };
 
         //#region Control User Session
