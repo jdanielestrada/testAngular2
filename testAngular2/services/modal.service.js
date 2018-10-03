@@ -19,8 +19,62 @@
             modalFormDetalleItemCot: modalFormDetalleItemCot,
             modalFormEditarItemCot: modalFormEditarItemCot,
             modalFormBuscarCostosMdc: modalFormBuscarCostosMdc,
+            modalFormBusquedaProyectos: modalFormBusquedaProyectos,
+            modalFormDetalleProducto: modalFormDetalleProducto,
+            modalFormDetalleProductoModificacionInsumos: modalFormDetalleProductoModificacionInsumos
         };
-        
+
+        function modalFormDetalleProductoModificacionInsumos(producto) {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmDetalleProductoModificacionInsumos.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "detalleProductoModificacionInsumos",
+                size: "detalle-producto-cotizacion",
+                resolve: {
+                    producto: function () {
+                        return producto;
+                    }
+                }
+            });
+
+            return modalInstance.result;
+        }
+
+        function modalFormDetalleProducto(producto) {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmDetalleProducto.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "detalleProducto",
+                size: "detalle-producto-cotizacion",
+                resolve: {
+                    producto: function () {
+                        return producto;
+                    }
+                }
+            });
+
+            return modalInstance.result;
+        }
+
+        function modalFormBusquedaProyectos(list_productos_seleccionados) {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmBusquedaProyectos.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "modalFrmbusquedaProyectos",
+                size: "seleccion-producto",
+                resolve: {
+                    listProductosSeleccionados: function () {
+                        return list_productos_seleccionados;
+                    }
+                }
+            });
+
+            return modalInstance.result;
+        }
+
         function modalFormEditarItemCot(itemCot) {
             var modalInstance = $uibModal.open({
                 templateUrl: "frmEditarItemCot.html",

@@ -262,6 +262,18 @@
                     }
                 }
             })
+            .state("cotProductoModificado", {
+                url: "/cotProductoModificado",
+                views: {
+                    '': {
+                        templateUrl: "modules/cotProductoModificado/cotProductoModificado.html?rand=" + rand,
+                        controller: "cotProductoModificado"
+                    },
+                    'templateModal@cotProductoModificado': {
+                        templateUrl: "modules/modals/scriptModal.html?rand=" + rand
+                    }
+                }
+            })
             .state("cotProductoNuevo", {
                 url: "/cotProductoNuevo",
                 views: {

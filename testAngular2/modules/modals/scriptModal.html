@@ -902,3 +902,552 @@
         <button class="btn btn-rta font_size_16px" ng-click="cancel()" type="button">Salir</button>
     </div>
 </script>
+
+<script type="text/ng-template" id="frmBusquedaProyectos.html">
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title font-madecentro" style="font-weight: 600;">Búsqueda de proyectos</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Filtrar Producto terminado:</label>
+
+                    <select class="form-control font-madecentro font_size_15px"
+                            id="seleccion_proyecto"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="box box-default" style="border-top: 3px solid #b9e400">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Producto
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped table-bordered"
+                               ng-if="obj_producto_seleccionado.ID_ITEM != null"
+                               style="font-size: 13px;margin-bottom: 10px;">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>CIDIS</th>
+                                    <th>CÓDIGO</th>
+                                    <th>REFERENCIA</th>
+                                    <th>DESCRIPCIÓN</th>
+                                    <th>PROCEDENCIA</th>
+                                    <th>UM</th>
+                                    <th>MEDIDAS PT</th>
+                                    <th>COLOR</th>
+                                    <th>ULTIMO COSTO</th>
+                                    <th>CANTIDAD UC</th>
+                                    <th>VALOR CLIENTE</th>
+                                    <th>CANT DISPONIBLE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img alt="zoom"
+                                             class="img-previa"
+                                             src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png" />
+                                        <!--onerror="this.src = 'assets/img/placeholder.png';"-->
+                                    </td>
+                                    <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
+                                    <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
+                                    <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
+                                    <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
+                                    <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
+                                    <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
+                                    <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
+                                    <td>{{obj_producto_seleccionado.COLOR}}</td>
+                                    <td>{{obj_producto_seleccionado.ULTIMO_COSTO | number:2}}</td>
+                                    <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
+                                    <td>{{obj_producto_seleccionado.VALOR_CLIENTE | number:2}}</td>
+                                    <td>{{obj_producto_seleccionado.CANT_DISP | number: 2}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-12">
+                <div class="box box-default" style="border-top: 3px solid #b9e400;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Insumos
+                        </h3>
+                        <div class="box-tools pull-right">
+
+                            <input class="btn-download-excel"
+                                   ng-click="export_file_insumos()"
+                                   style="vertical-align: middle;"
+                                   type="button"
+                                   uib-tooltip="Exportar a excel"
+                                   uib-tooltip-placement="left"
+                                   uib-tooltip-trigger="mouseenter">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped"
+                               st-safe-src="dataInsumosProductoSafe"
+                               st-table="dataInsumosProducto"
+                               ng-if="dataInsumosProducto.length > 0">
+                            <thead>
+                                <tr>
+                                    <th st-sort="ID_COD_ITEM_C">Código</th>
+                                    <th st-sort="ID_REFER_C">Referencia</th>
+                                    <th st-sort="DESCRIPCION_C">Descripción</th>
+                                    <!--<th st-sort="CANTIDAD_BASE">Cantidad Base</th>-->
+                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad consumo</th>
+
+                                    <th st-sort="CANT_DISP">Cantidad Disponible</th>
+                                    <th st-sort="COSTO_PROM_FINAL">Costo Final</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in dataInsumosProducto">
+                                    <td>{{item.ID_COD_ITEM_C}}</td>
+                                    <td>{{item.ID_REFER_C}}</td>
+                                    <td>{{item.DESCRIPCION_C}}</td>
+                                    <!--<td>{{item.CANTIDAD_BASE | number: 2}}</td>-->
+                                    <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
+
+                                    <td>{{item.CANT_DISP | number: 2}}</td>
+                                    <td>{{item.COSTO_PROM_FINAL | currency:"$":0}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center"
+                                        colspan="6"
+                                        style="background: rgb(239, 239, 239);">
+                                        <div st-displayed-pages="10"
+                                             st-items-by-page="10"
+                                             st-pagination=""
+                                             st-template="pagination.custom.html"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-4 col-md-offset-8">
+                <div class="box box-default" style="border-top: 3px solid #b9e400;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            Totales
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped">
+
+                            <tbody>
+                                <tr>
+                                    <td><span>Valor insumos:</span></td>
+                                    <td><b>{{obj_totales.costo_cliente | currency:"$":0}}</b></td>
+                                </tr>
+                                <!--<tr>
+                                    <td><span>Descuento:</span></td>
+                                    <td><b>{{obj_totales.descuento | currency:"$":0}}</b></td>
+                                </tr>-->
+                                <!--<tr>
+                                    <td><span>Variación:</span></td>
+                                    <td><b>{{obj_totales.variacion | currency:"$":0}}</b></td>
+                                </tr>-->
+                                <tr>
+                                    <td><span>Mano de Obra:</span></td>
+                                    <td><b>{{obj_totales.mano_obra | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span title="Costos Indirectos Fabricación">CIF:</span></td>
+                                    <td><b>{{obj_totales.cif | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Valor Total:</span></td>
+                                    <td><b>{{obj_totales.total | currency:"$":0}}</b></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+    <div class="modal-footer text-center">
+        <button class="btn btn-rta font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>
+        <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Cancelar</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="frmDetalleProducto.html">
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title font-madecentro" style="font-weight: 600;">Detalles Producto</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-condensed table-striped table-bordered"
+                       style="font-size: 13px;margin-bottom: 10px;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>CIDIS</th>
+                            <th>CÓDIGO</th>
+                            <th>REFERENCIA</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>PROCEDENCIA</th>
+                            <th>UM</th>
+                            <th>MEDIDAS PT</th>
+                            <th>COLOR</th>
+                            <th>ULTIMO COSTO</th>
+                            <th>CANTIDAD UC</th>
+                            <th>VALOR CLIENTE</th>
+                            <th>CANT DISPONIBLE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img alt="zoom"
+                                     class="img-previa"
+                                     src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png" />
+                                <!--onerror="this.src = 'assets/img/placeholder.png';"-->
+                            </td>
+                            <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
+                            <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
+                            <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
+                            <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
+                            <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
+                            <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
+                            <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
+                            <td>{{obj_producto_seleccionado.COLOR}}</td>
+                            <td>{{obj_producto_seleccionado.ULTIMO_COSTO | number:2}}</td>
+                            <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
+                            <td>{{obj_producto_seleccionado.VALOR_CLIENTE | number:2}}</td>
+                            <td>{{obj_producto_seleccionado.CANT_DISP | number: 2}}</td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Insumos
+                        </h3>
+                        <div class="box-tools pull-right">
+
+                            <input class="btn-download-excel"
+                                   ng-click="export_file_insumos()"
+                                   style="vertical-align: middle;"
+                                   type="button"
+                                   uib-tooltip="Exportar a excel"
+                                   uib-tooltip-placement="left"
+                                   uib-tooltip-trigger="mouseenter">
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        
+                        <table class="table table-hover table-condensed table-striped"
+                               st-safe-src="dataInsumosProductoSafe"
+                               st-table="dataInsumosProducto"
+                               ng-if="dataInsumosProducto.length > 0">
+                            <thead>
+                                <tr>
+                                    <th st-sort="ID_COD_ITEM_INS">Código</th>
+                                    <th st-sort="REFERENCIA_INS">Referencia</th>
+                                    <th st-sort="D_REFERENCIA_INS">Descripción</th>
+                                    <!--<th st-sort="CANTIDAD_BASE">Cantidad Base</th>-->
+                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad consumo</th>
+
+                                    <th st-sort="CANT_DISP">Cantidad Disponible</th>
+                                    <th st-sort="COSTO_PROM_FINAL">Valor Final</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            <tr ng-repeat="item in dataInsumosProducto">
+                                <td>{{item.ID_COD_ITEM_C}}</td>
+                                <td>{{item.ID_REFER_C}}</td>
+                                <td>{{item.DESCRIPCION_C}}</td>
+                                <!--<td>{{item.CANTIDAD_BASE | number: 2}}</td>-->
+                                <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
+
+                                <td>{{item.CANT_DISP | number: 2}}</td>
+                                <td>{{item.COSTO_PROM_FINAL | currency:"$":0}}</td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center"
+                                        colspan="6"
+                                        style="background: rgb(239, 239, 239);">
+                                        <div st-displayed-pages="10"
+                                             st-items-by-page="10"
+                                             st-pagination=""
+                                             st-template="pagination.custom.html"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-4 col-md-offset-8">
+                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
+                    
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped">
+                            <tbody>
+                                <tr>
+                                    <td><span>TOTAL MATERIAS PRIMAS:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.costo_cliente | currency:"$":0}}</b></td>
+                                </tr>
+                                <!--<tr>
+                    <td><span>Descuento:</span></td>
+                    <td><b>{{obj_producto_seleccionado.VR_DSCTO | currency:"$":0}}</b></td>
+                </tr>
+                <tr>
+                    <td><span>Variaciones:</span></td>
+                    <td><b>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</b></td>
+                </tr>-->
+                                <tr>                                    
+                                    <td><span>Mano de Obra calculado:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.mano_obra | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span title="Costos Indirectos Fabricación">CIF calculado:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.cif | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Valor Total:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.total | currency:"$":0}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+    <div class="modal-footer text-center">
+        <!--<button class="btn btn-rta font_size_16px" ng-click="guardar_item()" type="submit">Guardar</button>-->
+        <button class="btn btn-rta font_size_16px" ng-click="cancel()" type="button">Salir</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="frmDetalleProductoModificacionInsumos.html">
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title font-madecentro" style="font-weight: 600;">Detalles Producto Modificado</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover table-condensed table-striped table-bordered"
+                       style="font-size: 13px;margin-bottom: 10px;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>CIDIS</th>
+                            <th>CÓDIGO</th>
+                            <th>REFERENCIA</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>PROCEDENCIA</th>
+                            <th>UM</th>
+                            <th>MEDIDAS PT</th>
+                            <th>COLOR</th>
+                            <th>ULTIMO COSTO</th>
+                            <th>CANTIDAD UC</th>
+                            <th>VALOR CLIENTE</th>
+                            <th>CANT DISPONIBLE</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img alt="zoom"
+                                     class="img-previa"
+                                     src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png" />
+                                <!--onerror="this.src = 'assets/img/placeholder.png';"-->
+                            </td>
+                            <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
+                            <td>{{obj_producto_seleccionado.ID_ITEM}}</td>
+                            <td>{{obj_producto_seleccionado.ID_REFERENCIA}}</td>
+                            <td>{{obj_producto_seleccionado.DESCRIPCION}}</td>
+                            <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
+                            <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
+                            <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
+                            <td>{{obj_producto_seleccionado.COLOR}}</td>
+                            <td>{{obj_producto_seleccionado.ULTIMO_COSTO | number:2}}</td>
+                            <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
+                            <td>{{obj_producto_seleccionado.VALOR_CLIENTE | number:2}}</td>
+                            <td>{{obj_producto_seleccionado.CANT_DISP | number: 2}}</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border" style="padding-bottom: 20px;">
+                        <h3 class="box-title">
+                            <i class="fa fa-th" aria-hidden="true"></i>&nbsp;Insumos
+                        </h3>
+                   
+                        <div class="box-tools pull-right">
+                            
+                            <button class="btn btn-box-tool btn-rta"
+                                    ng-click="show_modal_seleccion_proyecto()"
+                                    type="button"
+                                    style="height: 40px; width: 40px; padding: 0;">
+                                <i class="fa fa-plus-circle"
+                                   style="font-size: 31px;"
+                                   tooltip-placement="left"
+                                   uib-tooltip="Agregar Insumo"></i>
+                            </button>
+
+                            <input class="btn-download-excel"
+                                   ng-click="export_file_insumos()"
+                                   style="vertical-align: middle;"
+                                   type="button"
+                                   uib-tooltip="Exportar a excel"
+                                   uib-tooltip-placement="left"
+                                   uib-tooltip-trigger="mouseenter">
+                        </div>
+                    </div>
+                    <div class="box-body">
+
+                        <table class="table table-hover table-condensed table-striped"
+                              
+                               st-table="dataInsumosProducto"
+                               ng-if="dataInsumosProducto.length > 0">
+                            <thead>
+                                <tr>
+                                    <th st-sort="ID_COD_ITEM_INS">Código</th>
+                                    <th st-sort="REFERENCIA_INS">Referencia</th>
+                                    <th st-sort="D_REFERENCIA_INS">Descripción</th>
+                                    <!--<th st-sort="CANTIDAD_BASE">Cantidad Base</th>-->
+                                    <th st-sort="CANTIDAD_REQUERIDA">Cantidad consumo</th>
+
+                                    <th st-sort="CANT_DISP">Cantidad Disponible</th>
+                                    <th st-sort="COSTO_PROM_FINAL">Valor Final</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr ng-repeat="item in dataInsumosProducto">
+                                    <td>{{item.ID_COD_ITEM_C}}</td>
+                                    <td>{{item.ID_REFER_C}}</td>
+                                    <td>{{item.DESCRIPCION_C}}</td>
+                                    <!--<td>{{item.CANTIDAD_BASE | number: 2}}</td>-->
+                                    <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
+
+                                    <td>{{item.CANT_DISP | number: 2}}</td>
+                                    <td>{{item.COSTO_PROM_FINAL | currency:"$":0}}</td>
+                                    <td style="text-align: right;">
+                                        <div class="btn-group">
+                                            <!--<button class="btn btn-rta"
+                                                    ng-click="ver_detalle_item_cot(item)"
+                                                    title="+ Información">
+                                                <i class="fa fa-eye" style="font-size: 20px;"></i>
+                                            </button>-->
+                                            <button class="btn btn-rta"
+                                                    ng-click="editar_producto_destino(item)"
+                                                    title="Editar insumos producto">
+                                                <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                                            </button>
+                                            <button class="btn btn-rta"
+                                                    ng-click="remover_insumo_producto(item)"
+                                                    title="Eliminar insumo">
+                                                <i class="fa fa-trash-o" style="font-size: 20px;"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center"
+                                        colspan="7"
+                                        style="background: rgb(239, 239, 239);">
+                                        <div st-displayed-pages="10"
+                                             st-items-by-page="10"
+                                             st-pagination=""
+                                             st-template="pagination.custom.html"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
+            <div class="col-md-4 col-md-offset-8">
+                <div class="box box-default" style="border-top: 3px solid #d2d6de;">
+
+                    <div class="box-body">
+                        <table class="table table-hover table-condensed table-striped">
+                            <tbody>
+                                <tr>
+                                    <td><span>TOTAL MATERIAS PRIMAS:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.costo_cliente | currency:"$":0}}</b></td>
+                                </tr>
+                                <!--<tr>
+                                    <td><span>Descuento:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.VR_DSCTO | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Variaciones:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</b></td>
+                                </tr>-->
+                                <tr>
+                                    <td><span>Mano de Obra calculado:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.mano_obra | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span title="Costos Indirectos Fabricación">CIF calculado:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.cif | currency:"$":0}}</b></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Valor Total:</span></td>
+                                    <td><b>{{obj_producto_seleccionado.data_totales.total | currency:"$":0}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        </div>
+    </div>
+    <div class="modal-footer text-center">
+        <button class="btn btn-rta font_size_16px" ng-click="guardar_insumos()" type="submit">Guardar</button>
+        <button class="btn btn-rta font_size_16px" ng-click="cancel()" type="button">Salir</button>
+    </div>
+</script>

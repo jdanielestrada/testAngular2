@@ -432,7 +432,7 @@ a {
         -o-transition: margin-left .3s ease-in-out;
         transition: margin-left .3s ease-in-out;
         margin-bottom: 0;
-        margin-left: 180px;
+        margin-right: 180px;
         border: none;
         min-height: 70px;
         border-radius: 0;
@@ -536,7 +536,7 @@ a {
     -o-transition: width .3s ease-in-out;
     transition: width .3s ease-in-out;
     display: block;
-    float: left;
+    float: right;
     height: 70px;
     font-size: 20px;
     line-height: 50px;
