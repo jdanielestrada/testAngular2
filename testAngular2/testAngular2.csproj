@@ -1684,6 +1684,10 @@
     <Content Include="modules\cotProductoModificado\cotProductoModificado.html" />
     <Content Include="modules\cotProductoNuevo\cotProductoNuevo.controller.js" />
     <Content Include="modules\cotProductoNuevo\cotProductoNuevo.html" />
+    <Content Include="modules\gestionEspesores\gestionEspesores.controller.js" />
+    <Content Include="modules\gestionEspesores\gestionEspesores.html" />
+    <Content Include="modules\gestionManoObraCif\gestionManoObraCif.controller.js" />
+    <Content Include="modules\gestionManoObraCif\gestionManoObraCif.html" />
     <Content Include="modules\Home\home.controller.js" />
     <Content Include="modules\Home\Home.html" />
     <Content Include="modules\modals\modal.busquedaCostosMdc.controller.js" />
