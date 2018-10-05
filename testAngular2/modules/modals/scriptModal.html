@@ -1365,22 +1365,28 @@
                                     <td>{{item.ID_REFER_C}}</td>
                                     <td>{{item.DESCRIPCION_C}}</td>
                                     <!--<td>{{item.CANTIDAD_BASE | number: 2}}</td>-->
-                                    <td>{{item.CANTIDAD_REQUERIDA | number: 2}}</td>
+                                    <td>
+                                        <input class="form-control"
+                                               ng-model="item.CANTIDAD_REQUERIDA"
+                                               ng-change="cambio_cant_requerida(item)"
+                                               placeholder="..."
+                                               ui-number-mask="0">
+                                    </td>
 
                                     <td>{{item.CANT_DISP | number: 2}}</td>
                                     <td>{{item.COSTO_PROM_FINAL | currency:"$":0}}</td>
                                     <td style="text-align: right;">
                                         <div class="btn-group">
                                             <!--<button class="btn btn-rta"
-                                                    ng-click="ver_detalle_item_cot(item)"
-                                                    title="+ Información">
-                                                <i class="fa fa-eye" style="font-size: 20px;"></i>
-                                            </button>-->
-                                            <button class="btn btn-rta"
-                                                    ng-click="editar_producto_destino(item)"
-                                                    title="Editar insumos producto">
-                                                <i class="fa fa-pencil" style="font-size: 20px;"></i>
-                                            </button>
+                        ng-click="ver_detalle_item_cot(item)"
+                        title="+ Información">
+                    <i class="fa fa-eye" style="font-size: 20px;"></i>
+                </button>-->
+                                            <!--<button class="btn btn-rta"
+                        ng-click="editar_producto_destino(item)"
+                        title="Editar insumos producto">
+                    <i class="fa fa-pencil" style="font-size: 20px;"></i>
+                </button>-->
                                             <button class="btn btn-rta"
                                                     ng-click="remover_insumo_producto(item)"
                                                     title="Eliminar insumo">
@@ -1418,14 +1424,7 @@
                                     <td><span>TOTAL MATERIAS PRIMAS:</span></td>
                                     <td><b>{{obj_producto_seleccionado.data_totales.costo_cliente | currency:"$":0}}</b></td>
                                 </tr>
-                                <!--<tr>
-                                    <td><span>Descuento:</span></td>
-                                    <td><b>{{obj_producto_seleccionado.VR_DSCTO | currency:"$":0}}</b></td>
-                                </tr>
-                                <tr>
-                                    <td><span>Variaciones:</span></td>
-                                    <td><b>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</b></td>
-                                </tr>-->
+           
                                 <tr>
                                     <td><span>Mano de Obra calculado:</span></td>
                                     <td><b>{{obj_producto_seleccionado.data_totales.mano_obra | currency:"$":0}}</b></td>
@@ -1448,6 +1447,6 @@
     </div>
     <div class="modal-footer text-center">
         <button class="btn btn-rta font_size_16px" ng-click="guardar_insumos()" type="submit">Guardar</button>
-        <button class="btn btn-rta font_size_16px" ng-click="cancel()" type="button">Salir</button>
+        <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Salir</button>
     </div>
 </script>

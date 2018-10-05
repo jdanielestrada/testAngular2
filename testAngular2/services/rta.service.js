@@ -13,28 +13,59 @@
     function RTAService($http, configService, $rootScope) {
         return {
 
-            getParametrosMulti                       : getParametrosMulti,
-            getOpsForGestionOperarioExtraLaboral     : getOpsForGestionOperarioExtraLaboral,
-            getProductosDesarrollados                : getProductosDesarrollados,
-            getMaterialesProductosDesarrollados      : getMaterialesProductosDesarrollados,
-            generarConsecutivoCotizacion             : generarConsecutivoCotizacion,
-            insertEncabezadoCotizacion               : insertEncabezadoCotizacion,
-            getCotizacionesByUsusario                : getCotizacionesByUsusario,
-            getDetalleCotizacion                     : getDetalleCotizacion,
-            insertProductosCotizacion                : insertProductosCotizacion,
-            deleteProductoDtCotizacion               : deleteProductoDtCotizacion,
-            insertarArchivoCostosMdc                 : insertarArchivoCostosMdc,
-            updateEstadoHCotizaciones                : updateEstadoHCotizaciones,
-            getInsumosByProductoCotizacion           : getInsumosByProductoCotizacion,
-            editarProductoDtCotizacion               : editarProductoDtCotizacion,
-            getCostosProductosInsumosRtaMdc          : getCostosProductosInsumosRtaMdc,
-            updateArchivoCostosMdc                   : updateArchivoCostosMdc,
-            getHistoricoCostosMdc                    : getHistoricoCostosMdc,
-            anularCostoMdc                           : anularCostoMdc,
-            getDetallearchivoCostos                  : getDetallearchivoCostos,
-            getProductosDesarrolladosForGestionImagen: getProductosDesarrolladosForGestionImagen
+            getParametrosMulti: getParametrosMulti,
+            getOpsForGestionOperarioExtraLaboral: getOpsForGestionOperarioExtraLaboral,
+            getProductosDesarrollados: getProductosDesarrollados,
+            getMaterialesProductosDesarrollados: getMaterialesProductosDesarrollados,
+            generarConsecutivoCotizacion: generarConsecutivoCotizacion,
+            insertEncabezadoCotizacion: insertEncabezadoCotizacion,
+            getCotizacionesByUsusario: getCotizacionesByUsusario,
+            getDetalleCotizacion: getDetalleCotizacion,
+            insertProductosCotizacion: insertProductosCotizacion,
+            deleteProductoDtCotizacion: deleteProductoDtCotizacion,
+            insertarArchivoCostosMdc: insertarArchivoCostosMdc,
+            updateEstadoHCotizaciones: updateEstadoHCotizaciones,
+            getInsumosByProductoCotizacion: getInsumosByProductoCotizacion,
+            editarProductoDtCotizacion: editarProductoDtCotizacion,
+            getCostosProductosInsumosRtaMdc: getCostosProductosInsumosRtaMdc,
+            updateArchivoCostosMdc: updateArchivoCostosMdc,
+            getHistoricoCostosMdc: getHistoricoCostosMdc,
+            anularCostoMdc: anularCostoMdc,
+            getDetallearchivoCostos: getDetallearchivoCostos,
+            getProductosDesarrolladosForGestionImagen: getProductosDesarrolladosForGestionImagen,
+            getAllMaterialesProductosDesarrollados: getAllMaterialesProductosDesarrollados
         };
-        
+
+        function updateEstadoHCotizaciones(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "update_estado_h_cotizaciones/", JSON.stringify(request))
+                .then(updateEstadoHCotizacionescomplete)
+                .catch(updateEstadoHCotizacionesFailed);
+
+            function updateEstadoHCotizacionescomplete(response) {
+                return response.data;
+            }
+
+            function updateEstadoHCotizacionesFailed(error) {
+                console.log('Error en updateEstadoHCotizaciones', error);
+                return error;
+            }
+        }
+
+        function getAllMaterialesProductosDesarrollados() {
+            return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_all_materiales_productos_desarrollados")
+                .then(getAllMaterialesProductosDesarrolladosComplete)
+                .catch(getAllMaterialesProductosDesarrolladosFailed);
+
+            function getAllMaterialesProductosDesarrolladosComplete(response) {
+                return response.data;
+            }
+
+            function getAllMaterialesProductosDesarrolladosFailed(error) {
+                toastr.error('XHR falló en getAllMaterialesProductosDesarrollados', error);
+                return error;
+            }
+        }
+
         function getProductosDesarrolladosForGestionImagen() {
             return $http.get(configService.ApiUrls.UrlGestionCotizaciones + "get_productos_desarrollados_for_gestion_imagen")
                 .then(getProductosDesarrolladosForGestionImagenComplete)
@@ -162,37 +193,31 @@
         }
 
 
-        function generarConsecutivoCotizacion(tipo_cotizacion, idUsuario)
-        {
+        function generarConsecutivoCotizacion(tipo_cotizacion, idUsuario) {
             return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "generar_consecutivo_cotizacion/" + tipo_cotizacion + "/" + idUsuario)
                 .then(generarConsecutivoCotizacionComplete)
                 .catch(generarConsecutivoCotizacionFailed);
 
-            function generarConsecutivoCotizacionComplete(response)
-            {
+            function generarConsecutivoCotizacionComplete(response) {
                 return response.data;
             }
 
-            function generarConsecutivoCotizacionFailed(error)
-            {
+            function generarConsecutivoCotizacionFailed(error) {
                 logger.error('XHR falló en generarConsecutivoCotizacion', error);
                 return error;
             }
         }
 
-        function insertEncabezadoCotizacion(request)
-        {
+        function insertEncabezadoCotizacion(request) {
             return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insert_h_Cotizacion/", JSON.stringify(request))
                 .then(insertEncabezadoCotizacioncomplete)
                 .catch(insertEncabezadoCotizacionFailed);
 
-            function insertEncabezadoCotizacioncomplete(response)
-            {
+            function insertEncabezadoCotizacioncomplete(response) {
                 return response.data;
             }
 
-            function insertEncabezadoCotizacionFailed(error)
-            {
+            function insertEncabezadoCotizacionFailed(error) {
                 console.log('Error en insertEncabezadoCotizacion', error);
                 return error;
             }
@@ -257,20 +282,18 @@
             }
         }
 
-    
+
         function insertarArchivoCostosMdc(request) {
 
             return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insert_data_costos_mdc/", JSON.stringify(request))
                 .then(insertarArchivoCostosMdcComplete)
                 .catch(insertarArchivoCostosMdcFailed);
 
-            function insertarArchivoCostosMdcComplete(response)
-            {
+            function insertarArchivoCostosMdcComplete(response) {
                 return response.data;
             }
 
-            function insertarArchivoCostosMdcFailed(error)
-            {
+            function insertarArchivoCostosMdcFailed(error) {
                 console.log('Error en insertarArchivoCostosMdcFailed', error);
                 return error;
             }

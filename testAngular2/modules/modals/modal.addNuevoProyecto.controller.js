@@ -154,9 +154,10 @@
                         //vm.obj_producto_seleccionado.data_materiales_producto = _.sortBy(data.data[0], 'DESCRIPCION_C');
 
                         data.data[0].forEach((item) => {
-                            item.COSTO_PROM_FINAL_BASE =  item.COSTO_PROM_FINAL;
+                            item.COSTO_PROM_FINAL_BASE = item.COSTO_PROM_FINAL;
+                            item.COSTO_PROM_FINAL = parseFloat(item.CANTIDAD_REQUERIDA) * parseFloat(item.COSTO_PROM_FINAL_BASE);
                         });
-
+                        
                         vm.dataInsumosProductoSafe = _.sortBy(data.data[0], 'DESCRIPCION_C');
                         vm.dataInsumosProducto = angular.copy(vm.dataInsumosProductoSafe);
 

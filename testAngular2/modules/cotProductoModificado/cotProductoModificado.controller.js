@@ -15,14 +15,14 @@
         function init() {
 
             vm.show_modal_seleccion_proyecto = show_modal_seleccion_proyecto;
-            vm.agregar_producto_destino      = agregar_producto_destino;
-            vm.remover_producto_destino      = remover_producto_destino;
-            vm.remover_producto_origen       = remover_producto_origen;
-            vm.editar_producto_destino       = editar_producto_destino;
-            vm.ver_detalle_item_cot          = ver_detalle_item_cot;
-            
+            vm.agregar_producto_destino = agregar_producto_destino;
+            vm.remover_producto_destino = remover_producto_destino;
+            vm.remover_producto_origen = remover_producto_origen;
+            vm.editar_producto_destino = editar_producto_destino;
+            vm.ver_detalle_item_cot = ver_detalle_item_cot;
+
             vm.list_productos_seleccionados = [];
-            
+
             vm.dominio = configService.variables.Dominio;
 
             vm.list_productos_destino = [];
@@ -86,6 +86,26 @@
             }
 
             function editar_producto_destino(producto) {
+                
+                if (!producto.ID_ITEM || producto.ID_ITEM === "") {
+                    toastr.warning("Debe ingresar un código de producto válido.");
+                    return;
+                }
+
+                if (!producto.ID_REFERENCIA || producto.ID_REFERENCIA === "") {
+                    toastr.warning("Debe ingresar una referencia de producto válida.");
+                    return;
+                }
+
+                if (!producto.DESCRIPCION || producto.DESCRIPCION === "") {
+                    toastr.warning("Debe ingresar una descripción de producto válida.");
+                    return;
+                }
+
+                producto.ID_ITEM = producto.ID_ITEM.toUpperCase();
+                producto.ID_REFERENCIA = producto.ID_REFERENCIA.toUpperCase();
+                producto.DESCRIPCION = producto.DESCRIPCION.toUpperCase();
+
                 modalService.modalFormDetalleProductoModificacionInsumos(producto);
 
                 //modalService.modalFormEditarItemCot(angular.copy(item))
@@ -101,6 +121,12 @@
 
                         vm.list_productos_seleccionados = [];
                         vm.list_productos_seleccionados.push(producto);
+
+                        vm.list_productos_destino = [];
+                        $timeout(() => {
+                            vm.$apply();
+                        }, 0);
+
                         angular.activarFancybox();
                     });
             }
