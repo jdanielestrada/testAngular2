@@ -34,6 +34,9 @@
             getDetallearchivoCostos: getDetallearchivoCostos,
             getProductosDesarrolladosForGestionImagen: getProductosDesarrolladosForGestionImagen,
             getAllMaterialesProductosDesarrollados: getAllMaterialesProductosDesarrollados,
+            insertEspesores: insertEspesores,
+            insertManoObra: insertManoObra,
+            
             insertNuevoProducto: insertNuevoProducto
         };
         
@@ -404,6 +407,38 @@
             }
         }
 
+
+
+        function insertEspesores(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insertEspesores/", JSON.stringify(request))
+                .then(insertEspesoresComplete)
+                .catch(insertEspesoresFailed);
+
+            function insertEspesoresComplete(response) {
+                return response.data;
+            }
+
+            function insertEspesoresFailed(error) {
+                console.log('Error en insertEspesores', error);
+                return error;
+            }
+        }
+
+
+        function insertManoObra(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insertManoObra/", JSON.stringify(request))
+                .then(insertManoObraComplete)
+                .catch(insertManoObraFailed);
+
+            function insertManoObraComplete(response) {
+                return response.data;
+            }
+
+            function insertManoObraFailed(error) {
+                console.log('Error en insertManoObra', error);
+                return error;
+            }
+        }v
 
 
     }

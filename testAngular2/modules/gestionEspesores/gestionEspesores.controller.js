@@ -99,6 +99,52 @@
                     });
             }
 
+
+            vm.insertEspesores = function () {
+
+
+                if (vm.objDataEspesor.tipoEspesor === "") {
+                    toastr.info('Debe ingreaar tipo espesor');
+                    return;
+                }
+                if (vm.objDataEspesor.espesor === "") {
+                    toastr.info('Debe ingresar el espesor');
+                    return;
+                }
+
+                if (vm.objDataEspesor.espesor === "") {
+                    toastr.info('Debe ingresar el espesor');
+                    return;
+                }
+
+                swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
+                return;
+
+
+                RTAService.insertEspesores(vm.objDataEspesor)
+
+                    .then(function (result) {
+
+                        if (result.MSG === "OK") {
+                            console.log('Registros actualizados correctamente');
+
+                            swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
+
+                        }
+                        else {
+
+                            toastr.warning(result.MSG);
+                            sweetAlert("ERROR", "No se actualizaron los datos", "error");
+                        }
+
+                    });
+
+
+
+            }
+
+
+
     
         };
 
