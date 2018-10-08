@@ -4956,7 +4956,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-/*.skin-yellow-light .main-header .navbar {
+.skin-yellow-light .main-header .navbar {
     background-color: #32241d;
 }
 
@@ -4974,7 +4974,7 @@ input[type="checkbox"] {
 
 .skin-yellow-light .main-header li.user-header {
     background-color: #32241d;
-}*/
+}
 
 .btn-rta {
     color: #32241d;

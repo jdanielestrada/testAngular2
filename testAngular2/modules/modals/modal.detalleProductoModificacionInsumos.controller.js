@@ -93,21 +93,20 @@
 
                     toastr.success("OK");
 
-                    //let request = {
-                    //    CS_H_COTIZACION: vm.obj_encabezado_cotizacion.cs_h_cotizacion,
-                    //    ESTADO_COTIZACION: 2, //cerrado
-                    //    ID_USUARIO: loginService.UserData.ID_USUARIO
-                    //};
+                    let request = {
+                        datos_item:vm.obj_producto_seleccionado,
+                        //ID_USUARIO: loginService.UserData.ID_USUARIO
+                    };
 
                     vm.objectDialog.LoadingDialog("...");
-                    RTAService.updateEstadoHCotizaciones(request)
+                    RTAService.insertNuevoProducto(request)
                         .then(function (result) {
 
                             vm.objectDialog.HideDialog();
 
                             if (result.MSG === "OK") {
-                                swal("COTIZACIÓN CERRADA CORRECTAMENTE.", "", "success");
-                                limpiar_formulario();
+                                swal("Registro almacenado correctamente.", "", "success");
+                                
                             } else {
                                 console.error(result.MSG);
                                 toastr.error(result.MSG);

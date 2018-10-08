@@ -33,20 +33,21 @@
             anularCostoMdc: anularCostoMdc,
             getDetallearchivoCostos: getDetallearchivoCostos,
             getProductosDesarrolladosForGestionImagen: getProductosDesarrolladosForGestionImagen,
-            getAllMaterialesProductosDesarrollados: getAllMaterialesProductosDesarrollados
+            getAllMaterialesProductosDesarrollados: getAllMaterialesProductosDesarrollados,
+            insertNuevoProducto: insertNuevoProducto
         };
+        
+        function insertNuevoProducto(request) {
+            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "insert_nuevo_producto/", JSON.stringify(request))
+                .then(insertNuevoProductocomplete)
+                .catch(insertNuevoProductoFailed);
 
-        function updateEstadoHCotizaciones(request) {
-            return $http.post(configService.ApiUrls.UrlGestionCotizaciones + "update_estado_h_cotizaciones/", JSON.stringify(request))
-                .then(updateEstadoHCotizacionescomplete)
-                .catch(updateEstadoHCotizacionesFailed);
-
-            function updateEstadoHCotizacionescomplete(response) {
+            function insertNuevoProductocomplete(response) {
                 return response.data;
             }
 
-            function updateEstadoHCotizacionesFailed(error) {
-                console.log('Error en updateEstadoHCotizaciones', error);
+            function insertNuevoProductoFailed(error) {
+                console.log('Error en insertNuevoProducto', error);
                 return error;
             }
         }
