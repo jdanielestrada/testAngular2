@@ -438,7 +438,7 @@
                 console.log('Error en insertManoObra', error);
                 return error;
             }
-        }v
+        }
 
 
     }
