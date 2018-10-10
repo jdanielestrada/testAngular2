@@ -35,6 +35,59 @@
                     vm.$apply();
                 }, 0);
             }
+
+            vm.objManoObra = {
+                espesor: "",
+                tipoGestion: "",
+                tableros:""
+            }
+
+
+            vm.insertMManoObra = function () {
+
+
+                if (vm.objManoObra.tipoGestion === "") {
+                    toastr.info('Debe ingreaar tipo gestión');
+                    return;
+                }
+                if (vm.objManoObra.espesor === "") {
+                    toastr.info('Debe ingresar el espesor');
+                    return;
+                }
+
+                if (vm.objManoObra.tableros === "") {
+                    toastr.info('Debe ingresar el número de tableros por minuto');
+                    return;
+                }
+
+                swal("DATOS ACTUALIZADOS", "Se guardo la información correctamente", "success");
+                init()
+                return;
+
+
+                RTAService.insertEspesores(vm.objDataEspesor)
+
+                    .then(function (result) {
+
+                        if (result.MSG === "OK") {
+                            console.log('Registros actualizados correctamente');
+
+                            swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
+
+                        }
+                        else {
+
+                            toastr.warning(result.MSG);
+                            sweetAlert("ERROR", "No se actualizaron los datos", "error");
+                        }
+
+                    });
+
+
+
+            }
+
+
             
             function get_productos_desarrollados_for_gestion_imagen() {
 
