@@ -26,27 +26,15 @@
             vm.dominio = configService.variables.Dominio;
 
             vm.list_productos_destino = [];
+            
+            function limpiar_formulario() {
 
-            $timeout(function () {
-                $("#dpFechaCotizacion").datetimepicker({
-                    dayViewHeaderFormat: "MMMM YYYY",
-                    locale: "es",
-                    //sideBySide: true,
-                    //minDate: moment(),
-                    defaultDate: moment(),
-                    showClear: true,
-                    widgetPositioning: {
-                        horizontal: "left",
-                        vertical: "bottom"
-                    },
-                    format: "DD/MMMM/YYYY"
-                });
-
-                $timeout(function () {
-                    $("[class*=date]").on("keypress", function (e) { e.preventDefault(); });
-                }, 50);
-
-            }, 300);
+                vm.list_productos_seleccionados = [];
+                vm.list_productos_destino = [];
+                $timeout(() => {
+                    vm.$apply();
+                }, 0);
+            }
 
             function agregar_producto_destino() {
 
@@ -106,7 +94,10 @@
                 producto.ID_REFERENCIA = producto.ID_REFERENCIA.toUpperCase();
                 producto.DESCRIPCION = producto.DESCRIPCION.toUpperCase();
 
-                modalService.modalFormDetalleProductoModificacionInsumos(producto);
+                modalService.modalFormDetalleProductoModificacionInsumos(producto)
+                    .then(() => {
+                        limpiar_formulario();
+                    });
 
                 //modalService.modalFormEditarItemCot(angular.copy(item))
                 //    .then((producto) => {

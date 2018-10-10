@@ -1692,6 +1692,7 @@
     <Content Include="modules\Home\Home.html" />
     <Content Include="modules\modals\modal.busquedaCostosMdc.controller.js" />
     <Content Include="modules\modals\modal.busquedaCotizaciones.controller.js" />
+    <Content Include="modules\modals\modal.busquedaInsumosProducto.controller.js" />
     <Content Include="modules\modals\modal.busquedaProyectos.controller.js" />
     <Content Include="modules\modals\modal.confirmaciones.controller.js" />
     <Content Include="modules\modals\modal.addNuevoProyecto.controller.js" />

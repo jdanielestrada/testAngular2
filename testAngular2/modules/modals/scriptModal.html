@@ -1321,7 +1321,7 @@
                         <div class="box-tools pull-right">
                             
                             <button class="btn btn-box-tool btn-rta"
-                                    ng-click="show_modal_seleccion_proyecto()"
+                                    ng-click="show_modal_seleccion_insumo()"
                                     type="button"
                                     style="height: 40px; width: 40px; padding: 0;">
                                 <i class="fa fa-plus-circle"
@@ -1448,5 +1448,29 @@
     <div class="modal-footer text-center">
         <button class="btn btn-rta font_size_16px" ng-click="guardar_insumos()" type="submit">Guardar</button>
         <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Salir</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="frmBusquedaInsumosProducto.html">
+    <div class="modal-header text-center">
+        <button type="button" class="close" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title font-madecentro" style="font-weight: 600;">Selección de proyectos</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Filtrar Insumo:</label>
+
+                    <select class="form-control font-madecentro font_size_15px"
+                            id="seleccion_insumo"></select>
+                </div>
+            </div>
+        </div>
+                
+    </div>
+    <div class="modal-footer text-center">
+        <button class="btn btn-rta font_size_16px" ng-click="guardar()" type="submit">Agregar Insumo</button>
+        <button class="btn btn-default font_size_16px" ng-click="cancel()" type="button">Cancelar</button>
     </div>
 </script>

@@ -14,6 +14,7 @@
         vm.remover_insumo_producto = remover_insumo_producto;
         vm.guardar_insumos = guardar_insumos;
         vm.cambio_cant_requerida = cambio_cant_requerida;
+        vm.show_modal_seleccion_insumo = show_modal_seleccion_insumo;
 
         vm.dataInsumosProducto = [];
         vm.dataInsumosProductoSafe = [];
@@ -33,6 +34,27 @@
             total: 0
         };
 
+        function show_modal_seleccion_insumo() {
+
+            modalService.modalFormBusquedaInsumosProducto(vm.dataInsumosProducto)
+                .then((insumo) => {
+
+                    insumo.COSTO_PROM_FINAL_BASE = insumo.COSTO_PROM_FINAL;
+                    //insumo.COSTO_PROM_FINAL = parseFloat(insumo.CANTIDAD_REQUERIDA) * parseFloat(insumo.COSTO_PROM_FINAL_BASE);
+
+                    vm.dataInsumosProductoSafe.push(insumo);
+
+                    vm.dataInsumosProducto = [];
+
+                    $timeout(function () {
+                        vm.dataInsumosProducto = angular.copy(vm.dataInsumosProductoSafe);
+                        totalizar_producto();
+                    }, 300);
+
+                    angular.activarFancybox();
+                });
+        }
+        
         function cambio_cant_requerida(insumo) {
 
             vm.dataInsumosProducto.filter((item, index) => {
@@ -90,11 +112,10 @@
             let text_confirm = "Está seguro de continuar con los cambios realizados?";
             modalService.modalFormConfirmacion(text_confirm)
                 .then(() => {
-
-                    toastr.success("OK");
-
+                    
                     let request = {
-                        datos_item:vm.obj_producto_seleccionado,
+                        datos_item: vm.obj_producto_seleccionado,
+                        insumos_producto: vm.dataInsumosProducto
                         //ID_USUARIO: loginService.UserData.ID_USUARIO
                     };
 
@@ -106,6 +127,7 @@
 
                             if (result.MSG === "OK") {
                                 swal("Registro almacenado correctamente.", "", "success");
+                                $uibModalInstance.close();
                                 
                             } else {
                                 console.error(result.MSG);

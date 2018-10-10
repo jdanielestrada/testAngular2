@@ -21,8 +21,26 @@
             modalFormBuscarCostosMdc: modalFormBuscarCostosMdc,
             modalFormBusquedaProyectos: modalFormBusquedaProyectos,
             modalFormDetalleProducto: modalFormDetalleProducto,
-            modalFormDetalleProductoModificacionInsumos: modalFormDetalleProductoModificacionInsumos
+            modalFormDetalleProductoModificacionInsumos: modalFormDetalleProductoModificacionInsumos,
+            modalFormBusquedaInsumosProducto: modalFormBusquedaInsumosProducto
         };
+
+        function modalFormBusquedaInsumosProducto(insumosProducto) {
+            var modalInstance = $uibModal.open({
+                templateUrl: "frmBusquedaInsumosProducto.html",
+                backdrop: "static",
+                keyboard: false,
+                controller: "modalBusquedaInsumosProducto",
+                size: "detalle-producto-cotizacion",
+                resolve: {
+                    insumosProducto: function () {
+                        return insumosProducto;
+                    }
+                }
+            });
+
+            return modalInstance.result;
+        }
 
         function modalFormDetalleProductoModificacionInsumos(producto) {
             var modalInstance = $uibModal.open({
