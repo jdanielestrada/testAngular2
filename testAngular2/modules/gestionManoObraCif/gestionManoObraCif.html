@@ -9,7 +9,7 @@
                     <h3 class="box-title">
                         GESTIÓN MANO DE OBRA  / CIF
                     </h3>
-                    <div class="box-tools pull-right">
+                    <!--<div class="box-tools pull-right">
                         <button class="btn btn-box-tool"
                                 ng-click="limpiar_formulario()"
                                 tooltip-placement="top"
@@ -18,26 +18,58 @@
                             <i class="fa fa-refresh"
                                style="font-size: 23px;"></i>
                         </button>
-                    </div>
+                    </div>-->
                 </div>
                 <div class="box-body">
                     <fieldset id="myFieldset">
+                        
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>TIPO GESTIÓN</label>
-                                    <select class="form-control font-madecentro font_size_15px"
-                                            id="seleccion_proyecto"></select>
-                                    <!--<input type="text" class="form-control" placeholder="Nombres" ng-model="obj_registro_nuevo_producto.codigo_producto" style="text-transform: uppercase">-->
+                                    <label>Seleccione tipo de gestión</label>
+                                    <select class="form-control" ng-model="objManoObra.tipoGestion">
+
+                                        <option value="">Seleccione </option>
+                                        <option value="M">MADERAS</option>
+                                        <option value="C">CANTOS</option>
+
+                                    </select>
                                 </div>
                             </div>
-                  
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Seleccione espesor</label>
+                                    <select class="form-control" ng-model="objManoObra.espesor">
+
+                                        <option value="">Seleccione </option>
+                                        <option value="3">3</option>
+                                        <option value="6">6</option>
+                                        <option value="15">15</option>
+                                        <option value="18">18</option>
+                                        <option value="25">25</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tableros por Minuto</label>
+                                    <input type="text" class="form-control" placeholder="NRO " ng-model="objManoObra.tableros" style="text-transform: uppercase">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    
                         
                         <div class="row text-center">
                             <div class="col-md-2 col-md-offset-5">
                                 <button class="btn btn-box-tool btn-rta col-md-12"
-                                        ng-click="guardar_producto()"
+                                        ng-click="insertMManoObra()"
                                         style="margin-bottom: 15px"
                                         type="button"
                                         tooltip-placement="left"

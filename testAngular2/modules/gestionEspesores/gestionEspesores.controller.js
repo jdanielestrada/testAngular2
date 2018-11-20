@@ -24,14 +24,14 @@
             vm.list_productos_desarrollados = [];
             vm.objDataEspesor = {
                 tipoEspesor: "",
-                referencia: "",
+                c_referencia: "",
                 espesor:""
 
             };
 
+            vm.listaMateriales = []
 
-
-            get_productos_desarrollados_for_gestion_imagen();
+            //get_materiales_productos_desarrollados();
 
             function limpiar_formulario() {
                 vm.list_adjuntos = [];
@@ -43,56 +43,37 @@
                 }, 0);
             }
             
-            function get_productos_desarrollados_for_gestion_imagen() {
+            function get_materiales_productos_desarrollados() {
 
                 vm.objectDialog.LoadingDialog("...");
-                RTAService.getProductosDesarrolladosForGestionImagen()
+                RTAService.getAllMaterialesProductosDesarrollados()
                     .then(function (data) {
 
                         if (data.data.length > 0 && data.data[0].length > 0) {
+                            vm.objectDialog.HideDialog();
+                            vm.listaMateriales = data.data[0];
+                         
+                            //$timeout(function () {
+                            //    $("#seleccion_proyecto").select2({
+                            //        data: _.sortBy(vm.list_productos_desarrollados, 'text'),
+                            //        language: "es"
+                            //    });
 
-                            vm.list_productos_desarrollados = data.data[0];
-                            vm.list_productos_desarrollados.forEach(function (item, index) {
-                                item.D_REFERENCIA = item.ID_ITEM.trim() + " - " + item.ID_REFERENCIA.trim() + " - " + item.DESCRIPCION.trim();
-
-                                item.ID_REFERENCIA = item.ID_REFERENCIA.trim();
-                                item.DESCRIPCION = item.DESCRIPCION.trim();
-                            });
-
-                            vm.list_productos_desarrollados.push({
-                                ID_ITEM: 0,
-                                D_REFERENCIA: "..."
-                            });
-
-                            vm.list_productos_desarrollados.forEach(function (item, index) {
-                                item.id = item.ID_ITEM;
-                                item.text = item.D_REFERENCIA;
-
-                                if (item.ID_ITEM === 0)
-                                    item.selected = true;
-                            });
-
-                            $timeout(function () {
-                                $("#seleccion_proyecto").select2({
-                                    data: _.sortBy(vm.list_productos_desarrollados, 'text'),
-                                    language: "es"
-                                });
-
-                                vm.objectDialog.HideDialog();
-                            }, 300);
+                            //    vm.objectDialog.HideDialog();
+                            //}, 300);
                             
-                            $timeout(function () {
-                                var $eventSelect = $("#seleccion_proyecto");
-                                $eventSelect.on("select2:select", function (e) {
+                            //$timeout(function () {
+                            //    var $eventSelect = $("#seleccion_proyecto");
+                            //    $eventSelect.on("select2:select", function (e) {
 
-                                    vm.obj_producto_seleccionado = {};
-                                    vm.obj_producto_seleccionado = e.params.data;
+                            //        vm.obj_producto_seleccionado = {};
+                            //        vm.obj_producto_seleccionado = e.params.data;
 
-                                    $timeout(function () {
-                                        vm.$apply();
-                                    }, 0);
-                                });
-                            }, 300);
+                            //        $timeout(function () {
+                            //            vm.$apply();
+                            //        }, 0);
+                            //    });
+                            //}, 300);
                         } else {
                             toastr.error("Ocurrió un error al tratar de obtener los tipos de proyectos.");
                         }
@@ -100,48 +81,53 @@
             }
 
 
-            vm.insertEspesores = function () {
+       
 
 
-                if (vm.objDataEspesor.tipoEspesor === "") {
-                    toastr.info('Debe ingreaar tipo espesor');
-                    return;
-                }
-                if (vm.objDataEspesor.espesor === "") {
-                    toastr.info('Debe ingresar el espesor');
-                    return;
-                }
 
-                if (vm.objDataEspesor.espesor === "") {
-                    toastr.info('Debe ingresar el espesor');
-                    return;
-                }
-
-                swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
-                return;
+                    vm.insertEspesores = function () {
 
 
-                RTAService.insertEspesores(vm.objDataEspesor)
-
-                    .then(function (result) {
-
-                        if (result.MSG === "OK") {
-                            console.log('Registros actualizados correctamente');
-
-                            swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
-
+                        if (vm.objDataEspesor.tipoEspesor === "") {
+                            toastr.info('Debe ingreaar tipo espesor');
+                            return;
                         }
-                        else {
+                        //if (vm.objDataEspesor.referencia === "") {
+                        //    toastr.info('Debe ingresar la referencia');
+                        //    return;
+                        //}
 
-                            toastr.warning(result.MSG);
-                            sweetAlert("ERROR", "No se actualizaron los datos", "error");
+                        if (vm.objDataEspesor.espesor === "") {
+                            toastr.info('Debe ingresar el espesor');
+                            return;
                         }
 
-                    });
+                        swal("DATOS ACTUALIZADOS", "Se guardo la información correctamente", "success");
+                        init()
+                        return;
+
+
+                        RTAService.insertEspesores(vm.objDataEspesor)
+
+                            .then(function (result) {
+
+                                if (result.MSG === "OK") {
+                                    console.log('Registros actualizados correctamente');
+
+                                    swal("DATOS actualizados", "Se actualizo el costo correctamente", "success");
+
+                                }
+                                else {
+
+                                    toastr.warning(result.MSG);
+                                    sweetAlert("ERROR", "No se actualizaron los datos", "error");
+                                }
+
+                            });
 
 
 
-            }
+                    }
 
 
 
