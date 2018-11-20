@@ -25,7 +25,7 @@
             if (vm.dataInsumosProducto.length <= 0)
                 return;
 
-            var name_file = 'ISUMOS_' + vm.obj_producto_seleccionado.ID_REFERENCIA;
+            var name_file = 'INSUMOS_' + vm.obj_producto_seleccionado.ID_REFERENCIA;
 
             alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.dataInsumosProducto]);
         };

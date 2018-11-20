@@ -1684,6 +1684,8 @@
     <Content Include="modules\cotProductoModificado\cotProductoModificado.html" />
     <Content Include="modules\cotProductoNuevo\cotProductoNuevo.controller.js" />
     <Content Include="modules\cotProductoNuevo\cotProductoNuevo.html" />
+    <Content Include="modules\cotRegNuevoProducto\cotRegNuevoProducto.controller.js" />
+    <Content Include="modules\cotRegNuevoProducto\cotRegNuevoProducto.html" />
     <Content Include="modules\gestionEspesores\gestionEspesores.controller.js" />
     <Content Include="modules\gestionEspesores\gestionEspesores.html" />
     <Content Include="modules\gestionManoObraCif\gestionManoObraCif.controller.js" />

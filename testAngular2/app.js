@@ -274,14 +274,26 @@
                     }
                 }
             })
-            .state("cotProductoNuevo", {
-                url: "/cotProductoNuevo",
+            //.state("cotProductoNuevo", {
+            //    url: "/cotProductoNuevo",
+            //    views: {
+            //        '': {
+            //            templateUrl: "modules/cotProductoNuevo/cotProductoNuevo.html?rand=" + rand,
+            //            controller: "cotProductoNuevo"
+            //        },
+            //        'templateModal@cotProductoNuevo': {
+            //            templateUrl: "modules/modals/scriptModal.html?rand=" + rand
+            //        }
+            //    }
+            //})
+            .state("cotRegNuevoProducto", {
+                url: "/cotRegNuevoProducto",
                 views: {
                     '': {
-                        templateUrl: "modules/cotProductoNuevo/cotProductoNuevo.html?rand=" + rand,
-                        controller: "cotProductoNuevo"
+                        templateUrl: "modules/cotRegNuevoProducto/cotRegNuevoProducto.html?rand=" + rand,
+                        controller: "cotRegNuevoProducto"
                     },
-                    'templateModal@cotProductoNuevo': {
+                    'templateModal@cotRegNuevoProducto': {
                         templateUrl: "modules/modals/scriptModal.html?rand=" + rand
                     }
                 }

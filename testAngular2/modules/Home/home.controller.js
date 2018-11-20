@@ -35,11 +35,11 @@
                     sref: "cotProductoModificado",
                     d_menu: "Producto Modificado"
                 },
-                //{
-                //    icon_class: "plus-square-o",
-                //    sref: "cotProductoNuevo",
-                //    d_menu: "Producto Nuevo"
-                //}
+                {
+                    icon_class: "plus-square-o",
+                    sref: "cotRegNuevoProducto",
+                    d_menu: "Producto Nuevo"
+                }
             ];
 
             vm.verificarPerfil = function(opcion) {
