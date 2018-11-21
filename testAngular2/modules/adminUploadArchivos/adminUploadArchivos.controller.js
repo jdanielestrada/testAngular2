@@ -255,6 +255,12 @@
                                     }
                                 }
 
+                                if (vm.objHeaderCostosCalculados.tomaMayorMenor === 'P') {
+
+                                    item.MAYOR_VALOR = (item.COSTO_MDC + item.COSTO_RTA) / 2;
+
+                                }
+
 
                                 //cALCULAR VARIACIÓN PORCENTUAL 
                                 if (item.COSTO_MDC === 0) {
