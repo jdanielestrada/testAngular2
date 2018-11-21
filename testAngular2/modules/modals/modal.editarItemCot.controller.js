@@ -38,6 +38,8 @@
             total: 0
         };
 
+        vm.pjVariacion = loginService.UserData.PJ_VARIACION;
+
         //get_insumos_by_producto_cotizacion();
         get_materiales_productos_desarrollados();
 
@@ -129,6 +131,8 @@
             vm.obj_totales.costo_cliente = 0;
             vm.obj_totales.mano_obra = 0;
             vm.obj_totales.cif = 0;
+
+
             vm.obj_totales.variacion = 0;
             vm.obj_totales.total = 0;
 
@@ -140,7 +144,9 @@
 
             vm.obj_totales.mano_obra = vm.obj_producto_seleccionado.MANO_OBRA;
             vm.obj_totales.cif = vm.obj_producto_seleccionado.CIF;
-            vm.obj_totales.variacion = vm.obj_producto_seleccionado.VARIACION;
+            //vm.obj_totales.variacion = vm.obj_producto_seleccionado.VARIACION;
+            vm.obj_totales.variacion = vm.obj_totales.costo_cliente * (vm.pjVariacion / 100);
+
 
             vm.obj_totales.descuento = parseFloat(vm.obj_producto_seleccionado.PJ_DSCTO / 100) * parseFloat(vm.obj_totales.costo_cliente);
 

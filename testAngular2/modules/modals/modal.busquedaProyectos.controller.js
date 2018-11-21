@@ -22,6 +22,8 @@
         vm.dataInsumosProducto = [];
         vm.dominio = configService.variables.Dominio;
 
+        vm.pjVariacion = loginService.UserData.PJ_VARIACION;
+
         vm.obj_totales = {
             costo_cliente: 0,
             descuento: 0,
@@ -72,7 +74,9 @@
 
             vm.obj_totales.mano_obra = vm.obj_producto_seleccionado.MANO_OBRA;
             vm.obj_totales.cif = vm.obj_producto_seleccionado.CIF;
-            vm.obj_totales.variacion = vm.obj_producto_seleccionado.VARIACION;
+            //vm.obj_totales.variacion = vm.obj_producto_seleccionado.VARIACION;
+            vm.obj_totales.variacion = vm.obj_totales.costo_cliente * (vm.pjVariacion / 100);
+
 
             vm.obj_totales.descuento = parseFloat(vm.obj_producto_seleccionado.PJ_DSCTO / 100) * parseFloat(vm.obj_totales.costo_cliente);
 

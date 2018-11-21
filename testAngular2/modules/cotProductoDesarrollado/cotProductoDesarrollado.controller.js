@@ -38,6 +38,9 @@
             };
 
             vm.swMostrarItems = false;
+
+            vm.pjVariacion = loginService.UserData.PJ_VARIACION;
+
             
             vm.listaCotizacionesUsuario         = [];
             vm.listaDetalleCotizacion           = [];
