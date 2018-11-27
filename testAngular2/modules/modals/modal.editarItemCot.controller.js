@@ -4,9 +4,9 @@
         .module('appRTA')
         .controller('editarItemCot', editarItemCot);
 
-    editarItemCot.$inject = ['configService', 'RTAService', '$scope', '$uibModalInstance', 'itemCot'];
+    editarItemCot.$inject = ['configService', 'RTAService', '$scope', '$uibModalInstance', 'itemCot','loginService'];
 
-    function editarItemCot(configService, RTAService, $scope, $uibModalInstance, itemCot) {
+    function editarItemCot(configService, RTAService, $scope, $uibModalInstance, itemCot, loginService) {
         var vm = $scope;
 
         vm.cancel = cancel;
@@ -17,6 +17,7 @@
 
         vm.dataInsumosProducto = [];
         vm.dataInsumosProductoSafe = [];
+        vm.insumosExportar = [];
 
         itemCot.EMPAQUE_H  = itemCot.EMPAQUE_H.toString();
         itemCot.EMPAQUE_W  = itemCot.EMPAQUE_W.toString();
@@ -50,7 +51,7 @@
 
             var name_file = 'INSUMOS_' + vm.obj_producto_seleccionado.ID_REFERENCIA;
 
-            alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.dataInsumosProducto]);
+            alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.insumosExportar]);
         };
 
         function isRegistroValido(valor) {
@@ -107,6 +108,22 @@
                 return;
             }
 
+            vm.sinInsumos = false;
+
+            vm.dataInsumosProducto.forEach((item) => {
+                if (item.CANTIDAD_REQUERIDA > item.CANT_DISP) {
+                    vm.sinInsumos = true;
+                }
+            });
+
+            if (vm.sinInsumos)
+            {
+                toastr.warning("No se permite agregar el producto, éste no cuenta con saldo  en los insumos requeridos.");
+                return;
+            }
+
+
+
             vm.obj_producto_seleccionado.data_insumo_producto = vm.dataInsumosProducto;
             vm.obj_producto_seleccionado.data_totales = vm.obj_totales;
 
@@ -120,6 +137,11 @@
             vm.dataInsumosProducto.forEach((item) => {
                 item.CANTIDAD_REQUERIDA = parseFloat(item.CANTIDAD_BASE) * parseFloat(vm.obj_producto_seleccionado.CANTIDAD);
                 item.COSTO_PROM_FINAL = parseFloat(item.CANTIDAD_REQUERIDA) * parseFloat(item.COSTO_PROM_FINAL_BASE);
+                if (item.CANTIDAD_REQUERIDA > item.CANT_DISP) {
+                    item.SW_SIN_SALDO = true;
+                } else {
+                    item.SW_SIN_SALDO = false;
+                }
             });
 
             /*totalizar costos*/
@@ -140,6 +162,11 @@
 
             vm.dataInsumosProducto.forEach((item) => {
                 vm.obj_totales.costo_cliente += parseFloat(item.COSTO_PROM_FINAL);
+                if (item.CANTIDAD_REQUERIDA > item.CANT_DISP) {
+                    item.SW_SIN_SALDO = true;
+                } else {
+                    item.SW_SIN_SALDO = false;
+                }
             });
 
             vm.obj_totales.mano_obra = vm.obj_producto_seleccionado.MANO_OBRA;
@@ -171,6 +198,7 @@
         //            }
         //        });
         //}
+        
 
         function get_materiales_productos_desarrollados() {
 
@@ -183,13 +211,21 @@
                      
                         data.data[0].forEach((item) => {
                             item.COSTO_PROM_FINAL_BASE = item.COSTO_PROM_FINAL;
+                            if (item.CANTIDAD_REQUERIDA > item.CANT_DISP) {
+                                item.SW_SIN_SALDO = true;
+                            } else {
+                                item.SW_SIN_SALDO = false;
+                            }
                         });
 
                         vm.dataInsumosProductoSafe = _.sortBy(data.data[0], 'DESCRIPCION_C');
                         vm.dataInsumosProducto = angular.copy(vm.dataInsumosProductoSafe);
 
-                        cambio_cantidad_producto();
+                        vm.insumosExportar = _.sortBy(data.data[1], 'DESCRIPCION');
+               
 
+                        cambio_cantidad_producto();
+           
                     } else {
                         toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
                     }

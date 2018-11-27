@@ -167,7 +167,7 @@
 
                         totalizar_producto();
                     } else {
-                        toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
+                        toastr.warning("El producto seleccionado no cuenta con insumos asociados, favor intente con otra referencia");
                         vm.dataInsumosProductoSafe = [];
                         vm.dataInsumosProducto = angular.copy(vm.dataInsumosProductoSafe);
                     }

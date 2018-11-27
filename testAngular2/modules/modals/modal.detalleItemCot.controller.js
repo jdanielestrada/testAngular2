@@ -15,6 +15,7 @@
         vm.dataInsumosProducto = [];
         vm.dataInsumosProductoSafe = [];
         vm.obj_producto_seleccionado = itemCot;
+        vm.insumosExportar = [];
 
         vm.dominio = configService.variables.Dominio;
 
@@ -27,7 +28,7 @@
 
             var name_file = 'INSUMOS_' + vm.obj_producto_seleccionado.ID_REFERENCIA;
 
-            alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.dataInsumosProducto]);
+            alasql("SELECT * INTO XLSX('" + name_file + ".xlsx',{headers:true}) FROM ? ", [vm.insumosExportar]);
         };
 
         function get_insumos_by_producto_cotizacion() {
@@ -40,6 +41,8 @@
                        
                         vm.dataInsumosProductoSafe = _.sortBy(data.data[0], 'DESCRIPCION_C');
                         vm.dataInsumosProducto = angular.copy(vm.dataInsumosProductoSafe);
+                        vm.insumosExportar = _.sortBy(data.data[1], 'DESCRIPCION');
+
                     } else {
                         toastr.warning("No se logró obtener los datos relacionados al producto seleccionado, intentelo de nuevo.");
                     }

@@ -649,19 +649,19 @@
                             <th>UM</th>
                             <th>MEDIDAS PT</th>
                             <th>COLOR</th>
-                            <th>ULTIMO COSTO</th> 
+                            <th>ULTIMO COSTO</th>
                             <th>CANTIDAD UC</th>
                             <th>VALOR CLIENTE</th>
-                            <th>CANT DISPONIBLE</th> 
+                            <th>CANT DISPONIBLE</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
                                 <img alt="zoom"
-                                     class="img-previa" 
+                                     class="img-previa"
                                      src="{{dominio}}/img_rta/{{obj_producto_seleccionado.ID_ITEM}}.png"
-                                      />
+                                     />
                                 <!--onerror="this.src = 'assets/img/placeholder.png';"-->
                             </td>
                             <td>{{obj_producto_seleccionado.C_CIDIS}}</td>
@@ -671,7 +671,7 @@
                             <td>{{obj_producto_seleccionado.ID_PROCEDENCIA}}</td>
                             <td>{{obj_producto_seleccionado.UNIDAD_MEDIDA}}</td>
                             <td>{{obj_producto_seleccionado.MEDIDAS_PT}}</td>
-                            <td>{{obj_producto_seleccionado.COLOR}}</td>                            
+                            <td>{{obj_producto_seleccionado.COLOR}}</td>
                             <td>{{obj_producto_seleccionado.ULTIMO_COSTO}}</td>
                             <td>{{obj_producto_seleccionado.CANTIDAD_UC}}</td>
                             <td>{{obj_producto_seleccionado.VALOR_CLIENTE}}</td>
@@ -684,14 +684,14 @@
                     <thead>
                         <tr>
                             <!--<th rowspan="2">MANO OBRA</th>
-                            <th rowspan="2" title="Costos Indirectos Fabricación">CIF</th>
-                            <th rowspan="2">VARIACIÓN</th>-->
+                        <th rowspan="2" title="Costos Indirectos Fabricación">CIF</th>
+                        <th rowspan="2">VARIACIÓN</th>-->
 
                             <th colspan="3" class="text-center">EMPAQUE</th>
                             <th colspan="2" class="text-center">CUBICAGE</th>
                             <th rowspan="2">CANTIDAD</th>
                             <th rowspan="2">% MARGEN</th>
-                            <th rowspan="2">% DSCTO</th>   
+                            <th rowspan="2">% DSCTO</th>
                         </tr>
                         <tr>
                             <th>H</th>
@@ -700,24 +700,24 @@
                             <th>C</th>
                             <th>K</th>
                         </tr>
-                        <!--<tr> 
-                            <th>EMPAQUE H</th>
-                            <th>EMPAQUE W</th>
-                            <th>EMPAQUE D</th>
-                            <th>CUBICAGE C</th>
-                            <th>CUBICAGE K</th>
-                            <th>CANTIDAD</th>
-                            <th>% MARGEN</th>
-                        </tr>-->
+                        <!--<tr>
+                        <th>EMPAQUE H</th>
+                        <th>EMPAQUE W</th>
+                        <th>EMPAQUE D</th>
+                        <th>CUBICAGE C</th>
+                        <th>CUBICAGE K</th>
+                        <th>CANTIDAD</th>
+                        <th>% MARGEN</th>
+                    </tr>-->
                     </thead>
                     <tbody>
                         <tr>
                             <!--<td>{{obj_producto_seleccionado.MANO_OBRA | currency:"$":0}}</td>
-                            <td>{{obj_producto_seleccionado.CIF | currency:"$":0}}</td>
-                            <td>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</td>-->
+                        <td>{{obj_producto_seleccionado.CIF | currency:"$":0}}</td>
+                        <td>{{obj_producto_seleccionado.VARIACION | currency:"$":0}}</td>-->
 
                             <td>
-                           
+
                                 <input aria-describedby="basic-addon1"
                                        class="form-control"
                                        ng-model="obj_producto_seleccionado.EMPAQUE_H"
@@ -779,7 +779,7 @@
                                        placeholder="..."
                                        required
                                        x-validacion-auto="porcentaje">
-                            </td> 
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -804,7 +804,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <table class="table table-hover table-condensed table-striped"
+                        <table class="table table-hover table-condensed"
                                st-safe-src="dataInsumosProductoSafe"
                                st-table="dataInsumosProducto"
                                ng-if="dataInsumosProducto.length > 0">
@@ -820,7 +820,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in dataInsumosProducto">
+                                <tr ng-repeat="item in dataInsumosProducto" ng-class="{'sin-saldo':item.SW_SIN_SALDO}">
                                     <td>{{item.ID_COD_ITEM_C}}</td>
                                     <td>{{item.ID_REFER_C}}</td>
                                     <td>{{item.DESCRIPCION_C}}</td>
@@ -847,7 +847,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="dataInsumosProducto.length > 0"> 
+        <div class="row" ng-if="dataInsumosProducto.length > 0">
             <div class="col-md-4 col-md-offset-8">
                 <div class="box box-default" style="border-top: 3px solid #d2d6de;">
 
